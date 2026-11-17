@@ -1,0 +1,308 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#003DA5">
+<title>HANOUT LITE | حانوت حومتك على تيليفونك</title>
+<meta name="description" content="HANOUT LITE — كتالوج الحانوت الرقمي: تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب. حانوت حومتك فتيليفونك.">
+<meta name="keywords" content="حانوت, كتالوج, طلبات, واتساب, متجر إلكتروني, HANOUT LITE, المغرب">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="logo.png" sizes="any">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="HANOUT LITE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HANOUT LITE">
+<meta property="og:title" content="HANOUT LITE | حانوت حومتك فتيليفونك">
+<meta property="og:description" content="تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب.">
+<meta property="og:image" content="logo.png">
+<meta property="og:locale" content="ar_MA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HANOUT LITE | حانوت حومتك فتيليفونك">
+<meta name="twitter:description" content="تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب.">
+<meta name="twitter:image" content="logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><style>
+*{box-sizing:border-box}
+:root{--blue:#003DA5;--blue2:#002A73;--blue-light:#E9F1FC;--accent:#0A66C2;--yellow:#FFC220;--red:#E01A2B;--green:#00843D;--ink:#0B1B34;--muted:#5B6B82;--line:#E4E9F2;--bg:#F5F8FD;--card:#fff;--r:16px;--shadow:0 4px 14px rgba(11,27,52,.07);font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);padding-bottom:78px}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px}
+input,select,textarea{font:inherit}
+img{display:block}
+.hidden{display:none!important}
+.muted{color:var(--muted);font-size:13px}
+.empty{text-align:center;color:var(--muted);padding:26px;background:#fff;border-radius:16px;grid-column:1/-1}
+.iconbtn i{line-height:1}
+.section-head h3 i,.panel h3 i,.stat i{margin-inline-end:8px}
+.empty i{font-size:26px;color:var(--blue);display:block;margin-bottom:8px}
+/* ===== App bar ===== */
+.appbar{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.14)}
+.appbar-top{max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px;padding:12px 16px 8px}
+.brand{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;color:#fff;text-decoration:none;font-size:19px;font-weight:800;letter-spacing:.5px}
+.brand img{width:38px;height:38px;border-radius:10px;object-fit:cover}
+.brand small{font-weight:600;opacity:.85;font-size:14px}
+.iconbtn{position:relative;background:rgba(255,255,255,.15);color:#fff;width:42px;height:42px;border-radius:50%;font-size:19px;display:grid;place-items:center}
+.iconbtn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--yellow)}
+.badge{position:absolute;top:-5px;inset-inline-start:-5px;background:var(--yellow);color:#3a2a00;font-size:11px;font-weight:800;min-width:19px;height:19px;border-radius:10px;display:grid;place-items:center;padding:0 4px}
+.searchwrap{max-width:1100px;margin:auto;padding:0 16px 14px}
+.searchbox{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:10px 14px;color:var(--muted)}
+.searchbox input{flex:1;border:0;outline:0;background:transparent;color:var(--ink);padding:0}
+/* ===== Shell ===== */
+.shell{max-width:1100px;margin:auto;padding:16px}
+.hero{display:flex;align-items:center;gap:16px;background:linear-gradient(120deg,#0A57C2,#003DA5);color:#fff;border-radius:22px;padding:24px;box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
+.hero-tag{display:inline-block;background:var(--yellow);color:#3a2a00;font-weight:800;font-size:12px;padding:5px 12px;border-radius:30px;margin-bottom:8px}
+.hero h2{margin:6px 0;font-size:26px}
+.hero p{margin:0;opacity:.9}
+.hero-art{font-size:62px;margin-inline-start:auto;opacity:.95}
+.section-head{display:flex;align-items:center;gap:10px;margin:22px 4px 12px}
+.section-head h3{margin:0;font-size:20px;color:var(--blue2);display:flex;align-items:center}
+/* ===== Category chips ===== */
+.cats{display:flex;gap:12px;overflow-x:auto;padding:4px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:0 0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink);min-width:86px;box-shadow:var(--shadow);transition:transform .15s}
+.cat:hover{transform:translateY(-2px)}
+.cat.active{border-color:var(--blue);background:var(--blue-light)}
+.cat-ic{font-size:26px;color:var(--blue2)}
+.cat span:last-child{font-size:12px;font-weight:600}
+/* ===== Deals row ===== */
+.deals{display:flex;gap:14px;overflow-x:auto;padding:4px 4px 10px;scrollbar-width:none}
+.deals::-webkit-scrollbar{display:none}
+/* ===== Layout & cards ===== */
+.layout{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px}
+.toolbar select{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+.product,.deal{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;gap:8px;transition:transform .15s}
+.product:hover{transform:translateY(-2px)}
+.deal{flex:0 0 168px}
+.pimg{height:140px;border-radius:12px;overflow:hidden;background:var(--blue-light);display:grid;place-items:center;font-size:52px;color:var(--blue2)}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.deal .pimg{height:112px;font-size:42px}
+.product h3,.deal h3{margin:0;font-size:15px}
+.product .muted,.deal .muted{font-size:12px}
+.deal-badge{position:absolute;top:10px;inset-inline-start:10px;background:var(--red);color:#fff;font-weight:800;font-size:12px;padding:4px 9px;border-radius:20px;z-index:1}
+.up-badge{position:absolute;top:10px;inset-inline-start:10px;background:var(--yellow);color:#3a2a00;font-weight:800;font-size:12px;padding:4px 9px;border-radius:20px;z-index:1}
+.pricebox{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.price{font-size:20px;font-weight:800;color:var(--red)}
+.oldprice{color:#8C96A5;text-decoration:line-through;font-size:13px}
+.btn-add{margin-top:auto;background:var(--blue);color:#fff;font-weight:700;padding:11px;border-radius:12px}
+.btn-add:disabled{background:#B9C6DA;cursor:not-allowed}
+.btn-add:not(:disabled):hover{background:var(--blue2)}
+/* ===== Panels ===== */
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:16px}
+.panel h3{margin:0 0 14px;display:flex;align-items:center}
+.cart-panel{position:sticky;top:150px}
+.cartrow,.manageRow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #eee}
+.mini{padding:5px 10px;background:var(--blue-light);color:var(--blue)}
+.danger{background:#FBE7E3;color:#A33120}
+.primary{background:var(--blue);color:#fff}
+.secondary{background:#E5EDF8;color:var(--blue)}
+.full{width:100%}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.pill{background:var(--blue-light);color:var(--blue);padding:5px 10px;border-radius:30px;font-size:12px}
+.hint{font-size:12px;color:var(--muted)}
+.notice{background:#FFF7DC;padding:12px;border-radius:12px;color:#695222;font-size:13px;margin-bottom:15px}
+.notice i{margin-inline-end:6px}
+.preview{width:100%;height:125px;object-fit:contain;border:1px dashed #B6C4DD;border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 16px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:23px;color:var(--blue2)}
+.foot{font-size:12px;text-align:center;color:var(--muted);padding:25px}
+/* ===== Bottom navigation ===== */
+.bottomnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;z-index:30;box-shadow:0 -2px 12px rgba(11,27,52,.07)}
+.navbtn{flex:1;background:none;border-radius:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 12px;color:var(--muted);font-size:11px;font-weight:700}
+.navbtn i{font-size:20px;line-height:1}
+.navbtn.active{color:var(--blue)}
+/* ===== Toast ===== */
+#toast{position:fixed;bottom:88px;inset-inline-start:15px;background:var(--blue);color:#fff;padding:12px 17px;border-radius:12px;display:none;z-index:40;box-shadow:var(--shadow)}
+#toast i{margin-inline-end:6px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.cart-panel{position:static}}
+@media(max-width:500px){.hero h2{font-size:21px}.hero-art{font-size:42px}.brand{font-size:16px;gap:7px}.brand img{width:32px;height:32px}.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
+/* ===== Enhancements (v0.5) ===== */
+.brand img{background:#fff;border-radius:9px}
+.toolbar2{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.toolbar2 input,.toolbar2 select{flex:1;min-width:120px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue);border-radius:20px;padding:4px 11px;font-size:12px;font-weight:700}
+.chip.new{background:#FFF4D6;color:#8a6100}
+.chip.done{background:#E4F5EA;color:var(--green)}
+.orderRow{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:9px;background:#fff}
+.orderRow .otop{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.orderRow ul{margin:7px 0 0;padding-inline-start:18px;color:var(--muted);font-size:13px}
+.orderRow li{margin:2px 0}
+.catRow{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:12px;padding:8px 11px;margin-bottom:8px}
+.catRow .cname{display:flex;align-items:center;gap:8px;font-weight:700}
+.catRow .cname .ce{font-size:20px}
+.installCta{display:none;align-items:center;justify-content:space-between;gap:10px;background:var(--blue);color:#fff;border-radius:14px;padding:11px 14px;margin:12px 0}
+.installCta span{font-size:13px;font-weight:600}
+.installCta button{background:var(--yellow);color:#0B1B34;font-weight:800;padding:8px 14px;border-radius:10px}
+</style></head><body>
+<header class="appbar">
+  <div class="appbar-top">
+    <button class="iconbtn" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    <a class="brand" href="#" onclick="showTab('customer');return false"><img src="logo.png" alt="شعار HANOUT LITE" onerror="this.onerror=null;this.src='icon.svg'"><span>HANOUT <small>LITE</small></span></a>
+    <div class="actions" style="flex:0 0 auto">
+      <button class="iconbtn" aria-label="مشاركة التطبيق" onclick="shareApp()"><i class="fa-solid fa-share-nodes"></i></button>
+      <button class="iconbtn" aria-label="السلة" onclick="goCart()"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></button>
+    </div>
+  </div>
+  <div class="searchwrap"><div class="searchbox"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="قلب على المنتوج فالكتالوغ..." oninput="renderProducts()"></div></div>
+</header>
+
+<main class="shell">
+  <section id="customer">
+    <div class="hero"><div><span class="hero-tag">توصيل أو استلام من الحانوت</span><h2>حانوت حومتك… فتيليفونك</h2><p id="shopTitle"></p></div><div class="hero-art"><i class="fa-solid fa-basket-shopping"></i></div></div>
+
+    <div class="section-head"><h3><i class="fa-solid fa-layer-group"></i>الأصناف</h3><span class="muted">اختر صنفاً للتسوق</span></div>
+    <div id="cats" class="cats"></div>
+
+    <div class="section-head"><h3><i class="fa-solid fa-tags"></i>عروض الأسبوع</h3><span class="muted">تخفيضات مختارة</span></div>
+    <div id="deals" class="deals"></div>
+
+    <div class="section-head"><h3><i class="fa-solid fa-boxes-stacked"></i>كل المنتوجات</h3></div>
+    <div class="layout">
+      <div>
+        <div class="toolbar"><select id="category" onchange="renderProducts();renderCats()"><option value="">جميع الأصناف</option></select></div>
+        <div id="products" class="grid"></div>
+      </div>
+      <aside class="panel cart-panel" id="cartPanel">
+        <h3><i class="fa-solid fa-cart-shopping"></i>السلة ديالك</h3>
+        <div id="cart"></div>
+        <div class="field"><label>الاسم (اختياري)</label><input id="buyer" placeholder="اسم الزبون"></div>
+        <div class="field"><label>طريقة الاستلام</label><select id="fulfillment"><option>الاستلام من الحانوت</option><option>طلب التوصيل (حسب موافقة التاجر)</option></select></div>
+        <div class="field"><label>ملاحظة للطلب</label><input id="note" placeholder="مثلاً: بغيت الخبز سخون"></div>
+        <button class="primary full" onclick="checkout()"><i class="fa-brands fa-whatsapp"></i> إرسال الطلب عبر واتساب</button>
+        <p class="muted">الأسعار والتوفر نهائيان فقط بعد تأكيد التاجر. لا يتم الدفع داخل التطبيق.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="merchant" class="hidden">
+    <div class="hero"><div><span class="hero-tag">فضاء التاجر</span><h2>مرحبا مول الحانوت</h2><p>زيد صور المنتوجات، العروض، وحدّث الأثمنة وقت ما تبدلات.</p></div><div class="hero-art"><i class="fa-solid fa-store"></i></div></div>
+    <div class="notice"><i class="fa-solid fa-lock"></i>هذه نسخة محلية تجريبية وليست لوحة محمية بكلمة مرور. لا تدخل معلومات شخصية حساسة أو بيانات ديون الزبائن. التعديلات تظهر على هذا الجهاز فقط.</div>
+    <div class="stats"><div class="stat"><b id="statProducts">0</b><span class="muted"><i class="fa-solid fa-box"></i>منتج</span></div><div class="stat"><b id="statAvailable">0</b><span class="muted"><i class="fa-solid fa-circle-check"></i>متوفر</span></div><div class="stat"><b id="statCart">0</b><span class="muted"><i class="fa-solid fa-cart-shopping"></i>في السلة</span></div><div class="stat"><b id="statOrders">0</b><span class="muted"><i class="fa-solid fa-receipt"></i>طلبات جديدة</span></div></div>
+    <div class="layout">
+      <div>
+        <div class="panel"><h3><i class="fa-solid fa-box"></i>المنتجات</h3><div class="toolbar2"><input id="manageSearch" placeholder="بحث فالمنتجات..." oninput="renderManage()" aria-label="بحث في المنتجات"><select id="manageSort" onchange="renderManage()" aria-label="ترتيب المنتجات"><option value="recent">الأحدث أولاً</option><option value="name">الاسم (أ - ي)</option><option value="price-asc">الثمن (من الأرخص)</option><option value="price-desc">الثمن (من الأغلى)</option></select></div><div id="manage"></div></div>
+        <div class="panel" style="margin-top:13px"><h3><i class="fa-solid fa-receipt"></i>الطلبات</h3><div id="orders"></div></div>
+      </div>
+      <div>
+        <div class="panel"><h3 id="formTitle"><i class="fa-solid fa-plus"></i>إضافة منتج</h3><form id="productForm" onsubmit="saveProduct(event)"><input id="editId" type="hidden"><div class="field"><label>اسم المنتج</label><input id="pName" required maxlength="70" placeholder="مثلاً: حليب 1 لتر"></div><div class="field"><label>الثمن بالدرهم</label><input id="pPrice" type="number" min="0" max="100000" step="0.01" required></div><div class="field"><label>الثمن السابق (اختياري — للعرض أو الزيادة)</label><input id="pOldPrice" type="number" min="0" max="100000" step="0.01" placeholder="مثال: 20"><span class="hint">إذا كان الثمن الجديد أقل، سيظهر التخفيض؛ وإذا كان أعلى، ستظهر الزيادة. لا تضع ثمناً سابقاً غير حقيقي.</span></div><div class="field"><label>صورة المنتوج (اختياري)</label><input id="pImage" type="file" accept="image/png,image/jpeg,image/webp" onchange="previewImage(event)"><img id="imagePreview" class="preview hidden" alt="معاينة صورة المنتوج"><button type="button" class="secondary" onclick="removeImage()"><i class="fa-solid fa-trash"></i> حذف صورة المنتوج</button><span class="hint">الصور تُضغط وتُحفظ محلياً في هذا المتصفح. اختر صورة واضحة أقل من 5 ميغابايت.</span></div><div class="field"><label>الصنف</label><input id="pCategory" required maxlength="35" placeholder="مواد غذائية" list="catOptions"><datalist id="catOptions"></datalist></div><div class="field"><label>رمز تعبيري للمنتج</label><input id="pEmoji" maxlength="4" placeholder="🥛"></div><div class="field"><label><input type="checkbox" id="pAvailable" checked> متوفر حالياً</label></div><button class="primary full" type="submit"><i class="fa-solid fa-floppy-disk"></i> حفظ المنتج</button><button class="secondary full" type="button" style="margin-top:7px" onclick="resetForm()"><i class="fa-solid fa-xmark"></i> إلغاء التعديل</button></form></div>
+        <div class="panel" style="margin-top:13px"><h3><i class="fa-solid fa-layer-group"></i>إدارة الأصناف</h3><div id="catsManage"></div><div class="field"><label>زيد صنف جديد</label><div class="toolbar2"><input id="newCatEmoji" maxlength="4" placeholder="🛒" style="max-width:90px" aria-label="رمز الصنف"><input id="newCatName" maxlength="35" placeholder="اسم الصنف" aria-label="اسم الصنف الجديد"></div></div><button class="secondary full" onclick="addCategory()"><i class="fa-solid fa-plus"></i> زيد الصنف</button></div>
+        <div class="panel" style="margin-top:13px"><h3><i class="fa-solid fa-gear"></i>إعدادات الحانوت</h3><div class="field"><label>اسم الحانوت</label><input id="shopName" maxlength="70"></div><div class="field"><label>رقم واتساب التاجر</label><input id="shopPhone" inputmode="tel" placeholder="2126XXXXXXXX"></div><button class="primary full" onclick="saveSettings()"><i class="fa-solid fa-floppy-disk"></i> حفظ الإعدادات</button><p class="muted">استعمل الرقم بصيغة دولية: 212 ثم الرقم دون الصفر الأول.</p><hr><div class="actions"><button class="secondary" onclick="exportData()"><i class="fa-solid fa-download"></i> تصدير الكتالوغ</button><button class="secondary" onclick="document.getElementById('importFile').click()"><i class="fa-solid fa-upload"></i> استيراد</button><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></div><p class="muted">الاستيراد يستبدل بيانات الحانوت المحلية بعد التأكيد.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="hidden"><div class="panel"><h2>HANOUT LITE v0.5</h2><p>نسخة تجريبية لتسهيل الطلبات بين الحانوت والزبون، بتجربة استخدام عصرية مستوحاة من تطبيقات التسوق الكبرى وأيقونات Font Awesome 6.</p><div class="actions" style="margin:10px 0"><button class="primary" onclick="shareApp()"><i class="fa-solid fa-share-nodes"></i> شارك التطبيق</button><button class="secondary" onclick="installApp()"><i class="fa-solid fa-mobile-screen-button"></i> تثبيت التطبيق</button></div><h3>ما الذي يعمل الآن؟</h3><p>تصفّح المنتوجات بالأصناف، عروض الأسبوع، البحث، السلة، إرسال الطلب عبر واتساب، إدارة الأصناف والطلبات، تثبيت التطبيق على الهاتف، والعمل بدون إنترنت بعد أول زيارة. الصور تحفظ في المتصفح نفسه ولا تظهر على جهاز آخر.</p><h3>ما الذي لا يعمل بعد؟</h3><p>المزامنة بين الأجهزة، حسابات المستخدمين، التتبع المباشر، والدفع الإلكتروني. الطلبات تُحفظ على جهاز التاجر فقط ولا تصل تلقائياً من أجهزة أخرى. لا تُستخدم هذه النسخة لإدارة بيانات العملاء الحساسة.</p><p>لإطلاق متجر فعلي على الإنترنت يلزم ربط قاعدة بيانات وصلاحيات للتاجر، مع مراجعة الخصوصية والامتثال القانوني.</p></div></section>
+</main>
+
+<nav class="bottomnav">
+  <button id="navCustomer" class="navbtn active" onclick="showTab('customer')"><i class="fa-solid fa-house"></i><span>الرئيسية</span></button>
+  <button id="navDeals" class="navbtn" onclick="goDeals()"><i class="fa-solid fa-tags"></i><span>العروض</span></button>
+  <button id="navCart" class="navbtn" onclick="goCart()"><i class="fa-solid fa-cart-shopping"></i><span>السلة</span></button>
+  <button id="navMerchant" class="navbtn" onclick="showTab('merchant')"><i class="fa-solid fa-store"></i><span>التاجر</span></button>
+  <button id="navAbout" class="navbtn" onclick="showTab('about')"><i class="fa-solid fa-circle-info"></i><span>حول</span></button>
+</nav>
+<div class="installCta" id="installCta"><span><i class="fa-solid fa-mobile-screen-button"></i> ثبّت التطبيق على تيليفونك</span><button onclick="installApp()">تثبيت</button></div>
+<div id="toast"></div>
+<footer class="foot">HANOUT LITE — نسخة تجريبية محلية • 2026</footer>
+<script>
+const KEY='hanout_ai_lite_v01';let pendingImage=null;let catList=[];
+const defaults={name:'حانوت الحومة — متجر تجريبي',phone:'',products:[{id:'p1',name:'حليب 1 لتر',price:8,oldPrice:10,category:'حليب ومشتقاته',emoji:'🥛',available:true},{id:'p2',name:'خبز',price:1.5,category:'مخبوزات',emoji:'🥖',available:true},{id:'p3',name:'سكر 1 كيلو',price:7,oldPrice:9,category:'مواد غذائية',emoji:'🍬',available:true},{id:'p4',name:'زيت 1 لتر',price:19,category:'مواد غذائية',emoji:'🫒',available:true},{id:'p5',name:'ماء 1.5 لتر',price:6,category:'مشروبات',emoji:'💧',available:true},{id:'p6',name:'قهوة',price:15,oldPrice:18,category:'مشروبات',emoji:'☕',available:true}]};
+let data;try{let raw=JSON.parse(localStorage.getItem(KEY));data=validData(raw)?raw:structuredClone(defaults)}catch(e){data=structuredClone(defaults)}
+function normalize(){if(!Array.isArray(data.categories))data.categories=[...new Set(data.products.map(p=>p.category))].sort().map(c=>({name:c,emoji:(data.products.find(p=>p.category===c)||{}).emoji||'🛍️'}));if(!Array.isArray(data.orders))data.orders=[]}
+normalize();
+let cart={};
+const el=id=>document.getElementById(id);
+const money=n=>Number(n).toFixed(2)+' DH';
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function validData(d){return !!(d&&typeof d.name==='string'&&typeof d.phone==='string'&&Array.isArray(d.products)&&d.products.length<=1000&&d.products.every(p=>typeof p.id==='string'&&typeof p.name==='string'&&p.name.length<=70&&Number.isFinite(p.price)&&p.price>=0&&p.price<=100000&&typeof p.category==='string'&&typeof p.emoji==='string'&&typeof p.available==='boolean'&&(p.image===undefined||typeof p.image==='string'&&p.image.length<180000)&&(p.oldPrice===undefined||p.oldPrice===null||Number.isFinite(p.oldPrice)&&p.oldPrice>=0&&p.oldPrice<=100000)))}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch(e){toast('مساحة التخزين ممتلئة. احذف بعض الصور أو صدّر نسخة احتياطية.');return false}}
+function toast(t,icon){el('toast').innerHTML=(icon?`<i class="fa-solid ${icon}"></i>`:'')+escapeHTML(t);el('toast').style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>el('toast').style.display='none',2800)}
+
+function showTab(tab,scroll=true){['customer','merchant','about'].forEach(t=>{el(t).classList.toggle('hidden',t!==tab);const b=el('nav'+t.charAt(0).toUpperCase()+t.slice(1));if(b)b.classList.toggle('active',t===tab)});if(scroll)window.scrollTo({top:0,behavior:'smooth'});render()}
+function goDeals(){showTab('customer',false);el('deals').scrollIntoView({behavior:'smooth',block:'start'})}
+function goCart(){showTab('customer',false);el('cartPanel').scrollIntoView({behavior:'smooth',block:'start'})}
+
+function render(){el('shopTitle').textContent=data.name;el('shopName').value=data.name;el('shopPhone').value=data.phone;
+  let cats=[...new Set(data.products.map(p=>p.category))].sort();let prev=el('category').value;
+  el('category').innerHTML='<option value="">جميع الأصناف</option>'+cats.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
+  el('category').value=cats.includes(prev)?prev:'';
+  el('catOptions').innerHTML=cats.map(c=>`<option value="${escapeHTML(c)}"></option>`).join('');
+  renderCats();renderDeals();renderProducts();renderCart();renderManage();renderOrders();renderCatsManage()}
+
+function renderCats(){catList=[...new Set(data.products.map(p=>p.category))].sort();const active=el('category').value;
+  el('cats').innerHTML=`<button class="cat ${!active?'active':''}" onclick="pickCat(-1)"><span class="cat-ic"><i class="fa-solid fa-basket-shopping"></i></span><span>الكل</span></button>`+
+  catList.map((c,i)=>{const p=data.products.find(x=>x.category===c);return `<button class="cat ${active===c?'active':''}" onclick="pickCat(${i})"><span class="cat-ic">${p?escapeHTML(p.emoji||'🛍️'):'🛍️'}</span><span>${escapeHTML(c)}</span></button>`}).join('')}
+function pickCat(i){el('category').value=i<0?'':catList[i];renderProducts();renderCats();el('products').scrollIntoView({behavior:'smooth',block:'start'})}
+
+function cardMarkup(p,cls){const old=Number(p.oldPrice||0),disc=old>p.price,up=old>0&&old<p.price;
+  const badge=disc?`<span class="deal-badge"><i class="fa-solid fa-tag"></i> -${Math.round((old-p.price)/old*100)}%</span>`:(up?`<span class="up-badge"><i class="fa-solid fa-arrow-trend-up"></i> زيادة</span>`:'');
+  const btn=p.available?`<button class="btn-add" onclick="addCart('${p.id.replace(/[^a-zA-Z0-9_-]/g,'')}')"><i class="fa-solid fa-cart-plus"></i> زيد للسلة</button>`:'<button class="btn-add" disabled><i class="fa-solid fa-ban"></i> غير متوفر</button>';
+  return `<article class="${cls}">${badge}<div class="pimg">${p.image?`<img src="${p.image}" alt="${escapeHTML(p.name)}">`:escapeHTML(p.emoji||'🛍️')}</div><span class="muted">${escapeHTML(p.category)}</span><h3>${escapeHTML(p.name)}</h3><div class="pricebox"><span class="price">${money(p.price)}</span>${disc?`<span class="oldprice">${money(old)}</span>`:''}</div>${btn}</article>`}
+
+function renderProducts(){let q=el('search').value.trim().toLowerCase(),cat=el('category').value;
+  let items=data.products.filter(p=>(!q||p.name.toLowerCase().includes(q))&&(!cat||p.category===cat));
+  el('products').innerHTML=items.length?items.map(p=>cardMarkup(p,'product')).join(''):'<div class="empty"><i class="fa-solid fa-magnifying-glass"></i>ما لقينا حتى منتوج.</div>'}
+
+function renderDeals(){const deals=data.products.filter(p=>Number(p.oldPrice||0)>p.price).sort((a,b)=>(b.oldPrice-b.price)-(a.oldPrice-a.price)).slice(0,10);
+  el('deals').innerHTML=deals.length?deals.map(p=>cardMarkup(p,'deal')).join(''):'<div class="empty"><i class="fa-solid fa-tag"></i>مازال ما كاين حتى تخفيض.</div>'}
+
+function addCart(id){let p=data.products.find(x=>x.id===id);if(!p||!p.available)return;cart[id]=(cart[id]||0)+1;renderCart();toast('تزاد المنتوج للسلة','fa-circle-check')}
+function updateQty(id,n){cart[id]=Math.max(0,(cart[id]||0)+n);if(!cart[id])delete cart[id];renderCart()}
+function renderCart(){let entries=Object.entries(cart).map(([id,qty])=>({p:data.products.find(p=>p.id===id),qty,id})).filter(x=>x.p&&x.p.available);
+  let total=entries.reduce((a,x)=>a+x.p.price*x.qty,0);
+  el('cart').innerHTML=entries.length?entries.map(x=>`<div class="cartrow"><div><b>${escapeHTML(x.p.name)}</b><div class="muted">${money(x.p.price*x.qty)}</div></div><div class="actions"><button class="mini" onclick="updateQty('${x.id}',-1)"><i class="fa-solid fa-minus"></i></button><b>${x.qty}</b><button class="mini" onclick="updateQty('${x.id}',1)"><i class="fa-solid fa-plus"></i></button></div></div>`).join('')+`<div class="cartrow"><b>المجموع التقديري</b><b>${money(total)}</b></div>`:'<div class="empty"><i class="fa-solid fa-basket-shopping"></i>السلة خاوية دابا</div>';
+  const count=entries.reduce((a,x)=>a+x.qty,0);el('statCart').textContent=count;el('cartBadge').textContent=count}
+
+function checkout(){let entries=Object.entries(cart).map(([id,qty])=>({p:data.products.find(p=>p.id===id),qty})).filter(x=>x.p&&x.p.available);
+  if(!entries.length)return toast('زيد شي منتوج للسلة أولاً','fa-triangle-exclamation');
+  let phone=data.phone.replace(/\D/g,'');if(!/^212[5-7]\d{8}$/.test(phone))return toast('خاص مول الحانوت يدخل رقم واتساب صحيح','fa-triangle-exclamation');
+  let total=entries.reduce((a,x)=>a+x.p.price*x.qty,0);
+  let lines=[`السلام عليكم، بغيت نطلب من ${data.name}:`,...entries.map(x=>`• ${x.p.name} × ${x.qty} = ${money(x.p.price*x.qty)}`),`المجموع التقديري: ${money(total)}`,`الاستلام: ${el('fulfillment').value}`,`الاسم: ${el('buyer').value.trim()||'غير محدد'}`,`ملاحظة: ${el('note').value.trim()||'لا توجد'}`,'المرجو تأكيد التوفر والثمن النهائي.'];
+  data.orders.unshift({id:'o'+Date.now().toString(36),ts:Date.now(),buyer:el('buyer').value.trim()||'غير محدد',fulfillment:el('fulfillment').value,note:el('note').value.trim(),items:entries.map(x=>({name:x.p.name,qty:x.qty,price:x.p.price})),total,status:'جديد'});
+  if(data.orders.length>200)data.orders.length=200;persist();renderOrders();
+  window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener,noreferrer')}
+
+function renderManage(){el('statProducts').textContent=data.products.length;el('statAvailable').textContent=data.products.filter(p=>p.available).length;
+  const q=(el('manageSearch')?el('manageSearch').value:'').trim().toLowerCase(),sort=el('manageSort')?el('manageSort').value:'recent';
+  let items=data.products.filter(p=>!q||p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q));
+  if(sort==='name')items=[...items].sort((a,b)=>a.name.localeCompare(b.name,'ar'));else if(sort==='price-asc')items=[...items].sort((a,b)=>a.price-b.price);else if(sort==='price-desc')items=[...items].sort((a,b)=>b.price-a.price);
+  el('manage').innerHTML=items.length?items.map(p=>`<div class="manageRow"><div style="display:flex;gap:9px;align-items:center">${p.image?`<img src="${p.image}" alt="" style="width:54px;height:54px;object-fit:cover;border-radius:9px">`:`<span style="font-size:26px">${escapeHTML(p.emoji)}</span>`}<div><b>${escapeHTML(p.name)}</b><div class="muted">${money(p.price)} • ${p.available?'متوفر':'غير متوفر'}</div>${p.oldPrice&&p.oldPrice!==p.price?`<div class="muted">الثمن السابق: ${money(p.oldPrice)}</div>`:''}</div></div><div class="actions"><button class="mini" onclick="editProduct('${p.id}')"><i class="fa-solid fa-pen"></i> تعديل</button><button class="mini danger" onclick="deleteProduct('${p.id}')"><i class="fa-solid fa-trash"></i> حذف</button></div></div>`).join(''):'<p class="empty"><i class="fa-solid fa-box-open"></i>ما لقينا حتى منتوج.</p>'}
+
+function previewImage(e){let file=e.target.files[0];if(!file)return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5*1024*1024){toast('اختر صورة JPG أو PNG أو WebP أقل من 5MB','fa-triangle-exclamation');e.target.value='';return}let img=new Image(),url=URL.createObjectURL(file);img.onload=()=>{let scale=Math.min(1,650/img.width,650/img.height),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);pendingImage=canvas.toDataURL('image/jpeg',0.68);el('imagePreview').src=pendingImage;el('imagePreview').classList.remove('hidden');URL.revokeObjectURL(url)};img.onerror=()=>{URL.revokeObjectURL(url);toast('تعذر قراءة الصورة','fa-triangle-exclamation')};img.src=url}
+function removeImage(){pendingImage='';el('imagePreview').removeAttribute('src');el('imagePreview').classList.add('hidden');el('pImage').value=''}
+function saveProduct(e){e.preventDefault();let id=el('editId').value||'p'+Date.now().toString(36),existing=data.products.find(x=>x.id===id);let oldText=el('pOldPrice').value;
+  let p={id,name:el('pName').value.trim(),price:Number(el('pPrice').value),oldPrice:oldText===''?null:Number(oldText),category:el('pCategory').value.trim(),emoji:el('pEmoji').value.trim()||'🛍️',available:el('pAvailable').checked,image:pendingImage===null?(existing?.image||''):pendingImage};
+  if(!p.name||!p.category||!Number.isFinite(p.price)||p.price<0||p.price>100000||p.oldPrice!==null&&(!Number.isFinite(p.oldPrice)||p.oldPrice<0||p.oldPrice>100000))return toast('راجع معلومات المنتوج','fa-triangle-exclamation');
+  if(!data.categories.some(c=>c.name===p.category))data.categories.push({name:p.category,emoji:p.emoji});
+  let snapshot=JSON.stringify(data),idx=data.products.findIndex(x=>x.id===id);if(idx<0)data.products.push(p);else data.products[idx]=p;if(!persist()){data=JSON.parse(snapshot);return}resetForm();render();toast('تحفظ المنتوج بنجاح','fa-circle-check')}
+function editProduct(id){let p=data.products.find(x=>x.id===id);if(!p)return;el('editId').value=p.id;el('pName').value=p.name;el('pPrice').value=p.price;el('pOldPrice').value=p.oldPrice??'';el('pCategory').value=p.category;el('pEmoji').value=p.emoji;el('pAvailable').checked=p.available;pendingImage=p.image||'';if(p.image){el('imagePreview').src=p.image;el('imagePreview').classList.remove('hidden')}else{el('imagePreview').classList.add('hidden')}el('formTitle').innerHTML='<i class="fa-solid fa-pen"></i>تعديل المنتج';el('productForm').scrollIntoView({behavior:'smooth',block:'center'})}
+function deleteProduct(id){if(!confirm('واش متأكد بغيتي تحذف المنتوج؟'))return;data.products=data.products.filter(p=>p.id!==id);delete cart[id];persist();render()}
+function resetForm(){el('productForm').reset();el('editId').value='';pendingImage=null;el('imagePreview').classList.add('hidden');el('imagePreview').removeAttribute('src');el('formTitle').innerHTML='<i class="fa-solid fa-plus"></i>إضافة منتج'}
+function saveSettings(){let name=el('shopName').value.trim(),phone=el('shopPhone').value.replace(/\D/g,'');if(!name)return toast('دخل اسم الحانوت','fa-triangle-exclamation');if(phone&&!/^212[5-7]\d{8}$/.test(phone))return toast('رقم واتساب غير صحيح. مثال: 212612345678','fa-triangle-exclamation');data.name=name;data.phone=phone;persist();render();toast('تحفظات الإعدادات','fa-circle-check')}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='hanout-catalog.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+async function importData(e){let f=e.target.files[0];if(!f)return;try{if(f.size>250000)throw Error('الملف كبير');let d=JSON.parse(await f.text());if(!validData(d))throw Error('صيغة الملف غير صحيحة');if(!confirm('غادي يتبدل الكتالوغ الحالي. واش موافق؟'))return;data=d;normalize();cart={};persist();render();toast('تم الاستيراد','fa-circle-check')}catch(err){toast(err.message,'fa-triangle-exclamation')}finally{e.target.value=''}}
+function renderOrders(){const list=data.orders;el('statOrders').textContent=list.filter(o=>o.status==='جديد').length;
+  el('orders').innerHTML=list.length?list.map(o=>{const t=new Date(o.ts).toLocaleString('ar-MA',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    return `<div class="orderRow"><div class="otop"><b>${escapeHTML(o.buyer)} • ${money(o.total)}</b><span class="chip ${o.status==='جديد'?'new':'done'}">${o.status==='جديد'?'جديد':'تم'}</span></div><div class="muted" style="font-size:12px">${t}${o.fulfillment?' • '+escapeHTML(o.fulfillment):''}</div><ul>${o.items.map(i=>`<li>${escapeHTML(i.name)} × ${i.qty} = ${money(i.price*i.qty)}</li>`).join('')}</ul>${o.note?`<div class="muted" style="font-size:12px">ملاحظة: ${escapeHTML(o.note)}</div>`:''}<div class="actions" style="margin-top:8px"><button class="mini" onclick="setOrderStatus('${o.id}')"><i class="fa-solid fa-check"></i> ${o.status==='جديد'?'تم':'رجع جديد'}</button><button class="mini danger" onclick="deleteOrder('${o.id}')"><i class="fa-solid fa-trash"></i> حذف</button></div></div>`}).join(''):'<p class="empty"><i class="fa-solid fa-receipt"></i>مازال ما كاين حتى طلب.</p>'}
+function setOrderStatus(id){let o=data.orders.find(x=>x.id===id);if(!o)return;o.status=o.status==='جديد'?'تم':'جديد';persist();renderOrders()}
+function deleteOrder(id){if(!confirm('تحذف هاد الطلب؟'))return;data.orders=data.orders.filter(x=>x.id!==id);persist();renderOrders()}
+
+function renderCatsManage(){const counts={};data.products.forEach(p=>counts[p.category]=(counts[p.category]||0)+1);
+  el('catsManage').innerHTML=data.categories.length?data.categories.map((c,i)=>`<div class="catRow"><div class="cname"><span class="ce">${escapeHTML(c.emoji||'🛍️')}</span><div>${escapeHTML(c.name)}<div class="muted" style="font-size:12px">${counts[c.name]||0} منتوج</div></div></div><div class="actions"><button class="mini" onclick="renameCategory(${i})"><i class="fa-solid fa-pen"></i> تعديل</button><button class="mini danger" onclick="deleteCategory(${i})"><i class="fa-solid fa-trash"></i> حذف</button></div></div>`).join(''):'<p class="empty"><i class="fa-solid fa-layer-group"></i>مازال ما كاين حتى صنف.</p>'}
+function addCategory(){let name=el('newCatName').value.trim(),emoji=el('newCatEmoji').value.trim()||'🛍️';if(!name)return toast('دخل اسم الصنف','fa-triangle-exclamation');if(data.categories.some(c=>c.name===name))return toast('هاد الصنف كاين من قبل','fa-triangle-exclamation');data.categories.push({name,emoji});el('newCatName').value='';el('newCatEmoji').value='';persist();render();toast('تزاد الصنف','fa-circle-check')}
+function renameCategory(i){let c=data.categories[i];if(!c)return;let old=c.name,name=prompt('الاسم الجديد للصنف:',old);if(name===null)return;name=name.trim();if(!name)return;if(name!==old&&data.categories.some(x=>x.name===name))return toast('هاد الاسم مستعمل من قبل','fa-triangle-exclamation');let emoji=prompt('الرمز التعبيري للصنف:',c.emoji||'🛍️');c.name=name;c.emoji=((emoji||'').trim())||'🛍️';if(name!==old)data.products.forEach(p=>{if(p.category===old)p.category=name});persist();render();toast('تبدل الصنف','fa-circle-check')}
+function deleteCategory(i){let c=data.categories[i];if(!c)return;let name=c.name,used=data.products.filter(p=>p.category===name).length;if(used&&!confirm('فيه '+used+' منتوج فهاد الصنف. غادي ينقلو لصنف «غير مصنف». موافق؟'))return;if(used){if(!data.categories.some(x=>x.name==='غير مصنف'))data.categories.push({name:'غير مصنف',emoji:'📦'});data.products.forEach(p=>{if(p.category===name)p.category='غير مصنف'})}data.categories=data.categories.filter(x=>x.name!==name);persist();render();toast('تحذف الصنف','fa-circle-check')}
+
+async function shareApp(){const url=location.href.split('#')[0];const text='HANOUT LITE — '+(data.name||'')+'\n'+url;try{if(navigator.share){await navigator.share({title:'HANOUT LITE',text:'HANOUT LITE — '+(data.name||''),url});return}await navigator.clipboard.writeText(url);toast('تنسخ رابط التطبيق','fa-circle-check')}catch(err){window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank','noopener,noreferrer')}}
+
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;const b=el('installCta');if(b)b.style.display='flex'});
+window.addEventListener('appinstalled',()=>{deferredPrompt=null;const b=el('installCta');if(b)b.style.display='none';toast('تثبت التطبيق بنجاح','fa-circle-check')});
+async function installApp(){const b=el('installCta');if(deferredPrompt){deferredPrompt.prompt();try{await deferredPrompt.userChoice}catch(err){}deferredPrompt=null;if(b)b.style.display='none';return}if(b)b.style.display='none';toast('من قائمة المتصفح: «إضافة إلى الشاشة الرئيسية»','fa-circle-info')}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./service-worker.js').catch(()=>{})})}
+
+render();
+</script></body></html>

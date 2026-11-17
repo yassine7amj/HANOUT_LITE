@@ -1,0 +1,23 @@
+{
+  "name": "HANOUT LITE — حانوت حومتك فتيليفونك",
+  "short_name": "HANOUT LITE",
+  "description": "كتالوج الحانوت الرقمي: تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F8FD",
+  "theme_color": "#003DA5",
+  "categories": ["shopping", "food"],
+  "icons": [
+    { "src": "icon-512.jpg", "sizes": "1920x1920", "type": "image/jpeg", "purpose": "any maskable" },
+    { "src": "logo.png", "sizes": "any", "type": "image/png" }
+  ],
+  "shortcuts": [
+    { "name": "العروض", "short_name": "العروض", "url": "./#deals" },
+    { "name": "السلة", "short_name": "السلة", "url": "./#cart" }
+  ]
+}

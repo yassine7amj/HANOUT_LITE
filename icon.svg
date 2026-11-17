@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="HANOUT LITE">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A66C2"/>
+      <stop offset="1" stop-color="#002A73"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <path d="M112 176h46l34 168a30 30 0 0 0 29 24h150a30 30 0 0 0 29-23l28-113H146"
+        fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M196 176l30-52a18 18 0 0 1 16-9h28a18 18 0 0 1 16 9l30 52"
+        fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="216" cy="408" r="24" fill="#FFC220"/>
+  <circle cx="356" cy="408" r="24" fill="#FFC220"/>
+</svg>
