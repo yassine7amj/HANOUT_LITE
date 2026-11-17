@@ -4,8 +4,8 @@
 <meta name="keywords" content="حانوت, كتالوج, طلبات, واتساب, متجر إلكتروني, HANOUT LITE, المغرب">
 <meta name="robots" content="index,follow">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="icon" href="logo.png" sizes="any">
-<link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,12 +15,16 @@
 <meta property="og:site_name" content="HANOUT LITE">
 <meta property="og:title" content="HANOUT LITE | حانوت حومتك فتيليفونك">
 <meta property="og:description" content="تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب.">
-<meta property="og:image" content="logo.png">
+<meta property="og:url" content="https://yassine7amj.github.io/HANOUT_LITE/">
+<meta property="og:image" content="https://yassine7amj.github.io/HANOUT_LITE/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="HANOUT LITE — حانوت حومتك فتيليفونك">
 <meta property="og:locale" content="ar_MA">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HANOUT LITE | حانوت حومتك فتيليفونك">
 <meta name="twitter:description" content="تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب.">
-<meta name="twitter:image" content="logo.png">
+<meta name="twitter:image" content="https://yassine7amj.github.io/HANOUT_LITE/og-cover.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><style>
 *{box-sizing:border-box}
 :root{--blue:#003DA5;--blue2:#002A73;--blue-light:#E9F1FC;--accent:#0A66C2;--yellow:#FFC220;--red:#E01A2B;--green:#00843D;--ink:#0B1B34;--muted:#5B6B82;--line:#E4E9F2;--bg:#F5F8FD;--card:#fff;--r:16px;--shadow:0 4px 14px rgba(11,27,52,.07);font-family:"Segoe UI",Tahoma,Arial,sans-serif}
@@ -141,6 +145,23 @@ img{display:block}
 .checkline input{accent-color:var(--blue)}
 .favbtn{position:absolute;top:8px;inset-inline-end:8px;width:32px;height:32px;border-radius:50%;background:#fff;color:#9AA7BC;display:grid;place-items:center;font-size:14px;z-index:2;box-shadow:var(--shadow)}
 .favbtn.on{color:var(--red)}
+.pemoji{width:74px;height:74px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:38px;box-shadow:0 2px 8px rgba(11,27,52,.08)}
+.deal .pemoji{width:58px;height:58px;font-size:30px}
+/* ===== Drawer menu (v0.7) ===== */
+.drawer{position:fixed;inset:0;z-index:50;visibility:hidden;pointer-events:none}
+.drawer.open{visibility:visible;pointer-events:auto}
+.drawer-bg{position:absolute;inset:0;background:rgba(4,12,26,.55);opacity:0;transition:opacity .22s}
+.drawer.open .drawer-bg{opacity:1}
+.drawer-panel{position:absolute;top:0;bottom:0;right:0;width:min(82vw,320px);background:var(--card);padding:16px;overflow:auto;display:flex;flex-direction:column;gap:2px;box-shadow:-8px 0 30px rgba(0,0,0,.3);transform:translateX(100%);transition:transform .22s}
+.drawer.open .drawer-panel{transform:translateX(0)}
+.drawer-head{display:flex;align-items:center;gap:11px;padding:4px 4px 13px;border-bottom:1px solid var(--line);margin-bottom:9px}
+.drawer-head img{width:42px;height:42px;border-radius:11px;object-fit:cover;background:#fff}
+.drawer-head b{font-size:16px;color:var(--ink)}
+.menuItem{display:flex;align-items:center;gap:11px;padding:12px;border-radius:12px;background:none;color:var(--ink);font-weight:600;text-align:start;width:100%}
+.menuItem i{width:20px;text-align:center;color:var(--blue)}
+.menuItem:hover{background:var(--blue-light)}
+.drawer-sep{height:1px;background:var(--line);margin:8px 0}
+.drawer-foot{margin-top:auto;font-size:12px;color:var(--muted);text-align:center;padding-top:14px}
 /* ===== Dark theme ===== */
 html[data-theme=dark]{--ink:#E9EFFA;--muted:#98A7BE;--line:#26334A;--bg:#0D1524;--card:#141F33;--blue-light:#182741;--shadow:0 4px 14px rgba(0,0,0,.45)}
 html[data-theme=dark] .appbar{background:linear-gradient(180deg,#0B2A5B,#07182F)}
@@ -157,7 +178,7 @@ html[data-theme=dark] .preview{border-color:var(--line)}
 </style></head><body>
 <header class="appbar">
   <div class="appbar-top">
-    <button class="iconbtn" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    <button class="iconbtn" aria-label="فتح القائمة" aria-controls="drawer" onclick="openMenu()"><i class="fa-solid fa-bars"></i></button>
     <a class="brand" href="#" onclick="showTab('customer');return false"><img src="logo.png" alt="شعار HANOUT LITE" onerror="this.onerror=null;this.src='icon.svg'"><span>HANOUT <small>LITE</small></span></a>
     <div class="actions" style="flex:0 0 auto">
       <button class="iconbtn" id="themeBtn" aria-label="الوضع الليلي" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
@@ -218,7 +239,7 @@ html[data-theme=dark] .preview{border-color:var(--line)}
     <div class="panel"><h3><i class="fa-solid fa-clock-rotate-left"></i>سجل الطلبات</h3><div id="myOrders"></div></div>
   </section>
 
-  <section id="about" class="hidden"><div class="panel"><h2>HANOUT LITE v0.6</h2><p>نسخة تجريبية لتسهيل الطلبات بين الحانوت والزبون، بتجربة استخدام عصرية مستوحاة من تطبيقات التسوق الكبرى وأيقونات Font Awesome 6.</p><div class="actions" style="margin:10px 0"><button class="primary" onclick="shareApp()"><i class="fa-solid fa-share-nodes"></i> شارك التطبيق</button><button class="secondary" onclick="installApp()"><i class="fa-solid fa-mobile-screen-button"></i> تثبيت التطبيق</button></div><h3>ما الذي يعمل الآن؟</h3><p>تصفّح المنتوجات بالأصناف، عروض الأسبوع، البحث، الفرز والتصفية (المتوفر / المفضلة)، قائمة المفضلة، الوضع الليلي، سلة وسجل طلبات للزبون، إرسال الطلب عبر واتساب، إدارة الأصناف والطلبات، تثبيت التطبيق على الهاتف، والعمل بدون إنترنت بعد أول زيارة. الصور تحفظ في المتصفح نفسه ولا تظهر على جهاز آخر.</p><h3>ما الذي لا يعمل بعد؟</h3><p>المزامنة بين الأجهزة، حسابات المستخدمين، التتبع المباشر، والدفع الإلكتروني. الطلبات تُحفظ على جهاز التاجر فقط ولا تصل تلقائياً من أجهزة أخرى، ولذلك «الطلبات ديالك» كتعرض غير الطلبات اللي تصيفطو من نفس المتصفح. لا تُستخدم هذه النسخة لإدارة بيانات العملاء الحساسة.</p><p>لإطلاق متجر فعلي على الإنترنت يلزم ربط قاعدة بيانات وصلاحيات للتاجر، مع مراجعة الخصوصية والامتثال القانوني.</p></div></section>
+  <section id="about" class="hidden"><div class="panel"><h2>HANOUT LITE v0.7</h2><p>نسخة تجريبية لتسهيل الطلبات بين الحانوت والزبون، بتجربة استخدام عصرية مستوحاة من تطبيقات التسوق الكبرى وأيقونات Font Awesome 6.</p><div class="actions" style="margin:10px 0"><button class="primary" onclick="shareApp()"><i class="fa-solid fa-share-nodes"></i> شارك التطبيق</button><button class="secondary" onclick="installApp()"><i class="fa-solid fa-mobile-screen-button"></i> تثبيت التطبيق</button><button class="secondary" onclick="openMenu()"><i class="fa-solid fa-bars"></i> القائمة</button></div><h3>ما الذي يعمل الآن؟</h3><p>تصفّح المنتوجات بالأصناف، عروض الأسبوع، البحث، الفرز والتصفية (المتوفر / المفضلة)، قائمة المفضلة، الوضع الليلي، قائمة جانبية موحّدة، سلة وسجل طلبات للزبون، إرسال الطلب عبر واتساب، إدارة الأصناف والطلبات، تثبيت التطبيق على الهاتف، والعمل بدون إنترنت بعد أول زيارة. الصور تحفظ في المتصفح نفسه ولا تظهر على جهاز آخر.</p><h3>ما الذي لا يعمل بعد؟</h3><p>المزامنة بين الأجهزة، حسابات المستخدمين، التتبع المباشر، والدفع الإلكتروني. الطلبات تُحفظ على جهاز التاجر فقط ولا تصل تلقائياً من أجهزة أخرى، ولذلك «الطلبات ديالك» كتعرض غير الطلبات اللي تصيفطو من نفس المتصفح. لا تُستخدم هذه النسخة لإدارة بيانات العملاء الحساسة.</p><p>لإطلاق متجر فعلي على الإنترنت يلزم ربط قاعدة بيانات وصلاحيات للتاجر، مع مراجعة الخصوصية والامتثال القانوني.</p></div></section>
 </main>
 
 <nav class="bottomnav">
@@ -226,11 +247,26 @@ html[data-theme=dark] .preview{border-color:var(--line)}
   <button id="navDeals" class="navbtn" onclick="goDeals()"><i class="fa-solid fa-tags"></i><span>العروض</span></button>
   <button id="navCart" class="navbtn" onclick="goCart()"><i class="fa-solid fa-cart-shopping"></i><span>السلة</span></button>
   <button id="navMyorders" class="navbtn" onclick="showTab('myorders')"><i class="fa-solid fa-receipt"></i><span>طلباتي</span></button>
-  <button id="navMerchant" class="navbtn" onclick="showTab('merchant')"><i class="fa-solid fa-store"></i><span>التاجر</span></button>
-  <button id="navAbout" class="navbtn" onclick="showTab('about')"><i class="fa-solid fa-circle-info"></i><span>حول</span></button>
 </nav>
 <div class="installCta" id="installCta"><span><i class="fa-solid fa-mobile-screen-button"></i> ثبّت التطبيق على تيليفونك</span><button onclick="installApp()">تثبيت</button></div>
 <div id="toast"></div>
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-bg" onclick="closeMenu()"></div>
+  <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="قائمة التطبيق">
+    <div class="drawer-head"><img src="logo.png" alt="" onerror="this.onerror=null;this.src='icon.svg'"><div style="min-width:0"><b>HANOUT LITE</b><div class="muted" id="drawerShop" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div></div><button class="iconbtn" style="margin-inline-start:auto;flex:0 0 auto" aria-label="إغلاق القائمة" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button></div>
+    <button class="menuItem" onclick="menuGo('customer')"><i class="fa-solid fa-house"></i>الرئيسية</button>
+    <button class="menuItem" onclick="menuGo(null,goDeals)"><i class="fa-solid fa-tags"></i>عروض الأسبوع</button>
+    <button class="menuItem" onclick="menuGo(null,goCart)"><i class="fa-solid fa-cart-shopping"></i>السلة ديالك</button>
+    <button class="menuItem" onclick="menuGo('myorders')"><i class="fa-solid fa-receipt"></i>الطلبات ديالك</button>
+    <button class="menuItem" onclick="menuGo('merchant')"><i class="fa-solid fa-store"></i>فضاء التاجر</button>
+    <div class="drawer-sep"></div>
+    <button class="menuItem" onclick="closeMenu();toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i>الوضع الليلي / النهاري</button>
+    <button class="menuItem" onclick="closeMenu();shareApp()"><i class="fa-solid fa-share-nodes"></i>شارك التطبيق</button>
+    <button class="menuItem" onclick="closeMenu();installApp()"><i class="fa-solid fa-mobile-screen-button"></i>ثبّت التطبيق</button>
+    <button class="menuItem" onclick="menuGo('about')"><i class="fa-solid fa-circle-info"></i>حول التطبيق</button>
+    <div class="drawer-foot">HANOUT LITE — v0.7</div>
+  </div>
+</div>
 <footer class="foot">HANOUT LITE — نسخة تجريبية محلية • 2026</footer>
 <script>
 const KEY='hanout_ai_lite_v01';let pendingImage=null;let catList=[];
@@ -250,6 +286,12 @@ function showTab(tab,scroll=true){['customer','merchant','myorders','about'].for
 function goDeals(){showTab('customer',false);el('deals').scrollIntoView({behavior:'smooth',block:'start'})}
 function goCart(){showTab('customer',false);el('cartPanel').scrollIntoView({behavior:'smooth',block:'start'})}
 
+function openMenu(){const d=el('drawer');if(!d)return;const s=el('drawerShop');if(s)s.textContent=data.name;d.classList.add('open');d.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+function closeMenu(){const d=el('drawer');if(!d)return;d.classList.remove('open');d.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+function menuGo(tab,after){closeMenu();setTimeout(()=>{if(tab)showTab(tab,false);if(typeof after==='function')after()},180)}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+function handleHash(){const h=location.hash;if(h==='#deals')goDeals();else if(h==='#cart')goCart()}
+
 function render(){el('shopTitle').textContent=data.name;el('shopName').value=data.name;el('shopPhone').value=data.phone;
   let cats=[...new Set(data.products.map(p=>p.category))].sort();let prev=el('category').value;
   el('category').innerHTML='<option value="">جميع الأصناف</option>'+cats.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
@@ -266,7 +308,7 @@ function cardMarkup(p,cls){const old=Number(p.oldPrice||0),disc=old>p.price,up=o
   const badge=disc?`<span class="deal-badge"><i class="fa-solid fa-tag"></i> -${Math.round((old-p.price)/old*100)}%</span>`:(up?`<span class="up-badge"><i class="fa-solid fa-arrow-trend-up"></i> زيادة</span>`:'');
   const favBtn=`<button class="favbtn ${fav?'on':''}" onclick="toggleFav('${pid}')" aria-label="المفضلة" aria-pressed="${fav}"><i class="fa-${fav?'solid':'regular'} fa-heart"></i></button>`;
   const btn=p.available?`<button class="btn-add" onclick="addCart('${pid}')"><i class="fa-solid fa-cart-plus"></i> زيد للسلة</button>`:'<button class="btn-add" disabled><i class="fa-solid fa-ban"></i> غير متوفر</button>';
-  return `<article class="${cls}">${badge}${favBtn}<div class="pimg">${p.image?`<img src="${p.image}" alt="${escapeHTML(p.name)}">`:escapeHTML(p.emoji||'🛍️')}</div><span class="muted">${escapeHTML(p.category)}</span><h3>${escapeHTML(p.name)}</h3><div class="pricebox"><span class="price">${money(p.price)}</span>${disc?`<span class="oldprice">${money(old)}</span>`:''}</div>${btn}</article>`}
+  return `<article class="${cls}">${badge}${favBtn}<div class="pimg">${p.image?`<img src="${p.image}" alt="${escapeHTML(p.name)}">`:`<span class="pemoji">${escapeHTML(p.emoji||'🛍️')}</span>`}</div><span class="muted">${escapeHTML(p.category)}</span><h3>${escapeHTML(p.name)}</h3><div class="pricebox"><span class="price">${money(p.price)}</span>${disc?`<span class="oldprice">${money(old)}</span>`:''}</div>${btn}</article>`}
 
 function renderProducts(){let q=el('search').value.trim().toLowerCase(),cat=el('category').value;
   let items=data.products.filter(p=>(!q||p.name.toLowerCase().includes(q))&&(!cat||p.category===cat));
@@ -346,7 +388,9 @@ const THEME_KEY='hanout_theme';
 function applyTheme(){const dark=localStorage.getItem(THEME_KEY)==='dark';document.documentElement.setAttribute('data-theme',dark?'dark':'light');const i=el('themeIcon');if(i)i.className=dark?'fa-solid fa-sun':'fa-solid fa-moon';const b=el('themeBtn');if(b)b.setAttribute('aria-label',dark?'الوضع النهاري':'الوضع الليلي')}
 function toggleTheme(){try{localStorage.setItem(THEME_KEY,document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}catch(e){}applyTheme()}
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./service-worker.js').catch(()=>{})})}
+window.addEventListener('hashchange',handleHash);
 
 applyTheme();
 render();
+handleHash();
 </script></body></html>
