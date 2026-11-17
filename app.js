@@ -1,4 +1,4 @@
-/* HANOUT LITE - shared application logic (used by index.html mobile + web.html desktop) */
+/* HANOUT LITE - shared application logic (used by store.html mobile + web.html desktop) */
 const KEY='hanout_ai_lite_v01';let pendingImage=null;let catList=[];
 const defaults={name:'حانوت الحومة — متجر تجريبي',phone:'',products:[{id:'p1',name:'حليب 1 لتر',price:8,oldPrice:10,category:'حليب ومشتقاته',emoji:'🥛',available:true},{id:'p2',name:'خبز',price:1.5,category:'مخبوزات',emoji:'🥖',available:true},{id:'p3',name:'سكر 1 كيلو',price:7,oldPrice:9,category:'مواد غذائية',emoji:'🍬',available:true},{id:'p4',name:'زيت 1 لتر',price:19,category:'مواد غذائية',emoji:'🫒',available:true},{id:'p5',name:'ماء 1.5 لتر',price:6,category:'مشروبات',emoji:'💧',available:true},{id:'p6',name:'قهوة',price:15,oldPrice:18,category:'مشروبات',emoji:'☕',available:true}]};
 let data;try{let raw=JSON.parse(localStorage.getItem(KEY));data=validData(raw)?raw:structuredClone(defaults)}catch(e){data=structuredClone(defaults)}

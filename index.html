@@ -1,256 +1,316 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#003DA5">
-<title>HANOUT LITE | حانوت حومتك على تيليفونك</title>
-<meta name="description" content="HANOUT LITE — كتالوج الحانوت الرقمي: تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب. حانوت حومتك فتيليفونك.">
-<meta name="keywords" content="حانوت, كتالوج, طلبات, واتساب, متجر إلكتروني, HANOUT LITE, المغرب">
+<title>HANWEB HUB | منصة تسيير تطبيقات الحانوت</title>
+<meta name="description" content="HANWEB HUB — منصة كتسيّر تطبيقات HANOUT LITE: جرّب نسخة الزبون ونسخة التاجر، وحمّل تطبيق أندرويد بالاسم والرابط ديال حانوتك.">
+<meta name="keywords" content="HANWEB, HANOUT LITE, منصة, تطبيق أندرويد, حانوت, كتالوج, طلبات, واتساب, المغرب">
 <meta name="robots" content="index,follow">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="HANOUT LITE">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="HANOUT LITE">
-<meta property="og:title" content="HANOUT LITE | حانوت حومتك فتيليفونك">
-<meta property="og:description" content="تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب.">
+<meta property="og:site_name" content="HANWEB HUB">
+<meta property="og:title" content="HANWEB HUB | منصة تسيير تطبيقات الحانوت">
+<meta property="og:description" content="كتالوج رقمي + تطبيق أندرويد لكل حانوت. جرّب التطبيق أو حمّلو — نسخة الزبون ونسخة التاجر.">
 <meta property="og:url" content="https://yassine7amj.github.io/HANOUT_LITE/">
 <meta property="og:image" content="https://yassine7amj.github.io/HANOUT_LITE/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="HANOUT LITE — حانوت حومتك فتيليفونك">
+<meta property="og:image:alt" content="HANWEB HUB — منصة تسيير تطبيقات الحانوت">
 <meta property="og:locale" content="ar_MA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="HANOUT LITE | حانوت حومتك فتيليفونك">
-<meta name="twitter:description" content="تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب.">
+<meta name="twitter:title" content="HANWEB HUB | منصة تسيير تطبيقات الحانوت">
+<meta name="twitter:description" content="جرّب نسخة الزبون ونسخة التاجر، وحمّل تطبيق أندرويد بالاسم والرابط ديال حانوتك.">
 <meta name="twitter:image" content="https://yassine7amj.github.io/HANOUT_LITE/og-cover.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><style>
 *{box-sizing:border-box}
-:root{--blue:#003DA5;--blue2:#002A73;--blue-light:#E9F1FC;--accent:#0A66C2;--yellow:#FFC220;--red:#E01A2B;--green:#00843D;--ink:#0B1B34;--muted:#5B6B82;--line:#E4E9F2;--bg:#F5F8FD;--card:#fff;--r:16px;--shadow:0 4px 14px rgba(11,27,52,.07);font-family:"Segoe UI",Tahoma,Arial,sans-serif}
-body{margin:0;background:var(--bg);color:var(--ink);padding-bottom:78px}
-button{font:inherit;cursor:pointer;border:0;border-radius:12px}
-input,select,textarea{font:inherit}
+:root{--blue:#003DA5;--blue2:#002A73;--blue-l:#E9F1FC;--teal:#0E9F8B;--yellow:#FFC220;--red:#E01A2B;--green:#00843D;--ink:#0B1B34;--muted:#5B6B82;--line:#E4E9F2;--bg:#F4F7FC;--card:#fff;--shadow:0 1px 3px rgba(11,27,52,.06),0 10px 30px rgba(11,27,52,.06)}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,Tahoma,Arial,sans-serif;font-size:15px;line-height:1.7}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;color:inherit}
+input{font:inherit}
 img{display:block}
+a{color:var(--blue)}
 .hidden{display:none!important}
 .muted{color:var(--muted);font-size:13px}
-.empty{text-align:center;color:var(--muted);padding:26px;background:#fff;border-radius:16px;grid-column:1/-1}
-.iconbtn i{line-height:1}
-.section-head h3 i,.panel h3 i,.stat i{margin-inline-end:8px}
-.empty i{font-size:26px;color:var(--blue);display:block;margin-bottom:8px}
-/* ===== App bar ===== */
-.appbar{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.14)}
-.appbar-top{max-width:1100px;margin:auto;display:flex;align-items:center;gap:12px;padding:12px 16px 8px}
-.brand{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;color:#fff;text-decoration:none;font-size:19px;font-weight:800;letter-spacing:.5px}
-.brand img{width:38px;height:38px;border-radius:10px;object-fit:cover}
-.brand small{font-weight:600;opacity:.85;font-size:14px}
-.iconbtn{position:relative;background:rgba(255,255,255,.15);color:#fff;width:42px;height:42px;border-radius:50%;font-size:19px;display:grid;place-items:center}
-.iconbtn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--yellow)}
-.badge{position:absolute;top:-5px;inset-inline-start:-5px;background:var(--yellow);color:#3a2a00;font-size:11px;font-weight:800;min-width:19px;height:19px;border-radius:10px;display:grid;place-items:center;padding:0 4px}
-.searchwrap{max-width:1100px;margin:auto;padding:0 16px 14px}
-.searchbox{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:10px 14px;color:var(--muted)}
-.searchbox input{flex:1;border:0;outline:0;background:transparent;color:var(--ink);padding:0}
-/* ===== Shell ===== */
-.shell{max-width:1100px;margin:auto;padding:16px}
-.hero{display:flex;align-items:center;gap:16px;background:linear-gradient(120deg,#0A57C2,#003DA5);color:#fff;border-radius:22px;padding:24px;box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
-.hero-tag{display:inline-block;background:var(--yellow);color:#3a2a00;font-weight:800;font-size:12px;padding:5px 12px;border-radius:30px;margin-bottom:8px}
-.hero h2{margin:6px 0;font-size:26px}
-.hero p{margin:0;opacity:.9}
-.hero-art{font-size:62px;margin-inline-start:auto;opacity:.95}
-.section-head{display:flex;align-items:center;gap:10px;margin:22px 4px 12px}
-.section-head h3{margin:0;font-size:20px;color:var(--blue2);display:flex;align-items:center}
-/* ===== Category chips ===== */
-.cats{display:flex;gap:12px;overflow-x:auto;padding:4px;scrollbar-width:none}
-.cats::-webkit-scrollbar{display:none}
-.cat{flex:0 0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink);min-width:86px;box-shadow:var(--shadow);transition:transform .15s}
-.cat:hover{transform:translateY(-2px)}
-.cat.active{border-color:var(--blue);background:var(--blue-light)}
-.cat-ic{font-size:26px;color:var(--blue2)}
-.cat span:last-child{font-size:12px;font-weight:600}
-/* ===== Deals row ===== */
-.deals{display:flex;gap:14px;overflow-x:auto;padding:4px 4px 10px;scrollbar-width:none}
-.deals::-webkit-scrollbar{display:none}
-/* ===== Layout & cards ===== */
-.layout{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
-.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px}
-.toolbar select{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
-.product,.deal{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;gap:8px;transition:transform .15s}
-.product:hover{transform:translateY(-2px)}
-.deal{flex:0 0 168px}
-.pimg{height:140px;border-radius:12px;overflow:hidden;background:var(--blue-light);display:grid;place-items:center;font-size:52px;color:var(--blue2)}
-.pimg img{width:100%;height:100%;object-fit:cover}
-.deal .pimg{height:112px;font-size:42px}
-.product h3,.deal h3{margin:0;font-size:15px}
-.product .muted,.deal .muted{font-size:12px}
-.deal-badge{position:absolute;top:10px;inset-inline-start:10px;background:var(--red);color:#fff;font-weight:800;font-size:12px;padding:4px 9px;border-radius:20px;z-index:1}
-.up-badge{position:absolute;top:10px;inset-inline-start:10px;background:var(--yellow);color:#3a2a00;font-weight:800;font-size:12px;padding:4px 9px;border-radius:20px;z-index:1}
-.pricebox{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.price{font-size:20px;font-weight:800;color:var(--red)}
-.oldprice{color:#8C96A5;text-decoration:line-through;font-size:13px}
-.btn-add{margin-top:auto;background:var(--blue);color:#fff;font-weight:700;padding:11px;border-radius:12px}
-.btn-add:disabled{background:#B9C6DA;cursor:not-allowed}
-.btn-add:not(:disabled):hover{background:var(--blue2)}
-/* ===== Panels ===== */
-.panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:16px}
-.panel h3{margin:0 0 14px;display:flex;align-items:center}
-.cart-panel{position:sticky;top:150px}
-.cartrow,.manageRow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid #eee}
-.mini{padding:5px 10px;background:var(--blue-light);color:var(--blue)}
-.danger{background:#FBE7E3;color:#A33120}
-.primary{background:var(--blue);color:#fff}
-.secondary{background:#E5EDF8;color:var(--blue)}
-.full{width:100%}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
-.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
-.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff}
-.pill{background:var(--blue-light);color:var(--blue);padding:5px 10px;border-radius:30px;font-size:12px}
-.hint{font-size:12px;color:var(--muted)}
-.notice{background:#FFF7DC;padding:12px;border-radius:12px;color:#695222;font-size:13px;margin-bottom:15px}
-.notice i{margin-inline-end:6px}
-.preview{width:100%;height:125px;object-fit:contain;border:1px dashed #B6C4DD;border-radius:10px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 16px}
-.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
-.stat b{display:block;font-size:23px;color:var(--blue2)}
-.foot{font-size:12px;text-align:center;color:var(--muted);padding:25px}
-/* ===== Bottom navigation ===== */
-.bottomnav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;z-index:30;box-shadow:0 -2px 12px rgba(11,27,52,.07)}
-.navbtn{flex:1;background:none;border-radius:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 12px;color:var(--muted);font-size:11px;font-weight:700}
-.navbtn i{font-size:20px;line-height:1}
-.navbtn.active{color:var(--blue)}
-/* ===== Toast ===== */
-#toast{position:fixed;bottom:88px;inset-inline-start:15px;background:var(--blue);color:#fff;padding:12px 17px;border-radius:12px;display:none;z-index:40;box-shadow:var(--shadow)}
-#toast i{margin-inline-end:6px}
-@media(max-width:860px){.layout{grid-template-columns:1fr}.cart-panel{position:static}}
-@media(max-width:500px){.hero h2{font-size:21px}.hero-art{font-size:42px}.brand{font-size:16px;gap:7px}.brand img{width:32px;height:32px}.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
-/* ===== Enhancements (v0.5) ===== */
-.brand img{background:#fff;border-radius:9px}
-.toolbar2{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.toolbar2 input,.toolbar2 select{flex:1;min-width:120px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
-.chip{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue);border-radius:20px;padding:4px 11px;font-size:12px;font-weight:700}
-.chip.new{background:#FFF4D6;color:#8a6100}
-.chip.done{background:#E4F5EA;color:var(--green)}
-.orderRow{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:9px;background:#fff}
-.orderRow .otop{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.orderRow ul{margin:7px 0 0;padding-inline-start:18px;color:var(--muted);font-size:13px}
-.orderRow li{margin:2px 0}
-.catRow{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:12px;padding:8px 11px;margin-bottom:8px}
-.catRow .cname{display:flex;align-items:center;gap:8px;font-weight:700}
-.catRow .cname .ce{font-size:20px}
-.installCta{display:none;align-items:center;justify-content:space-between;gap:10px;background:var(--blue);color:#fff;border-radius:14px;padding:11px 14px;margin:12px 0}
-.installCta span{font-size:13px;font-weight:600}
-.installCta button{background:var(--yellow);color:#0B1B34;font-weight:800;padding:8px 14px;border-radius:10px}
-/* ===== Enhancements (v0.6) ===== */
-.checkline{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)}
-.checkline input{accent-color:var(--blue)}
-.favbtn{position:absolute;top:8px;inset-inline-end:8px;width:32px;height:32px;border-radius:50%;background:#fff;color:#9AA7BC;display:grid;place-items:center;font-size:14px;z-index:2;box-shadow:var(--shadow)}
-.favbtn.on{color:var(--red)}
-.pemoji{width:74px;height:74px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:38px;box-shadow:0 2px 8px rgba(11,27,52,.08)}
-.deal .pemoji{width:58px;height:58px;font-size:30px}
-/* ===== Drawer menu (v0.7) ===== */
-.drawer{position:fixed;inset:0;z-index:50;visibility:hidden;pointer-events:none}
-.drawer.open{visibility:visible;pointer-events:auto}
-.drawer-bg{position:absolute;inset:0;background:rgba(4,12,26,.55);opacity:0;transition:opacity .22s}
-.drawer.open .drawer-bg{opacity:1}
-.drawer-panel{position:absolute;top:0;bottom:0;right:0;width:min(82vw,320px);background:var(--card);padding:16px;overflow:auto;display:flex;flex-direction:column;gap:2px;box-shadow:-8px 0 30px rgba(0,0,0,.3);transform:translateX(100%);transition:transform .22s}
-.drawer.open .drawer-panel{transform:translateX(0)}
-.drawer-head{display:flex;align-items:center;gap:11px;padding:4px 4px 13px;border-bottom:1px solid var(--line);margin-bottom:9px}
-.drawer-head img{width:42px;height:42px;border-radius:11px;object-fit:cover;background:#fff}
-.drawer-head b{font-size:16px;color:var(--ink)}
-.menuItem{display:flex;align-items:center;gap:11px;padding:12px;border-radius:12px;background:none;color:var(--ink);font-weight:600;text-align:start;width:100%}
-.menuItem i{width:20px;text-align:center;color:var(--blue)}
-.menuItem:hover{background:var(--blue-light)}
-.drawer-sep{height:1px;background:var(--line);margin:8px 0}
-.drawer-foot{margin-top:auto;font-size:12px;color:var(--muted);text-align:center;padding-top:14px}
+/* ===== Top bar ===== */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topwrap{max-width:1180px;margin:auto;display:flex;align-items:center;gap:14px;padding:0 20px;height:68px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--blue);font-weight:900;font-size:19px;letter-spacing:.3px}
+.logo img{width:38px;height:38px;border-radius:11px;object-fit:cover;background:#fff;box-shadow:var(--shadow)}
+.logo b{color:var(--ink);font-weight:700}
+.hubpill{background:var(--blue);color:#fff;font-size:10px;font-weight:900;letter-spacing:.6px;padding:3px 8px;border-radius:8px}
+.topnav{display:flex;gap:4px;margin-inline-start:auto}
+.tlink{display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:11px;color:var(--muted);text-decoration:none;font-weight:700;font-size:14px}
+.tlink:hover{background:var(--blue-l);color:var(--blue)}
+.tlink.cta{background:var(--blue);color:#fff}
+.tlink.cta:hover{background:var(--blue2);color:#fff}
+.ib{width:40px;height:40px;border-radius:11px;background:var(--blue-l);color:var(--blue);display:grid;place-items:center;font-size:16px}
+.ib:hover{background:var(--blue);color:#fff}
+.ib:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+@media(max-width:820px){.topnav{display:none}}
+/* ===== Layout ===== */
+.wrap{max-width:1180px;margin:auto;padding:0 20px 40px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;background:radial-gradient(120% 120% at 100% 0,var(--blue2),var(--blue) 55%,#0A57C2);color:#fff;border-radius:26px;padding:46px;margin:26px 0 10px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset-inline-start:-120px;bottom:-140px;width:340px;height:340px;background:radial-gradient(circle,rgba(255,194,32,.22),transparent 70%);border-radius:50%}
+.tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);color:#fff;font-weight:800;font-size:12px;padding:7px 14px;border-radius:30px;margin-bottom:16px}
+.hero h1{margin:0 0 14px;font-size:40px;line-height:1.28;letter-spacing:-.3px}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero p{margin:0 0 24px;font-size:16px;opacity:.92;max-width:52ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 22px;border-radius:14px;font-weight:800;font-size:15px;text-decoration:none}
+.btn.yellow{background:var(--yellow);color:#2B2000}
+.btn.yellow:hover{background:#FFD25A}
+.btn.glass{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.btn.glass:hover{background:rgba(255,255,255,.24)}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--blue2)}
+.btn.ghost{background:var(--card);color:var(--blue);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--blue-l)}
+.hero-chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}
+.hero-chips span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);font-size:12px;font-weight:700;padding:7px 13px;border-radius:30px}
+.hero-art{display:grid;place-items:center;position:relative;z-index:1}
+.hero-phone{width:210px;height:210px;border-radius:52px;background:#fff;display:grid;place-items:center;box-shadow:0 30px 70px rgba(0,0,0,.35);padding:26px}
+.hero-phone img{width:100%;height:100%;object-fit:contain;border-radius:30px}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding:30px;text-align:center}.hero p{margin-inline:auto}.hero-cta{justify-content:center}.hero-chips{justify-content:center}.hero h1{font-size:29px}.hero-art{order:-1;margin-bottom:8px}.hero-phone{width:150px;height:150px;border-radius:38px;padding:18px}}
+/* ===== Section head ===== */
+.sec-head{text-align:center;margin:52px 0 26px}
+.sec-head span.kicker{display:inline-block;background:var(--blue-l);color:var(--blue);font-weight:800;font-size:12px;padding:6px 14px;border-radius:30px;margin-bottom:12px}
+.sec-head h2{margin:0 0 8px;font-size:29px;color:var(--blue2);letter-spacing:-.3px}
+.sec-head p{margin:0 auto;color:var(--muted);max-width:60ch}
+/* ===== Services ===== */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(11,27,52,.12)}
+.card .ico{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:22px;margin-bottom:15px;background:var(--blue-l);color:var(--blue)}
+.card .ico.teal{background:#DFF5F1;color:var(--teal)}
+.card .ico.yellow{background:#FFF4D6;color:#8a6100}
+.card .ico.red{background:#FBE7E3;color:var(--red)}
+.card .ico.green{background:#E4F5EA;color:var(--green)}
+.card h3{margin:0 0 7px;font-size:17.5px;color:var(--blue2)}
+.card p{margin:0;color:var(--muted);font-size:14px}
+/* ===== Try ===== */
+.tryrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.try{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.try:before{content:"";position:absolute;top:0;inset-inline:0;height:5px;background:var(--blue)}
+.try.merchant:before{background:var(--teal)}
+.try.admin:before{background:var(--yellow)}
+.try h3{margin:0;font-size:19px;color:var(--blue2);display:flex;align-items:center;gap:10px}
+.try p{margin:0;color:var(--muted);font-size:14px;flex:1}
+.rolebadge{align-self:flex-start;font-size:11px;font-weight:800;padding:5px 11px;border-radius:20px;background:var(--blue-l);color:var(--blue)}
+.rolebadge.merchant{background:#DFF5F1;color:var(--teal)}
+.rolebadge.admin{background:#FFF4D6;color:#8a6100}
+/* ===== Download ===== */
+.dlgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.dl{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+.dl-top{display:flex;align-items:center;gap:14px}
+.dl-ic{width:56px;height:56px;border-radius:17px;display:grid;place-items:center;font-size:24px;background:var(--blue-l);color:var(--blue);flex:0 0 auto}
+.dl.merchant .dl-ic{background:#DFF5F1;color:var(--teal)}
+.dl-top b{display:block;font-size:18px;color:var(--blue2)}
+.dl-top span{font-size:12.5px;color:var(--muted)}
+.dl ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.dl li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--muted)}
+.dl li i{color:var(--green);font-size:13px;width:16px;text-align:center}
+.dl .acts{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto}
+.note{margin-top:22px;background:#FFF7DC;border:1px solid #F2E2AE;color:#695222;border-radius:16px;padding:16px 18px;font-size:13.5px}
+.note i{margin-inline-end:8px}
+/* ===== Steps ===== */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow);position:relative}
+.step:before{counter-increment:s;content:counter(s);position:absolute;top:-14px;inset-inline-end:22px;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-weight:900;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,61,165,.35)}
+.step h4{margin:6px 0 7px;font-size:16px;color:var(--blue2)}
+.step p{margin:0;color:var(--muted);font-size:13.5px}
+/* ===== Footer ===== */
+.sitefoot{background:#0B1B34;color:#B9C6DA;margin-top:56px}
+.sitefoot .fw{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:28px;padding:44px 20px 28px}
+.sitefoot h4{color:#fff;margin:0 0 14px;font-size:15px}
+.sitefoot a{color:#B9C6DA;text-decoration:none;display:flex;align-items:center;gap:9px;padding:6px 0;font-size:14px}
+.sitefoot a:hover{color:#fff}
+.sitefoot .fbrand{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.sitefoot .fbrand img{width:38px;height:38px;border-radius:11px;background:#fff;object-fit:cover}
+.sitefoot .fbrand b{color:#fff;font-size:17px}
+.sitefoot .fb{border-top:1px solid #1E2E48;text-align:center;padding:18px;font-size:13px;color:#7E8CA3}
+@media(max-width:760px){.sitefoot .fw{grid-template-columns:1fr;padding:32px 20px 20px}}
 /* ===== Dark theme ===== */
-html[data-theme=dark]{--ink:#E9EFFA;--muted:#98A7BE;--line:#26334A;--bg:#0D1524;--card:#141F33;--blue-light:#182741;--shadow:0 4px 14px rgba(0,0,0,.45)}
-html[data-theme=dark] .appbar{background:linear-gradient(180deg,#0B2A5B,#07182F)}
-html[data-theme=dark] .empty,html[data-theme=dark] .searchbox,html[data-theme=dark] .cat,html[data-theme=dark] .product,html[data-theme=dark] .deal,html[data-theme=dark] .panel,html[data-theme=dark] .stat,html[data-theme=dark] .orderRow,html[data-theme=dark] .bottomnav,html[data-theme=dark] .checkline,html[data-theme=dark] .favbtn,html[data-theme=dark] .toolbar select,html[data-theme=dark] .toolbar2 input,html[data-theme=dark] .toolbar2 select,html[data-theme=dark] .field input,html[data-theme=dark] .field select,html[data-theme=dark] .field textarea{background:var(--card);border-color:var(--line);color:var(--ink)}
-html[data-theme=dark] .cartrow,html[data-theme=dark] .manageRow{border-color:var(--line)}
-html[data-theme=dark] .notice{background:#3B2F13;color:#F1DEA8}
-html[data-theme=dark] .mini,html[data-theme=dark] .secondary,html[data-theme=dark] .chip{background:#1C2B46;color:#A8C7F7}
-html[data-theme=dark] .danger{background:#3B1F1A;color:#F2A99B}
-html[data-theme=dark] .chip.new{background:#3B2F13;color:#F1DEA8}
-html[data-theme=dark] .chip.done{background:#123020;color:#7FD9A6}
-html[data-theme=dark] .installCta{background:#0B2A5B}
-html[data-theme=dark] .oldprice{color:#7E8CA3}
-html[data-theme=dark] .preview{border-color:var(--line)}
+html[data-theme=dark]{--ink:#E9EFFA;--muted:#98A7BE;--line:#26334A;--bg:#0D1524;--card:#141F33;--blue-l:#182741;--shadow:0 1px 3px rgba(0,0,0,.5),0 10px 30px rgba(0,0,0,.35)}
+html[data-theme=dark] .topbar{background:rgba(14,22,36,.92)}
+html[data-theme=dark] .logo b{color:#E9EFFA}
+html[data-theme=dark] .sec-head h2,html[data-theme=dark] .card h3,html[data-theme=dark] .try h3,html[data-theme=dark] .dl-top b,html[data-theme=dark] .step h4{color:#BFD6FF}
+html[data-theme=dark] .rolebadge{background:#1C2B46;color:#A8C7F7}
+html[data-theme=dark] .rolebadge.merchant{background:#12302B;color:#7FD9C6}
+html[data-theme=dark] .rolebadge.admin{background:#3B2F13;color:#F1DEA8}
+html[data-theme=dark] .card .ico{background:#1C2B46;color:#A8C7F7}
+html[data-theme=dark] .card .ico.teal{background:#12302B;color:#7FD9C6}
+html[data-theme=dark] .card .ico.yellow{background:#3B2F13;color:#F1DEA8}
+html[data-theme=dark] .card .ico.red{background:#3B1F1A;color:#F2A99B}
+html[data-theme=dark] .card .ico.green{background:#123020;color:#7FD9A6}
+html[data-theme=dark] .dl-ic{background:#1C2B46;color:#A8C7F7}
+html[data-theme=dark] .dl.merchant .dl-ic{background:#12302B;color:#7FD9C6}
+html[data-theme=dark] .note{background:#3B2F13;border-color:#5A4A1E;color:#F1DEA8}
+html[data-theme=dark] .btn.ghost{color:#A8C7F7}
 </style></head><body>
-<header class="appbar">
-  <div class="appbar-top">
-    <button class="iconbtn" aria-label="فتح القائمة" aria-controls="drawer" onclick="openMenu()"><i class="fa-solid fa-bars"></i></button>
-    <a class="brand" href="#" onclick="showTab('customer');return false"><img src="logo.png" alt="شعار HANOUT LITE" onerror="this.onerror=null;this.src='icon.svg'"><span>HANOUT <small>LITE</small></span></a>
-    <div class="actions" style="flex:0 0 auto">
-      <button class="iconbtn" id="themeBtn" aria-label="الوضع الليلي" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
-      <button class="iconbtn" aria-label="مشاركة التطبيق" onclick="shareApp()"><i class="fa-solid fa-share-nodes"></i></button>
-      <button class="iconbtn" aria-label="السلة" onclick="goCart()"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></button>
-    </div>
+<header class="topbar">
+  <div class="topwrap">
+    <a class="logo" href="#top"><img src="logo.png" alt="شعار HANWEB" onerror="this.onerror=null;this.src='icon.svg'"><span>HANWEB <b>HUB</b></span><span class="hubpill">HUB</span></a>
+    <nav class="topnav">
+      <a class="tlink" href="#services"><i class="fa-solid fa-layer-group"></i> الخدمات</a>
+      <a class="tlink" href="#try"><i class="fa-solid fa-circle-play"></i> جرّب التطبيق</a>
+      <a class="tlink" href="#download"><i class="fa-solid fa-download"></i> حمّل التطبيق</a>
+      <a class="tlink" href="web.html"><i class="fa-solid fa-desktop"></i> نسخة الويب</a>
+      <a class="tlink cta" href="merchant.html"><i class="fa-solid fa-store"></i> فضاء التاجر</a>
+    </nav>
+    <button class="ib" id="themeBtn" aria-label="الوضع الليلي" onclick="toggleTheme()" style="margin-inline-start:auto"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
   </div>
-  <div class="searchwrap"><div class="searchbox"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="قلب على المنتوج فالكتالوغ..." oninput="renderProducts()"></div></div>
 </header>
 
-<main class="shell">
-  <section id="customer">
-    <div class="hero"><div><span class="hero-tag">توصيل أو استلام من الحانوت</span><h2>حانوت حومتك… فتيليفونك</h2><p id="shopTitle"></p></div><div class="hero-art"><i class="fa-solid fa-basket-shopping"></i></div></div>
-
-    <div class="section-head"><h3><i class="fa-solid fa-layer-group"></i>الأصناف</h3><span class="muted">اختر صنفاً للتسوق</span></div>
-    <div id="cats" class="cats"></div>
-
-    <div class="section-head"><h3><i class="fa-solid fa-tags"></i>عروض الأسبوع</h3><span class="muted">تخفيضات مختارة</span></div>
-    <div id="deals" class="deals"></div>
-
-    <div class="section-head"><h3><i class="fa-solid fa-boxes-stacked"></i>كل المنتوجات</h3></div>
-    <div class="layout">
-      <div>
-        <div class="toolbar"><select id="category" onchange="renderProducts();renderCats()"><option value="">جميع الأصناف</option></select><select id="sortBy" onchange="renderProducts()" aria-label="ترتيب المنتجات"><option value="default">ترتيب: افتراضي</option><option value="new">الأحدث أولاً</option><option value="price-asc">الثمن (من الأرخص)</option><option value="price-desc">الثمن (من الأغلى)</option><option value="name">الاسم (أ - ي)</option></select><label class="checkline"><input type="checkbox" id="onlyAvailable" onchange="renderProducts()"> المتوفر فقط</label><label class="checkline"><input type="checkbox" id="onlyFavs" onchange="renderProducts()"> <i class="fa-solid fa-heart" style="color:var(--red)"></i> المفضلة فقط</label></div>
-        <div id="products" class="grid"></div>
+<main class="wrap" id="top">
+  <section class="hero">
+    <div>
+      <span class="tag"><i class="fa-solid fa-bolt"></i> HANWEB HUB · تسيير تطبيقات الحانوت</span>
+      <h1>حانوتك فتيليفون زبونك… <em>بتطبيق أندرويد باسمك</em></h1>
+      <p>HANWEB كتحوّل الحانوت ديالك لكتالوج رقمي وتطبيق أندرويد. الزبون كيتصفّح المنتوجات والعروض، كيختار، وكيصيفط الطلب مباشرة عبر واتساب — ونتا كتسيّر الطلبات والكتالوغ من فضاء التاجر.</p>
+      <div class="hero-cta">
+        <a class="btn yellow" href="store.html?shop=hanout-nakhil"><i class="fa-solid fa-circle-play"></i> جرّب التطبيق دابا</a>
+        <a class="btn glass" href="#download"><i class="fa-brands fa-android"></i> حمّل تطبيق أندرويد</a>
       </div>
-      <aside class="panel cart-panel" id="cartPanel">
-        <h3><i class="fa-solid fa-cart-shopping"></i>السلة ديالك</h3>
-        <div id="cart"></div>
-        <div class="field"><label>الاسم (اختياري)</label><input id="buyer" placeholder="اسم الزبون"></div>
-        <div class="field"><label>طريقة الاستلام</label><select id="fulfillment"><option>الاستلام من الحانوت</option><option>طلب التوصيل (حسب موافقة التاجر)</option></select></div>
-        <div class="field"><label>ملاحظة للطلب</label><input id="note" placeholder="مثلاً: بغيت الخبز سخون"></div>
-        <button class="primary full" onclick="checkout()"><i class="fa-brands fa-whatsapp"></i> إرسال الطلب عبر واتساب</button>
-        <p class="muted">الأسعار والتوفر نهائيان فقط بعد تأكيد التاجر. لا يتم الدفع داخل التطبيق.</p>
-      </aside>
+      <div class="hero-chips">
+        <span><i class="fa-solid fa-mobile-screen-button"></i> نسخة الزبون + نسخة التاجر</span>
+        <span><i class="fa-solid fa-language"></i> عربي · RTL</span>
+        <span><i class="fa-solid fa-wifi"></i> يخدم بلا إنترنت</span>
+        <span><i class="fa-solid fa-wand-magic-sparkles"></i> تصميم Material 3</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-phone"><img src="logo.png" alt="شعار HANOUT LITE" onerror="this.onerror=null;this.src='icon.svg'"></div>
     </div>
   </section>
 
-
-  <section id="myorders" class="hidden">
-    <div class="hero"><div><span class="hero-tag">تتبع الطلبات</span><h2>الطلبات ديالك</h2><p>هادي هي الطلبات اللي صيفطتي من هاد الجهاز وحالتها عند التاجر.</p></div><div class="hero-art"><i class="fa-solid fa-receipt"></i></div></div>
-    <div class="panel"><h3><i class="fa-solid fa-clock-rotate-left"></i>سجل الطلبات</h3><div id="myOrders"></div></div>
+  <div class="sec-head" id="services">
+    <span class="kicker">الخدمات</span>
+    <h2>شنو كتقدّم HANWEB؟</h2>
+    <p>كلشي اللي محتاجو الحانوت ديالك باش يبيع أونلاين: كتالوج، طلبات، تسيير، وتطبيق. كل حانوت كياخد رابط خاص بيه وتطبيق أندرويد بالاسم ديالو.</p>
+  </div>
+  <section class="cards">
+    <div class="card"><div class="ico"><i class="fa-solid fa-store"></i></div><h3>كتالوج رقمي</h3><p>المنتوجات بالأصناف، الصور، الأثمنة والعروض — الزبون كيلقى كلشي مرتّب وواضح فتيليفونه.</p></div>
+    <div class="card"><div class="ico yellow"><i class="fa-solid fa-tags"></i></div><h3>عروض وتخفيضات</h3><p>حدّد الثمن القديم والجديد، وسجّل العروض ديال الأسبوع باش تبان للزبون أول حاجة.</p></div>
+    <div class="card"><div class="ico green"><i class="fa-brands fa-whatsapp"></i></div><h3>الطلب عبر واتساب</h3><p>الزبون كيكمّل السلة وكيصيفط الطلب مباشرة فواتساب ديالك — بلا وسيط وبلا عمولة.</p></div>
+    <div class="card"><div class="ico teal"><i class="fa-solid fa-clipboard-list"></i></div><h3>تسيير الطلبات</h3><p>من فضاء التاجر: تأكيد الطلب، تبديل الحالة، الحذف، والمشاركة — كلشي فبلاصة وحدة.</p></div>
+    <div class="card"><div class="ico"><i class="fa-brands fa-android"></i></div><h3>تطبيق أندرويد أصلي</h3><p>نسختين من نفس المنصة: تطبيق للزبون وتطبيق للتاجر، بالاسم والرابط والشعار ديال حانوتك.</p></div>
+    <div class="card"><div class="ico red"><i class="fa-solid fa-chart-simple"></i></div><h3>منصة تحكم (HUB)</h3><p>لوحة مركزية للمسؤول: تسيير جميع التجار، الاشتراكات والإحصائيات من بلاصة وحدة.</p></div>
   </section>
 
-  <section id="about" class="hidden"><div class="panel"><h2>HANOUT LITE v0.7</h2><p>نسخة تجريبية لتسهيل الطلبات بين الحانوت والزبون، بتجربة استخدام عصرية مستوحاة من تطبيقات التسوق الكبرى وأيقونات Font Awesome 6.</p><div class="actions" style="margin:10px 0"><button class="primary" onclick="shareApp()"><i class="fa-solid fa-share-nodes"></i> شارك التطبيق</button><button class="secondary" onclick="installApp()"><i class="fa-solid fa-mobile-screen-button"></i> تثبيت التطبيق</button><button class="secondary" onclick="openMenu()"><i class="fa-solid fa-bars"></i> القائمة</button></div><h3>ما الذي يعمل الآن؟</h3><p>تصفّح المنتوجات بالأصناف، عروض الأسبوع، البحث، الفرز والتصفية (المتوفر / المفضلة)، قائمة المفضلة، الوضع الليلي، قائمة جانبية موحّدة، سلة وسجل طلبات للزبون، إرسال الطلب عبر واتساب، إدارة الأصناف والطلبات، تثبيت التطبيق على الهاتف، والعمل بدون إنترنت بعد أول زيارة. الصور تحفظ في المتصفح نفسه ولا تظهر على جهاز آخر.</p><h3>ما الذي لا يعمل بعد؟</h3><p>المزامنة بين الأجهزة، حسابات المستخدمين، التتبع المباشر، والدفع الإلكتروني. الطلبات تُحفظ على جهاز التاجر فقط ولا تصل تلقائياً من أجهزة أخرى، ولذلك «الطلبات ديالك» كتعرض غير الطلبات اللي تصيفطو من نفس المتصفح. لا تُستخدم هذه النسخة لإدارة بيانات العملاء الحساسة.</p><p>لإطلاق متجر فعلي على الإنترنت يلزم ربط قاعدة بيانات وصلاحيات للتاجر، مع مراجعة الخصوصية والامتثال القانوني.</p></div></section>
+  <div class="sec-head" id="try">
+    <span class="kicker">تجربة مباشرة</span>
+    <h2>جرّب التطبيق فالمتصفح</h2>
+    <p>بلا تحميل وبلا تسجيل — دخل للنسخة اللي بغيت وشوف كيفاش كتخدم.</p>
+  </div>
+  <section class="tryrow">
+    <div class="try">
+      <span class="rolebadge"><i class="fa-solid fa-user"></i> نسخة الزبون</span>
+      <h3><i class="fa-solid fa-basket-shopping"></i> تجربة التسوّق</h3>
+      <p>تصفّح المنتوجات، العروض، السلة، والطلب عبر واتساب — بحال الزبون الحقيقي. كاين حتى نسخة مخصّصة للحاسوب.</p>
+      <div class="acts" style="display:flex;gap:9px;flex-wrap:wrap">
+        <a class="btn primary" href="store.html?shop=hanout-nakhil"><i class="fa-solid fa-circle-play"></i> جرّب نسخة الزبون</a>
+        <a class="btn ghost" href="web.html"><i class="fa-solid fa-desktop"></i> نسخة الحاسوب</a>
+      </div>
+    </div>
+    <div class="try merchant">
+      <span class="rolebadge merchant"><i class="fa-solid fa-store"></i> نسخة التاجر</span>
+      <h3><i class="fa-solid fa-cash-register"></i> فضاء التاجر</h3>
+      <p>دخل لحسابك باش تسيّر المنتوجات، الأصناف، الطلبات، ولينك الحانوت + رمز QR الخاص بيك.</p>
+      <div class="acts" style="display:flex;gap:9px;flex-wrap:wrap">
+        <a class="btn primary" href="merchant.html"><i class="fa-solid fa-right-to-bracket"></i> دخول التاجر</a>
+        <a class="btn ghost" href="login.html"><i class="fa-solid fa-user-plus"></i> حساب جديد</a>
+      </div>
+    </div>
+    <div class="try admin">
+      <span class="rolebadge admin"><i class="fa-solid fa-user-shield"></i> المنصة</span>
+      <h3><i class="fa-solid fa-diagram-project"></i> لوحة التحكم</h3>
+      <p>فضاء المسؤول العام: جميع التجار، الإحصائيات، والاشتراكات — من منصة HANWEB HUB المركزية.</p>
+      <div class="acts" style="display:flex;gap:9px;flex-wrap:wrap">
+        <a class="btn primary" href="admin.html"><i class="fa-solid fa-gauge-high"></i> لوحة المنصة</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec-head" id="download">
+    <span class="kicker"><i class="fa-brands fa-android"></i> أندرويد</span>
+    <h2>حمّل التطبيق</h2>
+    <p>جوج تطبيقات منفصلين — كل واحد بحزمة خاصة باش يتركّبو بجوج فنفس التيليفون بلا مشاكل.</p>
+  </div>
+  <section class="dlgrid">
+    <div class="dl">
+      <div class="dl-top">
+        <div class="dl-ic"><i class="fa-solid fa-basket-shopping"></i></div>
+        <div><b>HANOUT LITE — الزبون</b><span>التسوّق والطلب · الحزمة ma.hanout.nakhil</span></div>
+      </div>
+      <ul>
+        <li><i class="fa-solid fa-circle-check"></i> تصفّح المنتوجات بالأصناف والعروض</li>
+        <li><i class="fa-solid fa-circle-check"></i> سلة وطلبات مع إرسال واتساب</li>
+        <li><i class="fa-solid fa-circle-check"></i> واجهة عربية بتصميم Material 3</li>
+        <li><i class="fa-solid fa-circle-check"></i> نفس شعار HANOUT LITE ديال النسخة الويب</li>
+      </ul>
+      <div class="acts">
+        <a class="btn primary" href="https://github.com/yassine7amj/HANOUT_LITE/releases/download/kotlin-customer-hanout-nakhil-6/app-release.apk"><i class="fa-solid fa-download"></i> تحميل APK</a>
+      </div>
+    </div>
+    <div class="dl merchant">
+      <div class="dl-top">
+        <div class="dl-ic"><i class="fa-solid fa-store"></i></div>
+        <div><b>HANOUT LITE — التاجر</b><span>تسيير الحانوت · الحزمة ma.hanout.nakhil.merchant</span></div>
+      </div>
+      <ul>
+        <li><i class="fa-solid fa-circle-check"></i> لوحة تحكم: الطلبات الجديدة والمدخول</li>
+        <li><i class="fa-solid fa-circle-check"></i> تسيير الطلبات: تأكيد، حذف، مشاركة</li>
+        <li><i class="fa-solid fa-circle-check"></i> الكتالوغ: إضافة وتعديل المنتوجات</li>
+        <li><i class="fa-solid fa-circle-check"></i> معلومات الحانوت + وضع تجريبي بلا حساب</li>
+      </ul>
+      <div class="acts">
+        <a class="btn primary" href="https://github.com/yassine7amj/HANOUT_LITE/releases/download/kotlin-merchant-hanout-nakhil-7/app-release.apk"><i class="fa-solid fa-download"></i> تحميل APK</a>
+      </div>
+    </div>
+  </section>
+  <div class="note"><i class="fa-solid fa-circle-info"></i> باش تركّب التطبيق، خاصك تسمح بـ«تثبيت من مصادر غير معروفة» فإعدادات التيليفون. كاينين نسخ جوج بوحدهم: الزبون والتاجر — كيتركّبو بجوج بلا ما يتحيّد وحد الآخر. <a href="https://github.com/yassine7amj/HANOUT_LITE/releases">شوف كل الإصدارات</a>.</div>
+
+  <div class="sec-head" id="how">
+    <span class="kicker">كيفاش كتبدا</span>
+    <h2>من الحانوت للتطبيق فـ 4 خطوات</h2>
+  </div>
+  <section class="steps">
+    <div class="step"><h4>سجّل حانوتك</h4><p>خلق حساب التاجر من <a href="login.html">login</a> وعيّن اسم الحانوت والرابط المختصر.</p></div>
+    <div class="step"><h4>عمّر الكتالوغ</h4><p>زيد المنتوجات بالأصناف والصور والأثمنة، وسجّل عروض الأسبوع.</p></div>
+    <div class="step"><h4>شارك الرابط</h4><p>من فضاء التاجر كتلقى رابط الحانوت ورمز QR — صيفطهم للزبناء.</p></div>
+    <div class="step"><h4>سوّق التطبيق</h4><p>حمّل تطبيق أندرويد بالاسم ديالك، ولا خلي الزبناء يثبّتو النسخة الويب (PWA).</p></div>
+  </section>
 </main>
 
-<nav class="bottomnav">
-  <button id="navCustomer" class="navbtn active" onclick="showTab('customer')"><i class="fa-solid fa-house"></i><span>الرئيسية</span></button>
-  <button id="navDeals" class="navbtn" onclick="goDeals()"><i class="fa-solid fa-tags"></i><span>العروض</span></button>
-  <button id="navCart" class="navbtn" onclick="goCart()"><i class="fa-solid fa-cart-shopping"></i><span>السلة</span></button>
-  <button id="navMyorders" class="navbtn" onclick="showTab('myorders')"><i class="fa-solid fa-receipt"></i><span>طلباتي</span></button>
-</nav>
-<div class="installCta" id="installCta"><span><i class="fa-solid fa-mobile-screen-button"></i> ثبّت التطبيق على تيليفونك</span><button onclick="installApp()">تثبيت</button></div>
-<div id="toast"></div>
-<div class="drawer" id="drawer" aria-hidden="true">
-  <div class="drawer-bg" onclick="closeMenu()"></div>
-  <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="قائمة التطبيق">
-    <div class="drawer-head"><img src="logo.png" alt="" onerror="this.onerror=null;this.src='icon.svg'"><div style="min-width:0"><b>HANOUT LITE</b><div class="muted" id="drawerShop" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div></div><button class="iconbtn" style="margin-inline-start:auto;flex:0 0 auto" aria-label="إغلاق القائمة" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button></div>
-    <button class="menuItem" onclick="menuGo('customer')"><i class="fa-solid fa-house"></i>الرئيسية</button>
-    <button class="menuItem" onclick="menuGo(null,goDeals)"><i class="fa-solid fa-tags"></i>عروض الأسبوع</button>
-    <button class="menuItem" onclick="menuGo(null,goCart)"><i class="fa-solid fa-cart-shopping"></i>السلة ديالك</button>
-    <button class="menuItem" onclick="menuGo('myorders')"><i class="fa-solid fa-receipt"></i>الطلبات ديالك</button>
-    <a class="menuItem" href="merchant.html" style="text-decoration:none"><i class="fa-solid fa-store"></i>فضاء التاجر</a>
-    <div class="drawer-sep"></div>
-    <button class="menuItem" onclick="closeMenu();toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i>الوضع الليلي / النهاري</button>
-    <button class="menuItem" onclick="closeMenu();shareApp()"><i class="fa-solid fa-share-nodes"></i>شارك التطبيق</button>
-    <button class="menuItem" onclick="closeMenu();installApp()"><i class="fa-solid fa-mobile-screen-button"></i>ثبّت التطبيق</button>
-    <button class="menuItem" onclick="menuGo('about')"><i class="fa-solid fa-circle-info"></i>حول التطبيق</button>
-    <a class="menuItem" href="web.html" style="text-decoration:none"><i class="fa-solid fa-desktop"></i>نسخة الويب (الحاسوب)</a>
-    <div class="drawer-foot">HANOUT LITE — v0.7</div>
+<footer class="sitefoot">
+  <div class="fw">
+    <div>
+      <div class="fbrand"><img src="logo.png" alt="" onerror="this.onerror=null;this.src='icon.svg'"><b>HANWEB HUB</b></div>
+      <p style="margin:0;font-size:14px">منصة كتسيّر تطبيقات HANOUT LITE: كتالوج رقمي، طلبات عبر واتساب، وفضاء للتاجر — وكل حانوت كياخد رابطو وتطبيق أندرويد بالاسم ديالو.</p>
+    </div>
+    <div>
+      <h4>التطبيق</h4>
+      <a href="store.html?shop=hanout-nakhil"><i class="fa-solid fa-circle-play"></i> جرّب نسخة الزبون</a>
+      <a href="web.html"><i class="fa-solid fa-desktop"></i> نسخة الويب (الحاسوب)</a>
+      <a href="#download"><i class="fa-brands fa-android"></i> تحميل تطبيق أندرويد</a>
+    </div>
+    <div>
+      <h4>فضاءات</h4>
+      <a href="merchant.html"><i class="fa-solid fa-store"></i> فضاء التاجر</a>
+      <a href="admin.html"><i class="fa-solid fa-user-shield"></i> لوحة المنصة</a>
+      <a href="login.html"><i class="fa-solid fa-user-plus"></i> حساب جديد</a>
+      <a href="https://github.com/yassine7amj/HANOUT_LITE/releases"><i class="fa-solid fa-code-branch"></i> الإصدارات</a>
+    </div>
   </div>
-</div>
-<footer class="foot">HANOUT LITE — نسخة تجريبية محلية • 2026</footer>
-<script src="app.js"></script></body></html>
+  <div class="fb">HANWEB HUB · HANOUT LITE — 2026</div>
+</footer>
+
+<script>
+(function(){
+  var K='hanout-theme';
+  function apply(t){document.documentElement.setAttribute('data-theme',t);var i=document.getElementById('themeIcon');if(i)i.className=t==='dark'?'fa-solid fa-sun':'fa-solid fa-moon';}
+  try{apply(localStorage.getItem(K)||'light');}catch(e){apply('light');}
+  window.toggleTheme=function(){var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';try{localStorage.setItem(K,t);}catch(e){}apply(t);};
+})();
+</script>
+</body></html>

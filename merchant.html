@@ -153,7 +153,7 @@ html[data-theme=dark] #boot{background:#0D1524}
 <footer class="foot">HANOUT LITE — فضاء التاجر • v0.8</footer>
 <script>
 function doLogout(){if(window.HanoutStore)HanoutStore.signOut().then(()=>location.replace('login.html'));else location.replace('login.html')}
-function shopUrl(){const s=window.HANOUT_SHOP&&window.HANOUT_SHOP.slug;return s?new URL('index.html?shop='+encodeURIComponent(s),location.href).href:''}
+function shopUrl(){const s=window.HANOUT_SHOP&&window.HANOUT_SHOP.slug;return s?new URL('store.html?shop='+encodeURIComponent(s),location.href).href:''}
 function copyShopLink(){const u=shopUrl();if(!u)return;navigator.clipboard.writeText(u).then(()=>toast('تنسخ الرابط')).catch(()=>prompt('انسخ الرابط:',u))}
 window.copyShopLink=copyShopLink;window.doLogout=doLogout;
 window.onShopReady=function(shop){

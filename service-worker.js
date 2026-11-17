@@ -1,6 +1,6 @@
 /* HANOUT LITE — Service Worker (offline app shell) */
-const CACHE = 'hanout-lite-v6';
-const CORE = ['./', './index.html', './web.html', './merchant.html', './login.html', './admin.html', './app.js', './store.js', './firebase-config.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './logo.png'];
+const CACHE = 'hanout-lite-v7';
+const CORE = ['./', './index.html', './store.html', './web.html', './merchant.html', './login.html', './admin.html', './app.js', './store.js', './firebase-config.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './logo.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

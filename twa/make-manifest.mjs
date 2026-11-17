@@ -12,7 +12,7 @@
  *
  *   --base     رابط الموقع كامل، بلا سلاش فالآخر (إلزامي)
  *   --name     اسم التطبيق لي كيبان تحت الأيقونة (الافتراضي: HANOUT LITE)
- *   --shop     slug الحانوت، كيتزاد فالرابط: index.html?shop=<slug>
+ *   --shop     slug الحانوت، كيتزاد فالرابط: store.html?shop=<slug>
  *   --package  معرّف الحزمة Android (إلا تخلا كيتولّد أوتوماتيكيا)
  *
  * كيكتب النتيجة فـ twa/twa-manifest.json (بحال ما كيتسنّى bubblewrap).
@@ -64,8 +64,8 @@ if (/^[0-9]/.test(tail)) tail = 's' + tail;
 const packageId = String(argv.package || '').trim() || ('ma.hanout.' + tail.slice(0, 24));
 
 const startUrl = shop
-  ? prefix + '/index.html?shop=' + encodeURIComponent(shop)
-  : prefix + '/';
+  ? prefix + '/store.html?shop=' + encodeURIComponent(shop)
+  : prefix + '/store.html';
 
 const manifest = {
   packageId,

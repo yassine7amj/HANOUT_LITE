@@ -4,7 +4,7 @@
   "description": "كتالوج الحانوت الرقمي: تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./",
+  "start_url": "./store.html",
   "scope": "./",
   "id": "./",
   "display": "standalone",

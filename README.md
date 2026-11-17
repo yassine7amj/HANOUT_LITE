@@ -7,7 +7,8 @@
 
 | الصفحة | الوصف |
 | --- | --- |
-| `index.html` | واجهة الزبون (الهاتف) — `index.html?shop=<slug>` كتحدد الحانوت |
+| `index.html` | واجهة التعريف بمنصة HANWEB + تجربة وتحميل التطبيق (نسخة الزبون ونسخة التاجر) |
+| `store.html` | واجهة الزبون (الهاتف) — `store.html?shop=<slug>` كتحدد الحانوت |
 | `web.html` | واجهة الزبون (نسخة الويب المكتبية) |
 | `merchant.html` | فضاء التاجر (محمي بحساب): منتوجات، أصناف، طلبات، رابط + QR |
 | `login.html` | دخول/تسجيل التجار والمسؤولين |
@@ -74,4 +75,4 @@ bubblewrap build --skipPwaValidation
 
 ## ملاحظات
 
-- بدّل روابط `og:image` / `twitter:image` فـ `index.html` و`web.html` إلى الرابط المطلق ديال الصور.
+- بدّل روابط `og:image` / `twitter:image` فـ `index.html` و`store.html` و`web.html` إلى الرابط المطلق ديال الصور.

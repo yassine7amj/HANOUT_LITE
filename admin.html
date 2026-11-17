@@ -91,7 +91,7 @@ h1{margin:0 0 3px;font-size:24px;color:var(--blue2)}
   <span class="tag"><i class="fa-solid fa-shield-halved"></i> منصة التحكم</span>
   <div class="acts">
     <span class="who" id="who"></span>
-    <a class="lbtn ghost" href="index.html"><i class="fa-solid fa-basket-shopping"></i> المتجر</a>
+    <a class="lbtn ghost" href="store.html"><i class="fa-solid fa-basket-shopping"></i> المتجر</a>
     <button class="ib" title="تسجيل الخروج" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></button>
   </div>
 </div></header>
@@ -147,7 +147,7 @@ const PLANS={free:'مجاني',standard:'قياسي',pro:'احترافي'};
 let ME=null,MERCHANTS=[],CUR=null,CURCAT=null,CURORD=[];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function toast(t){$('toast').textContent=t;$('toast').style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>$('toast').style.display='none',2600)}
-function shopUrl(slug){return new URL('index.html?shop='+encodeURIComponent(slug),location.href).href}
+function shopUrl(slug){return new URL('store.html?shop='+encodeURIComponent(slug),location.href).href}
 function fmt(ts){if(!ts)return '—';return new Date(ts).toLocaleDateString('ar-MA',{year:'numeric',month:'2-digit',day:'2-digit'})}
 function subState(m){const now=Date.now();if(m.active===false)return{k:'off',t:'موقوف'};if(m.expiresAt&&m.expiresAt<now)return{k:'bad',t:'اشتراك منتهي'};if(m.expiresAt&&m.expiresAt<now+7*864e5)return{k:'warn',t:'قريب ينتهي'};return{k:'ok',t:'نشط'}}
 function logout(){HanoutStore.signOut().then(()=>location.replace('login.html'))}
