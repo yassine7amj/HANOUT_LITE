@@ -30,7 +30,9 @@ val appPackage = buildValue("appPackage", "ma.hanout.lite")
    بلا مفتاح، التطبيق كيتبنى غير موقّع المفعول (صالح للتجريب). */
 val keystorePath = System.getenv("ANDROID_KEYSTORE_PATH")
 val keystorePassword = System.getenv("KEYSTORE_PASSWORD").orEmpty()
-val keyPassword = System.getenv("KEY_PASSWORD").orEmpty().ifBlank { keystorePassword }
+// ملاحظة: سميّة هاد المتغير خاصها تكون مختلفة على اسم الخاصية ديال
+// SigningConfig (keyPassword) باش ما يوقعلناش self-assignment ونصيفطو null.
+val signingKeyPassword = System.getenv("KEY_PASSWORD").orEmpty().ifBlank { keystorePassword }
 val keyAliasName = System.getenv("KEY_ALIAS").orEmpty().ifBlank { "android" }
 val hasKeystore = !keystorePath.isNullOrBlank() && file(keystorePath).exists()
 
@@ -59,7 +61,7 @@ android {
                 storeFile = file(keystorePath!!)
                 storePassword = keystorePassword
                 keyAlias = keyAliasName
-                keyPassword = keyPassword
+                keyPassword = signingKeyPassword
             }
         }
     }
