@@ -74,6 +74,8 @@ const manifest = {
   launcherName: name.slice(0, 30),
   display: 'standalone',
   orientation: 'portrait',
+  /* androidbrowserhelper 2.7.x كيتطلّب minSdkVersion 24 */
+  minSdkVersion: 24,
   themeColor: '#003DA5',
   themeColorDark: '#002A73',
   navigationColor: '#003DA5',

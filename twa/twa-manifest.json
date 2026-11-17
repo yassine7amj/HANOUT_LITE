@@ -5,6 +5,7 @@
   "launcherName": "HANOUT LITE",
   "display": "standalone",
   "orientation": "portrait",
+  "minSdkVersion": 24,
   "themeColor": "#003DA5",
   "themeColorDark": "#002A73",
   "navigationColor": "#003DA5",
