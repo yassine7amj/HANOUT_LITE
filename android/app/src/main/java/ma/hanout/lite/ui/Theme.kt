@@ -6,7 +6,6 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toColorInt
 
 private val LightScheme = lightColorScheme(
     primary = Color(0xFF003DA5),
@@ -56,7 +55,7 @@ fun parseHexColor(hex: String): Color? = runCatching {
         8 -> "#$clean"
         else -> return@runCatching null
     }
-    Color(normalized.toColorInt())
+    Color(android.graphics.Color.parseColor(normalized))
 }.getOrNull()
 
 @Composable
