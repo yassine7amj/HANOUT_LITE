@@ -71,6 +71,8 @@ jobs:
         # كنعتمدو على Android SDK المثبّت أصلاً فالـ runner (ما كنستعملوش
         # android-actions/setup-android حيت كيحاول يثبّت حزمة 'tools' اللي
         # ما بقاتش موجودة فـ cmdline-tools الجديدة وكتفشّل البناء).
+        # Bubblewrap كيتحقّق من وجود $SDK/tools ولا $SDK/bin، فكنصنعو bin
+        # بروابط رمزية لأدوات cmdline-tools باش يقول بلي الـ SDK صحيح.
         run: |
           SDK="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
           if [ ! -d "$SDK" ]; then
@@ -87,13 +89,24 @@ jobs:
           fi
           if [ -n "$SDKMGR" ] && [ -x "$SDKMGR" ]; then
             echo "$(dirname "$SDKMGR")" >> "$GITHUB_PATH"
+
+            mkdir -p "$SDK/bin"
+            for f in "$(dirname "$SDKMGR")"/*; do
+              ln -sf "$f" "$SDK/bin/$(basename "$f")"
+            done
+
             yes | "$SDKMGR" --licenses > /dev/null 2>&1 || true
-            "$SDKMGR" --install "platform-tools" "platforms;android-34" "build-tools;34.0.0" > /dev/null 2>&1 || true
+            "$SDKMGR" --install "platform-tools" "platforms;android-34" "platforms;android-35" \
+              "build-tools;34.0.0" "build-tools;36.1.0" > /dev/null 2>&1 || true
             echo "✔ sdkmanager: $SDKMGR"
           else
             echo "⚠ ما لقيناش sdkmanager — الـ runner غالباً فيه SDK مقاد"
           fi
+
           echo "SDK=$SDK"
+          ls -1 "$SDK" || true
+          echo "--- bin ---"
+          ls -1 "$SDK/bin" 2>/dev/null || true
 
       - name: تحضير بيئة Bubblewrap
         run: |
