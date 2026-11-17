@@ -1,0 +1,10 @@
+# مخرجات بناء أندرويد المحلية
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+.cxx/
+captures/
+*.jks
+*.keystore

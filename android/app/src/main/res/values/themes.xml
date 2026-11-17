@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.HanoutLite" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/hanout_blue</item>
+        <item name="android:colorPrimaryDark">@color/hanout_blue_dark</item>
+        <item name="android:statusBarColor">@color/hanout_blue_dark</item>
+        <item name="android:navigationBarColor">@color/hanout_bg</item>
+        <item name="android:windowBackground">@color/hanout_bg</item>
+    </style>
+
+</resources>

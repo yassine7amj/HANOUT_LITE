@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HANOUT LITE</string>
+
+    <!-- التبويبات -->
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_cart">السلة</string>
+    <string name="nav_orders">طلباتي</string>
+    <string name="nav_about">الحانوت</string>
+
+    <!-- التصفح -->
+    <string name="search_hint">قلّب على منتوج…</string>
+    <string name="all_categories">الكل</string>
+    <string name="only_available">المتوفر فقط</string>
+    <string name="only_favorites">المفضلة</string>
+    <string name="sort_default">الترتيب</string>
+    <string name="sort_price_asc">الثمن: من الأرخص</string>
+    <string name="sort_price_desc">الثمن: من الأغلى</string>
+    <string name="sort_name">الاسم (أ‑ي)</string>
+    <string name="empty_products">ما لقينا حتى منتوج.</string>
+    <string name="empty_favorites">ما كاين حتى منتوج فالمفضلة دابا.</string>
+    <string name="add_to_cart">زيد للسلة</string>
+    <string name="out_of_stock">غير متوفر</string>
+    <string name="product_added">تزاد المنتوج للسلة</string>
+    <string name="products_count">%1$d منتوج</string>
+    <string name="deals_title">عروض وتخفيضات</string>
+
+    <!-- السلة -->
+    <string name="cart_title">السلة</string>
+    <string name="cart_empty">السلة خاوية دابا</string>
+    <string name="cart_empty_hint">زيد شي منتوج من الرئيسية باش تكمّل الطلب.</string>
+    <string name="cart_total">المجموع التقديري</string>
+    <string name="cart_clear">خوّي السلة</string>
+    <string name="checkout">صيفط الطلب فواتساب</string>
+    <string name="buyer_label">الاسم (اختياري)</string>
+    <string name="buyer_hint">اسم الزبون</string>
+    <string name="fulfillment_label">طريقة الاستلام</string>
+    <string name="fulfillment_pickup">الاستلام من الحانوت</string>
+    <string name="fulfillment_delivery">طلب التوصيل (حسب موافقة التاجر)</string>
+    <string name="note_label">ملاحظة للطلب</string>
+    <string name="note_hint">مثلاً: بغيت الخبز سخون</string>
+    <string name="checkout_empty">زيد شي منتوج للسلة أولاً</string>
+    <string name="checkout_no_phone">مول الحانوت مازال ما دخّلش رقم واتساب صحيح</string>
+    <string name="checkout_sent">تصيفط الطلب — كمّل فواتساب</string>
+
+    <!-- الطلبات -->
+    <string name="orders_title">طلباتي</string>
+    <string name="orders_empty">مازال ما صيفطتي حتى طلب من هاد الجهاز.</string>
+    <string name="order_status_new">قيد الانتظار</string>
+    <string name="order_status_done">تم التأكيد</string>
+    <string name="order_total">المجموع</string>
+
+    <!-- معلومات الحانوت -->
+    <string name="shop_phone">الهاتف / واتساب</string>
+    <string name="shop_call">اتصل</string>
+    <string name="shop_whatsapp">واتساب</string>
+    <string name="shop_share">شارك التطبيق</string>
+    <string name="shop_open_web">حلّ النسخة الويب</string>
+    <string name="shop_version">رقم الإصدار</string>
+    <string name="shop_slug">معرّف الحانوت</string>
+    <string name="shop_backend">مصدر البيانات</string>
+    <string name="backend_cloud">سحابي (Firebase)</string>
+    <string name="backend_demo">تجريبي — السيرفر غير مهيأ</string>
+    <string name="shop_refresh">حدّث البيانات</string>
+    <string name="shop_no_phone">ما كاينش رقم مسجّل</string>
+    <string name="share_chooser">شارك التطبيق</string>
+    <string name="share_text">HANOUT LITE — %1$s</string>
+
+    <!-- حالات عامة -->
+    <string name="loading">كنحمّلو الطلبية…</string>
+    <string name="retry">عاود المحاولة</string>
+    <string name="error_load">تعذّر تحميل معطيات الحانوت.</string>
+    <string name="shop_not_found">هاد الحانوت ما كاينش.</string>
+    <string name="shop_suspended">الحانوت موقوف مؤقتاً. المرجو المحاولة لاحقاً.</string>
+    <string name="no_shop_selected">هاد التطبيق ما مربوطش بحانوت معيّن.</string>
+    <string name="demo_notice">هاد التطبيق كيعرض معطيات تجريبية حيت مازال ما ترابطش مع Firebase.</string>
+
+    <!-- وصف عام -->
+    <string name="launcher_shortcut_shop">الحانوت</string>
+    <string name="launcher_shortcut_cart">السلة</string>
+    <string name="launcher_shortcut_orders">طلباتي</string>
+</resources>

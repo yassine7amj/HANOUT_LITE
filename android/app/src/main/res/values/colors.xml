@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="hanout_blue">#003DA5</color>
+    <color name="hanout_blue_dark">#002A73</color>
+    <color name="hanout_bg">#F5F8FD</color>
+    <color name="ic_launcher_background">#003DA5</color>
+</resources>
