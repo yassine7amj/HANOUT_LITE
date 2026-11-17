@@ -1,5 +1,5 @@
 /* HANOUT LITE — Service Worker (offline app shell) */
-const CACHE = 'hanout-lite-v1';
+const CACHE = 'hanout-lite-v2';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-512.jpg', './logo.png'];
 
 self.addEventListener('install', (e) => {
