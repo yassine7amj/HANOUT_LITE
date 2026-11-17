@@ -1,0 +1,30 @@
+{
+  "packageId": "ma.hanout.lite",
+  "host": "yassine7amj.github.io",
+  "name": "HANOUT LITE",
+  "launcherName": "HANOUT LITE",
+  "display": "standalone",
+  "orientation": "portrait",
+  "themeColor": "#003DA5",
+  "themeColorDark": "#002A73",
+  "navigationColor": "#003DA5",
+  "navigationColorDark": "#002A73",
+  "navigationDividerColor": "#003DA5",
+  "navigationDividerColorDark": "#002A73",
+  "backgroundColor": "#F5F8FD",
+  "splashScreenFadeOutDuration": 300,
+  "startUrl": "/HANOUT_LITE/",
+  "iconUrl": "https://yassine7amj.github.io/HANOUT_LITE/icon-512.png",
+  "maskableIconUrl": "https://yassine7amj.github.io/HANOUT_LITE/icon-512.png",
+  "webManifestUrl": "https://yassine7amj.github.io/HANOUT_LITE/manifest.webmanifest",
+  "enableNotifications": false,
+  "enableSiteSettingsShortcut": true,
+  "fallbackType": "customtabs",
+  "features": {},
+  "shortcuts": [],
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "android"
+  },
+  "fingerprints": []
+}

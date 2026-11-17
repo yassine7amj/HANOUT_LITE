@@ -1,0 +1,271 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0B1B34">
+<title>منصة التحكم | HANOUT LITE</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><style>
+*{box-sizing:border-box}
+:root{--blue:#003DA5;--blue2:#002A73;--nav:#0B1B34;--yellow:#FFC220;--red:#E01A2B;--green:#00843D;--orange:#B26A00;--ink:#0B1B34;--muted:#5B6B82;--line:#E4E9F2;--card:#fff;--bg:#F2F5FA}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,Tahoma,Arial,sans-serif;font-size:15px}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;color:inherit}
+input,select{font:inherit}
+img{display:block}
+a{color:var(--blue);text-decoration:none}
+.hidden{display:none!important}
+.muted{color:var(--muted);font-size:13px}
+/* top bar */
+.appbar{background:linear-gradient(180deg,#12294C,var(--nav));color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.appbar-in{max-width:1300px;margin:auto;display:flex;align-items:center;gap:13px;padding:13px 20px;flex-wrap:wrap}
+.appbar .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:900;font-size:17px}
+.appbar .brand img{width:34px;height:34px;border-radius:9px;background:#fff}
+.tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);font-size:12px;font-weight:800;padding:5px 11px;border-radius:30px;white-space:nowrap}
+.tag i{color:var(--yellow)}
+.acts{margin-inline-start:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.who{font-size:12.5px;opacity:.85;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ib{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;font-size:15px}
+.ib:hover{background:rgba(255,255,255,.26)}
+.lbtn{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:#3a2a00;font-weight:800;font-size:13.5px;padding:9px 14px;border-radius:10px}
+.lbtn.ghost{background:rgba(255,255,255,.14);color:#fff}
+/* layout */
+.wrap{max-width:1300px;margin:auto;padding:22px 20px 60px}
+h1{margin:0 0 3px;font-size:24px;color:var(--blue2)}
+.notice{background:#FFF7DC;border-inline-start:4px solid var(--yellow);padding:12px 15px;border-radius:11px;color:#695222;font-size:13px;margin:14px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;align-items:center;gap:13px;box-shadow:0 1px 3px rgba(11,27,52,.06)}
+.stat .ic{width:46px;height:46px;border-radius:12px;background:#E9F1FC;color:var(--blue);display:grid;place-items:center;font-size:19px;flex:0 0 auto}
+.stat b{display:block;font-size:24px;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 1px 3px rgba(11,27,52,.06)}
+.panel h3{margin:0 0 14px;font-size:17px;color:var(--blue2);display:flex;align-items:center;gap:8px}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.toolbar input,.toolbar select{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);flex:1;min-width:150px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 1px 3px rgba(11,27,52,.06);display:flex;flex-direction:column;gap:9px;transition:box-shadow .15s}
+.mcard:hover{box-shadow:0 10px 26px rgba(11,27,52,.12)}
+.mhead{display:flex;align-items:center;gap:11px}
+.avat{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0A57C2,#003DA5);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;flex:0 0 auto}
+.mhead b{font-size:15.5px;display:block;line-height:1.3}
+.slugline{font-size:12px;color:var(--muted);font-family:ui-monospace,Consolas,monospace;direction:ltr;text-align:start}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:4px 10px;font-size:11.5px;font-weight:800;background:#EEF3FA;color:#41567a}
+.chip.ok{background:#E4F5EA;color:var(--green)}
+.chip.off{background:#F1F3F7;color:#7B8798}
+.chip.warn{background:#FFF4D6;color:var(--orange)}
+.chip.bad{background:#FBE7E3;color:var(--red)}
+.chip.pro{background:#EDE9FF;color:#5B3FD6}
+.mini{padding:7px 11px;background:#EEF3FA;color:var(--blue);border-radius:9px;font-size:13px;font-weight:700}
+.mini.danger{background:#FBE7E3;color:#A33120}
+.mini.ok{background:#E4F5EA;color:var(--green)}
+.mini.i{width:34px;padding:7px 0;text-align:center}
+.acts2{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto}
+/* modal */
+.modal{position:fixed;inset:0;z-index:60;background:rgba(6,14,28,.6);display:none;padding:18px;overflow:auto}
+.modal.open{display:block}
+.mcard2{max-width:860px;margin:20px auto;background:var(--card);border-radius:18px;box-shadow:0 30px 70px rgba(0,0,0,.35);overflow:hidden}
+.mtop{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card);z-index:2}
+.mtop b{font-size:17px;color:var(--blue2)}
+.mbody{padding:18px}
+.tabs2{display:flex;gap:6px;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:16px;flex-wrap:wrap}
+.tabs2 button{flex:1;padding:10px;border:0;background:none;border-radius:9px;font:inherit;font-weight:800;color:var(--muted);min-width:110px}
+.tabs2 button.on{background:var(--card);color:var(--blue);box-shadow:0 1px 4px rgba(11,27,52,.1)}
+.field{display:flex;flex-direction:column;gap:6px;margin:11px 0}
+.field label{font-size:13px;font-weight:700}
+.field input,.field select{padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);width:100%}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{padding:12px 16px;border:0;border-radius:11px;font:inherit;font-weight:800;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.ghost{background:#EEF3FA;color:var(--blue)}
+.btn.danger{background:#FBE7E3;color:#A33120}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #EEF2F8;flex-wrap:wrap}
+.empty{text-align:center;color:var(--muted);padding:26px;border:1px dashed var(--line);border-radius:12px}
+.empty i{display:block;font-size:26px;color:var(--blue);margin-bottom:8px}
+.qrbox{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:14px}
+.qrbox img{width:150px;height:150px;border-radius:10px;background:#fff}
+.linkbox{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;direction:ltr;background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 11px;word-break:break-all}
+#toast{position:fixed;bottom:24px;inset-inline-start:24px;background:var(--blue);color:#fff;padding:13px 18px;border-radius:12px;display:none;z-index:90;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+@media(max-width:520px){.stats{grid-template-columns:1fr}.wrap{padding:16px}.who{display:none}}
+</style></head><body>
+<header class="appbar"><div class="appbar-in">
+  <span class="brand"><img src="logo.png" alt="" onerror="this.onerror=null;this.src='icon.svg'">HANOUT LITE</span>
+  <span class="tag"><i class="fa-solid fa-shield-halved"></i> منصة التحكم</span>
+  <div class="acts">
+    <span class="who" id="who"></span>
+    <a class="lbtn ghost" href="index.html"><i class="fa-solid fa-basket-shopping"></i> المتجر</a>
+    <button class="ib" title="تسجيل الخروج" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></button>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <h1><i class="fa-solid fa-gauge-high"></i> لوحة المدير العام</h1>
+  <p class="muted" style="margin:0">تحكم كامل فجميع التجار: الإنشاء، التفعيل، الاشتراكات، والاطلاع على المنتوجات والطلبات.</p>
+  <div class="notice" id="modeNotice"><i class="fa-solid fa-circle-info"></i> <span id="modeText">جاري التحميل...</span></div>
+
+  <div class="stats">
+    <div class="stat"><span class="ic"><i class="fa-solid fa-store"></i></span><div><b id="sMerchants">0</b><span>مجموع التجار</span></div></div>
+    <div class="stat"><span class="ic" style="background:#E4F5EA;color:var(--green)"><i class="fa-solid fa-circle-check"></i></span><div><b id="sActive">0</b><span>حانوت نشط</span></div></div>
+    <div class="stat"><span class="ic" style="background:#EDE9FF;color:#5B3FD6"><i class="fa-solid fa-receipt"></i></span><div><b id="sOrders">0</b><span>مجموع الطلبات</span></div></div>
+    <div class="stat"><span class="ic" style="background:#FFF4D6;color:var(--orange)"><i class="fa-solid fa-bell"></i></span><div><b id="sNew">0</b><span>طلبات جديدة</span></div></div>
+  </div>
+
+  <div class="panel">
+    <h3><i class="fa-solid fa-users-gear"></i>التجار <span class="muted" id="mcount" style="font-weight:400"></span></h3>
+    <div class="toolbar">
+      <input id="search" placeholder="قلب على تاجر بالاسم أو الرابط..." oninput="renderList()">
+      <select id="filter" onchange="renderList()"><option value="all">الكل</option><option value="active">نشط</option><option value="off">موقوف</option><option value="exp">منتهي/قريب ينتهي</option></select>
+      <button class="lbtn" style="background:var(--blue);color:#fff" onclick="newMerchant()"><i class="fa-solid fa-plus"></i> زيد تاجر</button>
+    </div>
+    <div class="mgrid" id="list"></div>
+  </div>
+</main>
+
+<div class="modal" id="modal"><div class="mcard2">
+  <div class="mtop">
+    <span class="avat" id="mAvat">؟</span>
+    <div style="min-width:0"><b id="mTitle">تاجر</b><div class="slugline" id="mSlug"></div></div>
+    <button class="ib" style="background:#EEF3FA;color:var(--blue);margin-inline-start:auto" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="mbody">
+    <div class="tabs2" id="mtabs">
+      <button data-t="info" class="on">المعلومات والاشتراك</button>
+      <button data-t="shop">الرابط وQR</button>
+      <button data-t="prod">المنتوجات</button>
+      <button data-t="ord">الطلبات</button>
+    </div>
+    <div id="tabInfo"></div>
+    <div id="tabShop" class="hidden"></div>
+    <div id="tabProd" class="hidden"></div>
+    <div id="tabOrd" class="hidden"></div>
+  </div>
+</div></div>
+
+<div id="toast"></div>
+<script src="firebase-config.js"></script><script src="store.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const PLANS={free:'مجاني',standard:'قياسي',pro:'احترافي'};
+let ME=null,MERCHANTS=[],CUR=null,CURCAT=null,CURORD=[];
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(t){$('toast').textContent=t;$('toast').style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>$('toast').style.display='none',2600)}
+function shopUrl(slug){return new URL('index.html?shop='+encodeURIComponent(slug),location.href).href}
+function fmt(ts){if(!ts)return '—';return new Date(ts).toLocaleDateString('ar-MA',{year:'numeric',month:'2-digit',day:'2-digit'})}
+function subState(m){const now=Date.now();if(m.active===false)return{k:'off',t:'موقوف'};if(m.expiresAt&&m.expiresAt<now)return{k:'bad',t:'اشتراك منتهي'};if(m.expiresAt&&m.expiresAt<now+7*864e5)return{k:'warn',t:'قريب ينتهي'};return{k:'ok',t:'نشط'}}
+function logout(){HanoutStore.signOut().then(()=>location.replace('login.html'))}
+function closeModal(){$('modal').classList.remove('open');CUR=null}
+window.closeModal=closeModal;window.logout=logout;
+document.querySelectorAll('#mtabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#mtabs button').forEach(x=>x.classList.toggle('on',x===b));['info','shop','prod','ord'].forEach(t=>$('tab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle('hidden',t!==b.dataset.t));});
+
+async function boot(){
+  const ok=await HanoutStore.ready();
+  $('modeText').innerHTML=ok?'<b>متصل بالسيرفر (Firebase).</b> كل التعديلات كتتزامن مباشرة مع جميع الأجهزة.':'<b>الوضع التجريبي المحلي.</b> البيانات كتبقى فهاد المتصفح فقط. باش تفعّل السيرفر عمّر <code>firebase-config.js</code>.';
+  const u=await HanoutStore.waitAuth();
+  if(!u){location.replace('login.html?next=admin');return}
+  const prof=await HanoutStore.getProfile();
+  if(!prof||prof.role!=='admin'){location.replace('login.html');return}
+  ME=prof;$('who').textContent=prof.email;
+  await load();
+}
+async function load(){
+  MERCHANTS=await HanoutStore.listMerchants();
+  renderList();
+  const st=await HanoutStore.platformStats();
+  $('sMerchants').textContent=st.merchants;$('sActive').textContent=st.active;$('sOrders').textContent=st.orders;$('sNew').textContent=st.newOrders;
+  MERCHANTS.forEach(m=>{const b=st.byMerchant[m.slug]||{total:0,new:0};m._orders=b.total;m._new=b.new});
+  renderList();
+}
+function renderList(){
+  const q=$('search').value.trim().toLowerCase(),f=$('filter').value;
+  let list=MERCHANTS.filter(m=>!q||(m.name||'').toLowerCase().includes(q)||(m.slug||'').toLowerCase().includes(q));
+  if(f==='active')list=list.filter(m=>subState(m).k==='ok'||subState(m).k==='warn');
+  else if(f==='off')list=list.filter(m=>m.active===false);
+  else if(f==='exp')list=list.filter(m=>{const k=subState(m).k;return k==='bad'||k==='warn'});
+  $('mcount').textContent='('+list.length+')';
+  $('list').innerHTML=list.length?list.map(m=>{const s=subState(m);const init=(m.name||'?').trim().charAt(0);
+    return `<article class="mcard">
+      <div class="mhead"><span class="avat">${esc(init)}</span><div style="min-width:0"><b>${esc(m.name||'بلا اسم')}</b><div class="slugline">${esc(m.slug)}</div></div></div>
+      <div class="chips"><span class="chip ${s.k}">${s.t}</span><span class="chip ${m.plan==='pro'?'pro':''}">${PLANS[m.plan]||'مجاني'}</span><span class="chip"><i class="fa-solid fa-receipt"></i> ${m._orders||0} طلب</span>${m._new?`<span class="chip warn"><i class="fa-solid fa-bell"></i> ${m._new} جديد</span>`:''}</div>
+      <div class="muted">${esc(m.phone||'بلا رقم')} • ينتهي: ${fmt(m.expiresAt)}</div>
+      <div class="acts2">
+        <button class="mini" onclick="openMerchant('${esc(m.slug)}')"><i class="fa-solid fa-folder-open"></i> إدارة</button>
+        <button class="mini i" title="نسخ الرابط" onclick="copyLink('${esc(m.slug)}')"><i class="fa-solid fa-link"></i></button>
+        <button class="mini i" title="فتح المتجر" onclick="window.open(shopUrl('${esc(m.slug)}'),'_blank')"><i class="fa-solid fa-up-right-from-square"></i></button>
+        <button class="mini ${m.active===false?'ok':'danger'} i" title="${m.active===false?'تفعيل':'إيقاف'}" onclick="toggleActive('${esc(m.slug)}')"><i class="fa-solid fa-${m.active===false?'play':'pause'}"></i></button>
+      </div>
+    </article>`}).join(''):'<div class="empty" style="grid-column:1/-1"><i class="fa-solid fa-store-slash"></i>ما كاين حتى تاجر. بدا بـ«زيد تاجر».</div>';
+}
+window.copyLink=async slug=>{try{await navigator.clipboard.writeText(shopUrl(slug));toast('تنسخ الرابط')}catch(e){prompt('انسخ الرابط:',shopUrl(slug))}};
+window.toggleActive=async slug=>{const m=MERCHANTS.find(x=>x.slug===slug);if(!m)return;await HanoutStore.saveMerchant({slug:slug,active:m.active===false});toast(m.active===false?'تفعّل الحانوت':'توقف الحانوت');await load()};
+window.newMerchant=()=>{CUR=null;CURCAT=null;CURORD=[];$('mAvat').textContent='+';$('mTitle').textContent='تاجر جديد';$('mSlug').textContent='';renderInfo(null);$('modal').classList.add('open');setTab('info')};
+window.openMerchant=async slug=>{const m=MERCHANTS.find(x=>x.slug===slug);CUR=m;$('mAvat').textContent=(m.name||'?').charAt(0);$('mTitle').textContent=m.name||'تاجر';$('mSlug').textContent=slug;CURCAT=null;CURORD=[];renderInfo(m);$('modal').classList.add('open');setTab('info');loadShopData(slug)};
+function setTab(t){document.querySelectorAll('#mtabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===t));['info','shop','prod','ord'].forEach(k=>$('tab'+k.charAt(0).toUpperCase()+k.slice(1)).classList.toggle('hidden',k!==t));if(t==='shop'&&CUR)$('tabShop').innerHTML=shopTab(CUR);if(t==='prod')$('tabProd').innerHTML=CURCAT?prodTab(CURCAT):'<div class="empty"><i class="fa-solid fa-spinner fa-spin"></i>جاري التحميل...</div>';if(t==='ord')$('tabOrd').innerHTML=CUR?ordTab(CURORD):'<div class="empty"><i class="fa-solid fa-spinner fa-spin"></i>جاري التحميل...</div>'}
+async function loadShopData(slug){
+  const shop=await HanoutStore.loadShop(slug);CURCAT=shop||{products:[],categories:[]};
+  CURORD=await HanoutStore.listOrders(slug);
+  const on=document.querySelector('#mtabs button.on').dataset.t;
+  if(on==='prod')$('tabProd').innerHTML=prodTab(CURCAT);
+  if(on==='ord')$('tabOrd').innerHTML=ordTab(CURORD);
+}
+function renderInfo(m){
+  const isNew=!m;
+  const v=m||{name:'',slug:'',phone:'',plan:'free',active:true,expiresAt:null,ownerEmail:'',note:''};
+  const exp=v.expiresAt?new Date(v.expiresAt).toISOString().slice(0,10):'';
+  $('tabInfo').innerHTML=`
+    <div class="field"><label>اسم الحانوت *</label><input id="fName" maxlength="60" value="${esc(v.name)}"></div>
+    <div class="grid2">
+      <div class="field"><label>الرابط المختصر (slug) *</label><input id="fSlug" maxlength="40" value="${esc(v.slug)}" ${isNew?'':'readonly style="background:#F6F8FC"'}><span class="muted">كيتبدل غير فالإنشاء.</span></div>
+      <div class="field"><label>رقم واتساب</label><input id="fPhone" inputmode="tel" value="${esc(v.phone)}" placeholder="2126XXXXXXXX"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>الاشتراك</label><select id="fPlan">${Object.keys(PLANS).map(k=>`<option value="${k}" ${v.plan===k?'selected':''}>${PLANS[k]}</option>`).join('')}</select></div>
+      <div class="field"><label>تاريخ انتهاء الاشتراك</label><input id="fExp" type="date" value="${exp}"><span class="muted">خليه خاوي = بلا نهاية.</span></div>
+    </div>
+    <div class="field"><label>بريد صاحب الحانوت</label><input id="fOwner" value="${esc(v.ownerEmail||'')}" placeholder="owner@example.com"></div>
+    <div class="field"><label>ملاحظات داخلية</label><input id="fNote" maxlength="120" value="${esc(v.note||'')}"></div>
+    <div class="field"><label><input type="checkbox" id="fActive" ${v.active===false?'':'checked'}> الحانوت نشط (كيبان للزبناء)</label></div>
+    <div class="acts2" style="margin-top:6px">
+      <button class="btn primary" onclick="saveCurrent()"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>
+      ${isNew?'':`<button class="btn ghost" onclick="copyLink('${esc(v.slug)}')"><i class="fa-solid fa-link"></i> نسخ الرابط</button><button class="btn danger" onclick="removeCurrent()"><i class="fa-solid fa-trash"></i> حذف الحانوت</button>`}
+    </div>`;
+}
+function shopTab(m){const url=shopUrl(m.slug);return `
+  <p class="muted">هاد الرابط كيوصّل الزبناء مباشرة لحانوت <b>${esc(m.name)}</b>. صيفطو ليهم فواتساب، ولا دير QR وطبعه.</p>
+  <div class="qrbox">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}" alt="QR">
+    <div style="flex:1;min-width:220px"><div class="linkbox">${esc(url)}</div>
+      <div class="acts2" style="margin-top:10px"><button class="mini" onclick="copyLink('${esc(m.slug)}')"><i class="fa-solid fa-copy"></i> نسخ</button>
+      <a class="mini" href="https://wa.me/?text=${encodeURIComponent('كتالوج '+m.name+': '+url)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> شارك فواتساب</a></div>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:14px">باش تصنع تطبيق أندرويد (APK) خاص بهاد الحانوت، شوف مجلّد <code>twa/</code> فالمستودع.</p>`}
+function prodTab(shop){
+  const ps=shop.products||[];
+  if(!ps.length)return '<div class="empty"><i class="fa-solid fa-box-open"></i>هاد الحانوت مازال ما زاد حتى منتوج.</div>';
+  return `<p class="muted">${ps.length} منتوج • ${(shop.categories||[]).length} صنف (للقراءة فقط من طرف الإدارة).</p>`+
+    ps.map(p=>`<div class="row"><div><b>${esc(p.emoji||'')} ${esc(p.name)}</b><div class="muted">${esc(p.category)} • ${Number(p.price).toFixed(2)} DH ${p.oldPrice?'• كان '+Number(p.oldPrice).toFixed(2):''}</div></div><span class="chip ${p.available?'ok':'off'}">${p.available?'متوفر':'غير متوفر'}</span></div>`).join('');
+}
+function ordTab(list){
+  if(!list.length)return '<div class="empty"><i class="fa-solid fa-receipt"></i>مازال ما كاين حتى طلب.</div>';
+  return `<p class="muted">${list.length} طلب</p>`+list.map(o=>`<div class="row" style="align-items:flex-start">
+    <div style="min-width:0"><b>${esc(o.buyer||'زبون')} • ${Number(o.total||0).toFixed(2)} DH</b>
+    <div class="muted">${new Date(o.ts).toLocaleString('ar-MA')}${o.fulfillment?' • '+esc(o.fulfillment):''}</div>
+    <ul style="margin:6px 0 0;padding-inline-start:18px;color:var(--muted);font-size:13px">${(o.items||[]).map(i=>`<li>${esc(i.name)} × ${i.qty} = ${Number(i.price*i.qty).toFixed(2)} DH</li>`).join('')}</ul></div>
+    <div class="acts2"><span class="chip ${o.status==='جديد'?'warn':'ok'}">${o.status==='جديد'?'جديد':'تم'}</span>
+    <button class="mini i" title="تبديل الحالة" onclick="setOrd('${esc(CUR.slug)}','${esc(o.id)}','${o.status==='جديد'?'تم':'جديد'}')"><i class="fa-solid fa-check"></i></button>
+    <button class="mini danger i" title="حذف" onclick="delOrd('${esc(CUR.slug)}','${esc(o.id)}')"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
+}
+window.setOrd=async(slug,id,st)=>{await HanoutStore.updateOrder(slug,id,{status:st});toast('تبدلت الحالة');loadShopData(slug)};
+window.delOrd=async(slug,id)=>{if(!confirm('تحذف هاد الطلب؟'))return;await HanoutStore.deleteOrder(slug,id);toast('تحذف الطلب');loadShopData(slug)};
+window.saveCurrent=async()=>{
+  const name=$('fName').value.trim();if(!name)return toast('دخل اسم الحانوت');
+  let slug=$('fSlug').value.trim();slug=HanoutStore.slugify(slug);
+  const phone=$('fPhone').value.replace(/\D/g,'');
+  const expv=$('fExp').value?new Date($('fExp').value+'T23:59:59').getTime():null;
+  const payload={slug:slug,name:name,phone:phone,plan:$('fPlan').value,expiresAt:expv,active:$('fActive').checked,ownerEmail:$('fOwner').value.trim(),note:$('fNote').value.trim()};
+  if(!CUR){const ex=await HanoutStore.getMerchant(slug);if(ex){payload.slug=slug+'-'+Math.random().toString(36).slice(2,5)}payload.createdAt=Date.now()}
+  await HanoutStore.saveMerchant(payload);
+  toast('تحفظ التاجر');closeModal();await load();
+};
+window.removeCurrent=async()=>{if(!CUR)return;if(!confirm('غادي يتحذف الحانوت بجميع منتوجاتو وطلباتو. متأكد؟'))return;await HanoutStore.deleteMerchant(CUR.slug);toast('تحذف الحانوت');closeModal();await load()};
+$('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal()});
+boot();
+</script></body></html>

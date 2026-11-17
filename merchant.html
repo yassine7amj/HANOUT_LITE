@@ -6,7 +6,6 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#002A73">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><style>
 *{box-sizing:border-box}
 :root{--blue:#003DA5;--blue2:#002A73;--blue-l:#E9F1FC;--yellow:#FFC220;--red:#E01A2B;--green:#00843D;--ink:#0B1B34;--muted:#5B6B82;--line:#E4E9F2;--bg:#F2F5FA;--card:#fff;--shadow:0 1px 3px rgba(11,27,52,.06),0 8px 24px rgba(11,27,52,.05)}
@@ -33,7 +32,7 @@ a{color:var(--blue)}
 .linkbtn.ghost{background:rgba(255,255,255,.16);color:#fff}
 /* ===== Layout ===== */
 .wrap{max-width:1240px;margin:auto;padding:24px 22px 60px}
-.head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.head{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
 .head h1{margin:0;font-size:26px;color:var(--blue2)}
 html[data-theme=dark] .head h1{color:#BFD6FF}
 .notice{background:#FFF7DC;padding:13px 15px;border-radius:12px;color:#695222;font-size:13px;margin:14px 0 18px}
@@ -72,9 +71,17 @@ html[data-theme=dark] .manageRow{border-color:#26334A}
 .catRow .cname{display:flex;align-items:center;gap:8px;font-weight:700}
 .catRow .cname .ce{font-size:20px}
 hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+/* ===== Shop link / QR ===== */
+.qrbox{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.qrbox img{width:132px;height:132px;border-radius:10px;background:#fff;border:1px solid var(--line)}
+.linkbox{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;direction:ltr;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px;word-break:break-all;text-align:start}
 /* ===== Toast ===== */
 #toast{position:fixed;bottom:26px;inset-inline-start:26px;background:var(--blue);color:#fff;padding:13px 18px;border-radius:12px;display:none;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.25)}
 #toast i{margin-inline-end:6px}
+/* ===== Boot overlay ===== */
+#boot{position:fixed;inset:0;z-index:80;background:var(--bg);display:grid;place-items:center;text-align:center;gap:12px}
+#boot .sp{width:46px;height:46px;border:4px solid var(--blue-l);border-top-color:var(--blue);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
 /* ===== Footer ===== */
 .foot{border-top:1px solid var(--line);margin-top:20px;padding:16px 22px;text-align:center;color:var(--muted);font-size:13px}
 html[data-theme=dark]{--ink:#E9EFFA;--muted:#98A7BE;--line:#26334A;--bg:#0D1524;--card:#141F33;--blue-l:#182741;--shadow:0 1px 3px rgba(0,0,0,.5)}
@@ -85,6 +92,7 @@ html[data-theme=dark] .chip.new{background:#3B2F13;color:#F1DEA8}
 html[data-theme=dark] .chip.done{background:#123020;color:#7FD9A6}
 html[data-theme=dark] .preview{border-color:#26334A}
 html[data-theme=dark] .empty{border-color:#26334A}
+html[data-theme=dark] #boot{background:#0D1524}
 @media(max-width:980px){.split{grid-template-columns:1fr}}
 @media(max-width:620px){.wrap{padding:16px}.stats{grid-template-columns:1fr}.appbar-in{flex-wrap:wrap}.tagspace{display:none}}
 </style></head><body>
@@ -93,21 +101,38 @@ html[data-theme=dark] .empty{border-color:#26334A}
     <a class="brand" href="merchant.html"><img src="logo.png" alt="شعار HANOUT LITE" onerror="this.onerror=null;this.src='icon.svg'"><span>HANOUT <small>LITE</small></span></a>
     <span class="tagspace"><i class="fa-solid fa-store"></i> فضاء التاجر</span>
     <div class="acts">
-      <a class="linkbtn ghost" href="index.html"><i class="fa-solid fa-basket-shopping"></i> المتجر</a>
+      <a class="linkbtn ghost" href="#" id="viewShop" target="_blank" rel="noopener"><i class="fa-solid fa-basket-shopping"></i> المتجر</a>
       <button class="ib" id="themeBtn" aria-label="الوضع الليلي" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      <button class="ib" aria-label="تسجيل الخروج" title="تسجيل الخروج" onclick="doLogout()"><i class="fa-solid fa-right-from-bracket"></i></button>
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="head"><h1><i class="fa-solid fa-gauge-high"></i> لوحة التاجر</h1></div>
-  <p class="muted" style="margin:0">هنا كتدير المنتوجات، الأصناف، الإعدادات، وكتتبع الطلبات. هاد الفضاء منفصل على واجهة الزبناء.</p>
-  <div class="notice"><i class="fa-solid fa-lock"></i>هذه نسخة محلية تجريبية وليست لوحة محمية بكلمة مرور. لا تدخل معلومات شخصية حساسة أو بيانات ديون الزبائن. التعديلات تظهر على هذا الجهاز فقط وتظهر مباشرة للزبناء اللي كيستعملو نفس المتصفح.</div>
+  <div class="head"><h1><i class="fa-solid fa-gauge-high"></i> <span id="dashName">لوحة التاجر</span></h1></div>
+  <p class="muted" style="margin:0">هنا كتدير المنتوجات، الأصناف، الإعدادات، وكتتبع الطلبات. هاد الفضاء خاص ومحمي بحسابك.</p>
+  <div class="notice" id="modeNotice"><i class="fa-solid fa-circle-info"></i> <span id="modeText">جاري التحقق...</span></div>
 
   <div class="stats">
     <div class="stat"><span class="ic"><i class="fa-solid fa-box"></i></span><div><b id="statProducts">0</b><span class="muted">منتج</span></div></div>
     <div class="stat"><span class="ic"><i class="fa-solid fa-circle-check"></i></span><div><b id="statAvailable">0</b><span class="muted">متوفر</span></div></div>
     <div class="stat"><span class="ic"><i class="fa-solid fa-receipt"></i></span><div><b id="statOrders">0</b><span class="muted">طلبات جديدة</span></div></div>
+  </div>
+
+  <div class="panel">
+    <h3><i class="fa-solid fa-qrcode"></i>رابط الحانوت ديالك</h3>
+    <div class="qrbox">
+      <img id="shopQR" alt="QR الحانوت" src="">
+      <div style="flex:1;min-width:220px">
+        <p class="muted" style="margin:0 0 8px">صيفط هاد الرابط للزبناء، ولا دير ليه QR وطبعه. كل طلب كيوصل لهنا مباشرة.</p>
+        <div class="linkbox" id="shopLink">—</div>
+        <div class="actions" style="margin-top:10px">
+          <button class="mini" onclick="copyShopLink()"><i class="fa-solid fa-copy"></i> نسخ الرابط</button>
+          <a class="mini" id="waShare" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> شارك فواتساب</a>
+          <button class="mini" onclick="installApp()"><i class="fa-solid fa-mobile-screen-button"></i> ثبّت التطبيق</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="split">
@@ -116,13 +141,34 @@ html[data-theme=dark] .empty{border-color:#26334A}
       <div class="panel"><h3><i class="fa-solid fa-receipt"></i>الطلبات</h3><div id="orders"></div></div>
     </div>
     <div>
-      <div class="panel"><h3 id="formTitle"><i class="fa-solid fa-plus"></i>إضافة منتج</h3><form id="productForm" onsubmit="saveProduct(event)"><input id="editId" type="hidden"><div class="field"><label>اسم المنتج</label><input id="pName" required maxlength="70" placeholder="مثلاً: حليب 1 لتر"></div><div class="field"><label>الثمن بالدرهم</label><input id="pPrice" type="number" min="0" max="100000" step="0.01" required></div><div class="field"><label>الثمن السابق (اختياري — للعرض أو الزيادة)</label><input id="pOldPrice" type="number" min="0" max="100000" step="0.01" placeholder="مثال: 20"><span class="hint">إذا كان الثمن الجديد أقل، سيظهر التخفيض؛ وإذا كان أعلى، ستظهر الزيادة. لا تضع ثمناً سابقاً غير حقيقي.</span></div><div class="field"><label>صورة المنتوج (اختياري)</label><input id="pImage" type="file" accept="image/png,image/jpeg,image/webp" onchange="previewImage(event)"><img id="imagePreview" class="preview hidden" alt="معاينة صورة المنتوج"><button type="button" class="secondary" style="padding:11px" onclick="removeImage()"><i class="fa-solid fa-trash"></i> حذف صورة المنتوج</button><span class="hint">الصور تُضغط وتُحفظ محلياً في هذا المتصفح. اختر صورة واضحة أقل من 5 ميغابايت.</span></div><div class="field"><label>الصنف</label><input id="pCategory" required maxlength="35" placeholder="مواد غذائية" list="catOptions"><datalist id="catOptions"></datalist></div><div class="field"><label>رمز تعبيري للمنتج</label><input id="pEmoji" maxlength="4" placeholder="🥛"></div><div class="field"><label><input type="checkbox" id="pAvailable" checked> متوفر حالياً</label></div><button class="primary full" type="submit" style="padding:12px"><i class="fa-solid fa-floppy-disk"></i> حفظ المنتج</button><button class="secondary full" type="button" style="margin-top:7px;padding:12px" onclick="resetForm()"><i class="fa-solid fa-xmark"></i> إلغاء التعديل</button></form></div>
+      <div class="panel"><h3 id="formTitle"><i class="fa-solid fa-plus"></i>إضافة منتج</h3><form id="productForm" onsubmit="saveProduct(event)"><input id="editId" type="hidden"><div class="field"><label>اسم المنتج</label><input id="pName" required maxlength="70" placeholder="مثلاً: حليب 1 لتر"></div><div class="field"><label>الثمن بالدرهم</label><input id="pPrice" type="number" min="0" max="100000" step="0.01" required></div><div class="field"><label>الثمن السابق (اختياري — للعرض أو الزيادة)</label><input id="pOldPrice" type="number" min="0" max="100000" step="0.01" placeholder="مثال: 20"><span class="hint">إذا كان الثمن الجديد أقل، سيظهر التخفيض؛ وإذا كان أعلى، ستظهر الزيادة. لا تضع ثمناً سابقاً غير حقيقي.</span></div><div class="field"><label>صورة المنتوج (اختياري)</label><input id="pImage" type="file" accept="image/png,image/jpeg,image/webp" onchange="previewImage(event)"><img id="imagePreview" class="preview hidden" alt="معاينة صورة المنتوج"><button type="button" class="secondary" style="padding:11px" onclick="removeImage()"><i class="fa-solid fa-trash"></i> حذف صورة المنتوج</button><span class="hint">الصور تُضغط وتُحفظ. اختر صورة واضحة أقل من 5 ميغابايت.</span></div><div class="field"><label>الصنف</label><input id="pCategory" required maxlength="35" placeholder="مواد غذائية" list="catOptions"><datalist id="catOptions"></datalist></div><div class="field"><label>رمز تعبيري للمنتج</label><input id="pEmoji" maxlength="4" placeholder="🥛"></div><div class="field"><label><input type="checkbox" id="pAvailable" checked> متوفر حالياً</label></div><button class="primary full" type="submit" style="padding:12px"><i class="fa-solid fa-floppy-disk"></i> حفظ المنتج</button><button class="secondary full" type="button" style="margin-top:7px;padding:12px" onclick="resetForm()"><i class="fa-solid fa-xmark"></i> إلغاء التعديل</button></form></div>
       <div class="panel"><h3><i class="fa-solid fa-layer-group"></i>إدارة الأصناف</h3><div id="catsManage"></div><div class="field"><label>زيد صنف جديد</label><div class="toolbar2"><input id="newCatEmoji" maxlength="4" placeholder="🛒" style="max-width:90px" aria-label="رمز الصنف"><input id="newCatName" maxlength="35" placeholder="اسم الصنف" aria-label="اسم الصنف الجديد"></div></div><button class="secondary full" style="padding:12px" onclick="addCategory()"><i class="fa-solid fa-plus"></i> زيد الصنف</button></div>
-      <div class="panel"><h3><i class="fa-solid fa-gear"></i>إعدادات الحانوت</h3><div class="field"><label>اسم الحانوت</label><input id="shopName" maxlength="70"></div><div class="field"><label>رقم واتساب التاجر</label><input id="shopPhone" inputmode="tel" placeholder="2126XXXXXXXX"></div><button class="primary full" style="padding:12px" onclick="saveSettings()"><i class="fa-solid fa-floppy-disk"></i> حفظ الإعدادات</button><p class="muted">استعمل الرقم بصيغة دولية: 212 ثم الرقم دون الصفر الأول.</p><hr><div class="actions"><button class="secondary" style="padding:11px" onclick="exportData()"><i class="fa-solid fa-download"></i> تصدير الكتالوغ</button><button class="secondary" style="padding:11px" onclick="document.getElementById('importFile').click()"><i class="fa-solid fa-upload"></i> استيراد</button><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></div><p class="muted">الاستيراد يستبدل بيانات الحانوت المحلية بعد التأكيد.</p></div>
+      <div class="panel"><h3><i class="fa-solid fa-gear"></i>إعدادات الحانوت</h3><div class="field"><label>اسم الحانوت</label><input id="shopName" maxlength="70"></div><div class="field"><label>رقم واتساب التاجر</label><input id="shopPhone" inputmode="tel" placeholder="2126XXXXXXXX"></div><button class="primary full" style="padding:12px" onclick="saveSettings()"><i class="fa-solid fa-floppy-disk"></i> حفظ الإعدادات</button><p class="muted">استعمل الرقم بصيغة دولية: 212 ثم الرقم دون الصفر الأول.</p><hr><div class="actions"><button class="secondary" style="padding:11px" onclick="exportData()"><i class="fa-solid fa-download"></i> تصدير الكتالوغ</button><button class="secondary" style="padding:11px" onclick="document.getElementById('importFile').click()"><i class="fa-solid fa-upload"></i> استيراد</button><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></div><p class="muted">الاستيراد كيعمّر الكتالوغ ديالك.</p></div>
     </div>
   </div>
 </main>
 
+<div id="boot"><div><div class="sp"></div><b>جاري تحميل فضاء التاجر...</b><p class="muted">كنتحققو من الحساب والبيانات</p></div></div>
 <div id="toast"></div>
-<footer class="foot">HANOUT LITE — فضاء التاجر • 2026</footer>
-<script src="app.js"></script></body></html>
+<footer class="foot">HANOUT LITE — فضاء التاجر • v0.8</footer>
+<script>
+function doLogout(){if(window.HanoutStore)HanoutStore.signOut().then(()=>location.replace('login.html'));else location.replace('login.html')}
+function shopUrl(){const s=window.HANOUT_SHOP&&window.HANOUT_SHOP.slug;return s?new URL('index.html?shop='+encodeURIComponent(s),location.href).href:''}
+function copyShopLink(){const u=shopUrl();if(!u)return;navigator.clipboard.writeText(u).then(()=>toast('تنسخ الرابط')).catch(()=>prompt('انسخ الرابط:',u))}
+window.copyShopLink=copyShopLink;window.doLogout=doLogout;
+window.onShopReady=function(shop){
+  const el=document.getElementById('boot');if(el)el.remove();
+  if(shop){
+    document.getElementById('dashName').textContent=shop.name||'لوحة التاجر';
+    const link=document.getElementById('shopLink');if(link)link.textContent=shopUrl();
+    const qr=document.getElementById('shopQR');if(qr)qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(shopUrl());
+    const wa=document.getElementById('waShare');if(wa)wa.href='https://wa.me/?text='+encodeURIComponent('كتالوج '+(shop.name||'')+': '+shopUrl());
+    const vs=document.getElementById('viewShop');if(vs)vs.href=shopUrl();
+  }
+  const ok=window.HanoutStore&&window.HanoutStore.mode==='cloud';
+  const t=document.getElementById('modeText');
+  if(t)t.innerHTML=ok?'<b>متصل بالسيرفر.</b> التعديلات كتتزامن مباشرة مع الزبناء فجميع الأجهزة.':'<b>الوضع التجريبي المحلي.</b> البيانات كتبقى فهاد المتصفح فقط. باش تفعّل المزامنة عمّر <code>firebase-config.js</code>.';
+};
+setTimeout(()=>{const el=document.getElementById('boot');if(el&&!window.HANOUT_SHOP){const b=el.querySelector('b');if(b)b.textContent='كنتسناو الاتصال...'}},3500);
+</script>
+<script src="firebase-config.js"></script><script src="store.js"></script><script src="app.js"></script></body></html>

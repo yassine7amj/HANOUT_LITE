@@ -1,0 +1,140 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#003DA5">
+<title>دخول | منصة HANOUT LITE</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><style>
+*{box-sizing:border-box}
+:root{--blue:#003DA5;--blue2:#002A73;--blue-l:#E9F1FC;--yellow:#FFC220;--red:#E01A2B;--green:#00843D;--ink:#0B1B34;--muted:#5B6B82;--line:#E4E9F2;--card:#fff;--bg:#F5F8FD}
+body{margin:0;min-height:100vh;font-family:"Segoe UI",system-ui,Tahoma,Arial,sans-serif;background:linear-gradient(140deg,#0A57C2,#003DA5 55%,#002A73);color:var(--ink);display:grid;place-items:center;padding:22px}
+.card{width:100%;max-width:430px;background:var(--card);border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.28);padding:26px 24px;position:relative;overflow:hidden}
+.brand{display:flex;align-items:center;gap:11px;justify-content:center;margin-bottom:4px}
+.brand img{width:44px;height:44px;border-radius:12px;background:var(--blue-l);object-fit:cover}
+.brand b{font-size:20px;font-weight:900;color:var(--blue);letter-spacing:.4px}
+.brand b span{color:var(--ink)}
+h1{font-size:20px;margin:14px 0 4px;text-align:center;color:var(--blue2)}
+.sub{text-align:center;color:var(--muted);font-size:13px;margin:0 0 16px}
+.tabs{display:flex;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:16px}
+.tabs button{flex:1;padding:10px;border:0;background:none;border-radius:9px;font:inherit;font-weight:800;color:var(--muted);cursor:pointer}
+.tabs button.on{background:var(--card);color:var(--blue);box-shadow:0 1px 4px rgba(11,27,52,.1)}
+.field{display:flex;flex-direction:column;gap:6px;margin:11px 0}
+.field label{font-size:13px;font-weight:700;color:var(--ink)}
+.field input,.field select{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--ink);font:inherit}
+.field input:focus{outline:3px solid var(--yellow);outline-offset:1px}
+.btn{width:100%;padding:13px;border:0;border-radius:12px;font:inherit;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--blue2)}
+.btn.ghost{background:var(--blue-l);color:var(--blue);margin-top:9px}
+.hint{font-size:12px;color:var(--muted);line-height:1.7}
+.err{background:#FBE7E3;color:#A33120;border-radius:11px;padding:11px 13px;font-size:13px;font-weight:700;margin:10px 0;display:none}
+.mode{display:inline-flex;align-items:center;gap:7px;background:var(--bg);border:1px solid var(--line);color:var(--muted);font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:30px;margin:0 auto 14px;width:max-content}
+.mode .dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
+.mode.ok .dot{background:var(--green)}
+.steps{display:none}
+.sep{border-top:1px solid var(--line);margin:16px 0}
+.foot{text-align:center;font-size:12px;color:var(--muted);margin-top:14px}
+a{color:var(--blue)}
+.toplink{position:absolute;top:14px;inset-inline-start:16px;font-size:13px;font-weight:700;text-decoration:none}
+@media(max-width:480px){.card{padding:22px 18px}}
+</style></head><body>
+<div class="card">
+  <a class="toplink" href="index.html"><i class="fa-solid fa-arrow-right"></i> المتجر</a>
+  <div class="brand"><img src="logo.png" alt="" onerror="this.onerror=null;this.src='icon.svg'"><b>HANOUT <span>LITE</span></b></div>
+  <div style="text-align:center"><span class="mode" id="mode"><span class="dot"></span>جاري الفحص...</span></div>
+  <h1 id="title">دخول التجار والمسؤولين</h1>
+  <p class="sub" id="subtitle">سجّل الدخول باش تسيّر الحانوت ديالك أو المنصة.</p>
+
+  <div class="tabs" id="tabs">
+    <button type="button" class="on" data-tab="in">دخول</button>
+    <button type="button" data-tab="up">حساب جديد</button>
+  </div>
+
+  <div class="err" id="err"></div>
+
+  <form id="form">
+    <div class="field"><label>البريد الإلكتروني</label><input id="email" type="email" required autocomplete="username" placeholder="you@example.com"></div>
+    <div class="field" id="passField"><label>كلمة السر</label><input id="pass" type="password" autocomplete="current-password" placeholder="••••••••" minlength="6"></div>
+    <div class="field" id="shopField" style="display:none"><label>اسم الحانوت</label><input id="shopname" maxlength="60" placeholder="مثال: حانوت النخيل"></div>
+    <div class="field" id="phoneField" style="display:none"><label>رقم واتساب (اختياري)</label><input id="shopphone" inputmode="tel" placeholder="2126XXXXXXXX"></div>
+    <button class="btn primary" type="submit" id="submitBtn"><i class="fa-solid fa-right-to-bracket"></i> دخول</button>
+  </form>
+
+  <div class="steps" id="newShop">
+    <div class="sep"></div>
+    <h1 style="font-size:17px">كمّل إنشاء الحانوت</h1>
+    <p class="sub">الحساب ديالك ما مرتبطش بحانوت. دخل معلومات الحانوت باش تكمّل.</p>
+    <div class="field"><label>اسم الحانوت</label><input id="nsName" maxlength="60" placeholder="حانوت الحومة"></div>
+    <div class="field"><label>رقم واتساب</label><input id="nsPhone" inputmode="tel" placeholder="2126XXXXXXXX"></div>
+    <div class="field"><label>الرابط المختصر (slug)</label><input id="nsSlug" maxlength="40" placeholder="hanout-nakhil"><span class="hint">كيتزاد فالرابط: index.html?shop=hanout-nakhil</span></div>
+    <button class="btn primary" type="button" onclick="createShop()"><i class="fa-solid fa-store"></i> إنشاء الحانوت</button>
+  </div>
+
+  <div class="sep"></div>
+  <p class="hint" style="text-align:center">الحساب ديال المسؤول العام خاصو يكون مزيود فـ <code>firebase-config.js</code>. الزبائن ما كيحتاجوش حساب باش يشريو.</p>
+  <div class="foot"><a href="#" onclick="HanoutStore.signOut().then(()=>location.reload());return false">تسجيل الخروج</a></div>
+</div>
+<div id="toast" style="position:fixed;bottom:20px;inset-inline-start:20px;background:#003DA5;color:#fff;padding:12px 17px;border-radius:12px;display:none;font-weight:700"></div>
+<script src="firebase-config.js"></script><script src="store.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const NEXT=new URLSearchParams(location.search).get('next');
+let mode='in';
+function toast(t){const el=$('toast');el.textContent=t;el.style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>el.style.display='none',2600)}
+function err(t){const e=$('err');if(!t){e.style.display='none';return}e.textContent=t;e.style.display='block'}
+function setTab(m){mode=m;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===m));
+  const up=m==='up';$('shopField').style.display=up?'flex':'none';$('phoneField').style.display=up?'flex':'none';
+  $('title').textContent=up?'إنشاء حساب تاجر':'دخول التجار والمسؤولين';
+  $('subtitle').textContent=up?'سجّل وخلق الحانوت ديالك فدقيقة.':'سجّل الدخول باش تسيّر الحانوت ديالك أو المنصة.';
+  $('submitBtn').innerHTML=up?'<i class="fa-solid fa-user-plus"></i> إنشاء الحساب':'<i class="fa-solid fa-right-to-bracket"></i> دخول';
+  err('');}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+
+$('form').addEventListener('submit',async e=>{e.preventDefault();err('');
+  const email=$('email').value.trim(),pass=$('pass').value;
+  if(!email){err('دخل البريد الإلكتروني');return}
+  if(mode==='up'&&!$('shopname').value.trim()){err('دخل اسم الحانوت');return}
+  $('submitBtn').disabled=true;
+  try{
+    if(mode==='up'){
+      await HanoutStore.signUp(email,pass);
+      const name=$('shopname').value.trim();
+      const slug=HanoutStore.slugify(name);
+      const existing=await HanoutStore.getMerchant(slug);
+      const finalSlug=existing?slug+'-'+Math.random().toString(36).slice(2,5):slug;
+      await HanoutStore.saveMerchant({slug:finalSlug,name:name,phone:$('shopphone').value.replace(/\D/g,''),ownerUid:(HanoutStore.currentUser()||{}).uid||'',ownerEmail:email,plan:'free',active:true,createdAt:Date.now(),expiresAt:null});
+      await HanoutStore.setSlug(finalSlug);
+    }else{
+      await HanoutStore.signIn(email,pass);
+    }
+  }catch(ex){
+    $('submitBtn').disabled=false;
+    err(localize(ex));return;
+  }
+  $('submitBtn').disabled=false;
+  await route();
+});
+function localize(ex){const c=(ex&&ex.code)||'';if(c.indexOf('user-not-found')>-1)return 'ما كاين حتى حساب بهاد البريد.';if(c.indexOf('wrong-password')>-1||c.indexOf('invalid-credential')>-1)return 'كلمة السر غير صحيحة.';if(c.indexOf('email-already-in-use')>-1)return 'هاد البريد مستعمل من قبل.';if(c.indexOf('weak-password')>-1)return 'كلمة السر ضعيفة (6 حروف على الأقل).';if(c.indexOf('invalid-email')>-1)return 'البريد الإلكتروني غير صحيح.';if(c.indexOf('network')>-1)return 'مشكل فالاتصال. تحقق من الإنترنت.';return (ex&&ex.message)||'وقع خطأ. عاود المحاولة.'}
+async function route(){
+  const prof=await HanoutStore.getProfile();
+  if(!prof){err('تعذر قراءة الحساب');return}
+  if(prof.role==='admin'){$('tabs').style.display='none';$('form').style.display='none';location.replace('admin.html');return}
+  if(!prof.slug){$('form').style.display='none';$('tabs').style.display='none';$('newShop').style.display='block';$('title').textContent='كمّل إنشاء الحانوت';$('subtitle').textContent='';return}
+  location.replace('merchant.html');
+}
+window.createShop=async function(){
+  const name=$('nsName').value.trim();if(!name)return toast('دخل اسم الحانوت');
+  const u=HanoutStore.currentUser();
+  let slug=HanoutStore.slugify($('nsSlug').value.trim()||name);
+  const ex=await HanoutStore.getMerchant(slug);if(ex)slug=slug+'-'+Math.random().toString(36).slice(2,5);
+  await HanoutStore.saveMerchant({slug:slug,name:name,phone:$('nsPhone').value.replace(/\D/g,''),ownerUid:(u||{}).uid||'',ownerEmail:(u||{}).email||'',plan:'free',active:true,createdAt:Date.now(),expiresAt:null});
+  await HanoutStore.setSlug(slug);
+  location.replace('merchant.html');
+};
+(async()=>{
+  const ok=await HanoutStore.ready();
+  const m=$('mode');m.classList.toggle('ok',ok);m.innerHTML='<span class="dot"></span>'+(ok?'متصل بالسيرفر (Firebase)':'الوضع التجريبي المحلي');
+  if(!ok){$('passField').style.display='none';$('pass').required=false;$('tabs').querySelector('[data-tab="up"]').style.display='none';}
+  const u=HanoutStore.currentUser();
+  if(u)await route();
+})();
+</script></body></html>

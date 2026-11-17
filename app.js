@@ -5,11 +5,19 @@ let data;try{let raw=JSON.parse(localStorage.getItem(KEY));data=validData(raw)?r
 function normalize(){if(!Array.isArray(data.categories))data.categories=[...new Set(data.products.map(p=>p.category))].sort().map(c=>({name:c,emoji:(data.products.find(p=>p.category===c)||{}).emoji||'🛍️'}));if(!Array.isArray(data.orders))data.orders=[];if(!Array.isArray(data.favs))data.favs=[]}
 normalize();
 let cart={};
+/* ===== منصة متعددة التجار (Multi-tenant) ===== */
+const PARAMS=new URLSearchParams(location.search);
+const SHOP_PARAM=PARAMS.get('shop');
+const IS_MERCHANT_DASH=!!document.getElementById('manage');
+let shopSlug=SHOP_PARAM||null;     // slug للقراءة (واجهة الزبون)
+let cloudShop=null;                // slug للكتابة (لوحة التاجر)
+let cloudReady=false;let cloudTimer=null;
 const el=id=>document.getElementById(id);
 const money=n=>Number(n).toFixed(2)+' DH';
 const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function validData(d){return !!(d&&typeof d.name==='string'&&typeof d.phone==='string'&&Array.isArray(d.products)&&d.products.length<=1000&&d.products.every(p=>typeof p.id==='string'&&typeof p.name==='string'&&p.name.length<=70&&Number.isFinite(p.price)&&p.price>=0&&p.price<=100000&&typeof p.category==='string'&&typeof p.emoji==='string'&&typeof p.available==='boolean'&&(p.image===undefined||typeof p.image==='string'&&p.image.length<180000)&&(p.oldPrice===undefined||p.oldPrice===null||Number.isFinite(p.oldPrice)&&p.oldPrice>=0&&p.oldPrice<=100000)))}
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch(e){toast('مساحة التخزين ممتلئة. احذف بعض الصور أو صدّر نسخة احتياطية.');return false}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){toast('مساحة التخزين ممتلئة. احذف بعض الصور أو صدّر نسخة احتياطية.');return false}if(cloudShop)scheduleCloudSave();return true}
+function scheduleCloudSave(){if(!window.HanoutStore)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>{HanoutStore.saveCatalog(cloudShop,{products:data.products,categories:data.categories}).catch(()=>{});HanoutStore.saveMerchant({slug:cloudShop,name:data.name,phone:data.phone}).catch(()=>{})},600)}
 function toast(t,icon){el('toast').innerHTML=(icon?`<i class="fa-solid ${icon}"></i>`:'')+escapeHTML(t);el('toast').style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>el('toast').style.display='none',2800)}
 
 function showTab(tab,scroll=true){['customer','merchant','myorders','about'].forEach(t=>{const s=el(t);if(!s)return;s.classList.toggle('hidden',t!==tab);const b=el('nav'+t.charAt(0).toUpperCase()+t.slice(1));if(b)b.classList.toggle('active',t===tab)});if(scroll)window.scrollTo({top:0,behavior:'smooth'});render()}
@@ -85,6 +93,7 @@ function checkout(){let entries=Object.entries(cart).map(([id,qty])=>({p:data.pr
   let lines=[`السلام عليكم، بغيت نطلب من ${data.name}:`,...entries.map(x=>`• ${x.p.name} × ${x.qty} = ${money(x.p.price*x.qty)}`),`المجموع التقديري: ${money(total)}`,`الاستلام: ${el('fulfillment').value}`,`الاسم: ${el('buyer').value.trim()||'غير محدد'}`,`ملاحظة: ${el('note').value.trim()||'لا توجد'}`,'المرجو تأكيد التوفر والثمن النهائي.'];
   data.orders.unshift({id:'o'+Date.now().toString(36),ts:Date.now(),buyer:el('buyer').value.trim()||'غير محدد',fulfillment:el('fulfillment').value,note:el('note').value.trim(),items:entries.map(x=>({name:x.p.name,qty:x.qty,price:x.p.price})),total,status:'جديد'});
   if(data.orders.length>200)data.orders.length=200;persist();renderOrders();
+  if(shopSlug&&window.HanoutStore){const o=data.orders[0];HanoutStore.addOrder(shopSlug,{id:o.id,ts:o.ts,buyer:o.buyer,fulfillment:o.fulfillment,note:o.note,items:o.items,total:o.total,status:'جديد'}).catch(()=>{})}
   window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener,noreferrer')}
 
 function renderManage(){el('statProducts').textContent=data.products.length;el('statAvailable').textContent=data.products.filter(p=>p.available).length;
@@ -110,8 +119,8 @@ function renderOrders(){const list=data.orders;const so=el('statOrders');if(so)s
   const box=el('orders');if(!box)return;
   box.innerHTML=list.length?list.map(o=>{const t=new Date(o.ts).toLocaleString('ar-MA',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     return `<div class="orderRow"><div class="otop"><b>${escapeHTML(o.buyer)} • ${money(o.total)}</b><span class="chip ${o.status==='جديد'?'new':'done'}">${o.status==='جديد'?'جديد':'تم'}</span></div><div class="muted" style="font-size:12px">${t}${o.fulfillment?' • '+escapeHTML(o.fulfillment):''}</div><ul>${o.items.map(i=>`<li>${escapeHTML(i.name)} × ${i.qty} = ${money(i.price*i.qty)}</li>`).join('')}</ul>${o.note?`<div class="muted" style="font-size:12px">ملاحظة: ${escapeHTML(o.note)}</div>`:''}<div class="actions" style="margin-top:8px"><button class="mini" onclick="setOrderStatus('${o.id}')"><i class="fa-solid fa-check"></i> ${o.status==='جديد'?'تم':'رجع جديد'}</button><button class="mini danger" onclick="deleteOrder('${o.id}')"><i class="fa-solid fa-trash"></i> حذف</button></div></div>`}).join(''):'<p class="empty"><i class="fa-solid fa-receipt"></i>مازال ما كاين حتى طلب.</p>'}
-function setOrderStatus(id){let o=data.orders.find(x=>x.id===id);if(!o)return;o.status=o.status==='جديد'?'تم':'جديد';persist();renderOrders()}
-function deleteOrder(id){if(!confirm('تحذف هاد الطلب؟'))return;data.orders=data.orders.filter(x=>x.id!==id);persist();renderOrders()}
+function setOrderStatus(id){let o=data.orders.find(x=>x.id===id);if(!o)return;o.status=o.status==='جديد'?'تم':'جديد';if(cloudShop&&window.HanoutStore)HanoutStore.updateOrder(cloudShop,id,{status:o.status}).catch(()=>{});renderOrders()}
+function deleteOrder(id){if(!confirm('تحذف هاد الطلب؟'))return;data.orders=data.orders.filter(x=>x.id!==id);if(cloudShop&&window.HanoutStore)HanoutStore.deleteOrder(cloudShop,id).catch(()=>{});renderOrders()}
 
 function renderCatsManage(){const counts={};data.products.forEach(p=>counts[p.category]=(counts[p.category]||0)+1);
   el('catsManage').innerHTML=data.categories.length?data.categories.map((c,i)=>`<div class="catRow"><div class="cname"><span class="ce">${escapeHTML(c.emoji||'🛍️')}</span><div>${escapeHTML(c.name)}<div class="muted" style="font-size:12px">${counts[c.name]||0} منتوج</div></div></div><div class="actions"><button class="mini" onclick="renameCategory(${i})"><i class="fa-solid fa-pen"></i> تعديل</button><button class="mini danger" onclick="deleteCategory(${i})"><i class="fa-solid fa-trash"></i> حذف</button></div></div>`).join(''):'<p class="empty"><i class="fa-solid fa-layer-group"></i>مازال ما كاين حتى صنف.</p>'}
@@ -129,6 +138,48 @@ const THEME_KEY='hanout_theme';
 function applyTheme(){const dark=localStorage.getItem(THEME_KEY)==='dark';document.documentElement.setAttribute('data-theme',dark?'dark':'light');const i=el('themeIcon');if(i)i.className=dark?'fa-solid fa-sun':'fa-solid fa-moon';const b=el('themeBtn');if(b)b.setAttribute('aria-label',dark?'الوضع النهاري':'الوضع الليلي')}
 function toggleTheme(){try{localStorage.setItem(THEME_KEY,document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}catch(e){}applyTheme()}
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./service-worker.js').catch(()=>{})})}
+/* ===== تشغيل السحابة: تعدد التجار ===== */
+function applyShop(shop){if(!shop)return;
+  if(shop.name)data.name=shop.name;
+  if(typeof shop.phone==='string'&&shop.phone)data.phone=shop.phone;
+  if(Array.isArray(shop.products))data.products=shop.products;
+  if(Array.isArray(shop.categories)&&shop.categories.length)data.categories=shop.categories;
+  else data.categories=[...new Set(data.products.map(p=>p.category))].sort().map(c=>({name:c,emoji:(data.products.find(p=>p.category===c)||{}).emoji||'🛍️'}));
+  if(shop.color)document.documentElement.style.setProperty('--blue',shop.color);
+  document.title=data.name+' | HANOUT LITE'}
+function blocked(t,m){document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;padding:30px;text-align:center;font-family:system-ui;background:#F5F8FD"><div><div style="font-size:52px">🚧</div><h2 style="color:#0B1B34">'+escapeHTML(t)+'</h2><p style="color:#5B6B82;max-width:44ch">'+escapeHTML(m)+'</p></div></div>'}
+async function cloudBoot(){
+  if(!window.HanoutStore)return;
+  cloudReady=await HanoutStore.ready();
+  document.documentElement.setAttribute('data-backend',cloudReady?'cloud':'local');
+  if(IS_MERCHANT_DASH){
+    const u=await HanoutStore.waitAuth();
+    if(!u){location.replace('login.html?next=merchant');return}
+    const prof=await HanoutStore.getProfile();
+    if(!prof||prof.role==='admin'||!prof.slug){location.replace('login.html?next=merchant');return}
+    cloudShop=prof.slug;
+    const shop=await HanoutStore.loadShop(cloudShop);
+    if(shop&&shop.active===false){blocked('الحانوت موقوف','هاد الحانوت توقف مؤقتاً من طرف إدارة المنصة. المرجو التواصل مع الإدارة.');return}
+    if(shop)applyShop(shop);
+    data.orders=await HanoutStore.listOrders(cloudShop);
+    window.HANOUT_SHOP=shop;
+    render();
+    setTimeout(()=>{if(typeof window.onShopReady==='function')try{window.onShopReady(shop)}catch(e){}},0);
+  }else if(SHOP_PARAM){
+    const shop=await HanoutStore.loadShop(SHOP_PARAM);
+    if(!shop){toast('هاد الحانوت ما كاينش','fa-triangle-exclamation');return}
+    if(shop.active===false){blocked('الحانوت موقوف','هاد الحانوت توقف مؤقتاً. المرجو المحاولة لاحقاً.');return}
+    shopSlug=SHOP_PARAM;applyShop(shop);render();handleHash();
+  }else if(cloudReady){
+    // بلا ?shop= : كنعرضو أول حانوت نشط فالمنصة (التطبيق العام)
+    const slug=await HanoutStore.firstActiveSlug();
+    if(!slug)return;
+    const shop=await HanoutStore.loadShop(slug);
+    if(!shop||shop.active===false)return;
+    shopSlug=slug;applyShop(shop);render();handleHash();
+  }
+}
+cloudBoot();
 window.addEventListener('hashchange',handleHash);
 
 applyTheme();

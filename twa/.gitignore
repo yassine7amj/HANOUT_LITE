@@ -1,0 +1,19 @@
+# مفتاح التوقيع: ماشي فالمستودع (كيجي من GitHub Secrets فـ CI)
+android.keystore
+
+# المشروع ديال Android كيتولّد فـ CI عبر: bubblewrap update
+manifest-checksum.txt
+app/
+gradle/
+build/
+.gradle/
+gradlew
+gradlew.bat
+build.gradle
+settings.gradle
+gradle.properties
+store_icon.png
+
+# المخرجات
+*.apk
+*.aab
