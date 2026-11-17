@@ -16,6 +16,14 @@ data class Product(
     val image: String? = null
 ) {
     val hasDiscount: Boolean get() = oldPrice != null && oldPrice > price
+
+    /** نسبة التخفيض (%) — 0 إلا ما كانش تخفيض. */
+    val discountPercent: Int
+        get() {
+            val old = oldPrice ?: return 0
+            if (old <= price || old <= 0.0) return 0
+            return (((old - price) / old) * 100).toInt()
+        }
 }
 
 /** صنف (catégories[]) */
@@ -32,6 +40,7 @@ data class Shop(
     val name: String = "",
     val phone: String = "",
     val color: String = "",
+    val plan: String = "free",
     val active: Boolean = true,
     val products: List<Product> = emptyList(),
     val categories: List<Category> = emptyList()
@@ -57,8 +66,19 @@ data class Order(
     val total: Double = 0.0,
     val status: String = STATUS_NEW
 ) {
+    val isNew: Boolean get() = status != STATUS_DONE
+    val itemCount: Int get() = items.sumOf { it.qty }
+
     companion object {
         const val STATUS_NEW = "جديد"
         const val STATUS_DONE = "تم"
     }
 }
+
+/** حساب التاجر كما هو مخزّن فـ users/{uid}. */
+data class MerchantProfile(
+    val uid: String = "",
+    val email: String = "",
+    val slug: String = "",
+    val role: String = "merchant"
+)

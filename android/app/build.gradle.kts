@@ -26,6 +26,15 @@ val fbApiKey = buildValue("fbApiKey", "")
 val webBase = buildValue("webBase", "https://yassine7amj.github.io/HANOUT_LITE")
 val appPackage = buildValue("appPackage", "ma.hanout.lite")
 
+/* نوع النسخة: customer (تطبيق الزبون) ولا merchant (تطبيق التاجر).
+   كنزيدو لاحقة .merchant باش الجوج يثبّتو فمرة وحدة فحال الجوج. */
+val appRole = buildValue("role", "customer").lowercase().let {
+    if (it == "merchant") "merchant" else "customer"
+}
+val applicationIdValue =
+    if (appRole == "merchant" && !appPackage.endsWith(".merchant")) "$appPackage.merchant"
+    else appPackage
+
 /* مفتاح التوقيع: كيتعطى من الـ workflow كمتغيرات بيئة (اختياري).
    بلا مفتاح، التطبيق كيتبنى غير موقّع المفعول (صالح للتجريب). */
 val keystorePath = System.getenv("ANDROID_KEYSTORE_PATH")
@@ -41,7 +50,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = appPackage
+        applicationId = applicationIdValue
         minSdk = 26
         targetSdk = 35
         versionCode = buildValue("versionCode", "1").toIntOrNull() ?: 1
@@ -49,6 +58,7 @@ android {
 
         manifestPlaceholders["appLabel"] = appLabel
 
+        buildConfigField("String", "APP_ROLE", "\"$appRole\"")
         buildConfigField("String", "SHOP_SLUG", "\"$shopSlug\"")
         buildConfigField("String", "FB_PROJECT_ID", "\"$fbProjectId\"")
         buildConfigField("String", "FB_API_KEY", "\"$fbApiKey\"")

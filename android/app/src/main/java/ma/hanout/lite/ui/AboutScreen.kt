@@ -163,6 +163,37 @@ fun AboutScreen(
             }
         }
 
+        item { ThemeSettingsCard() }
+
+        item {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                )
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(14.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    BrandLogo(size = 42.dp)
+                    Spacer(Modifier.width(12.dp))
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            text = stringResource(R.string.hub_name),
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.Black
+                        )
+                        Text(
+                            text = stringResource(R.string.hub_about),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+        }
+
         item {
             Button(
                 onClick = { viewModel.refresh() },

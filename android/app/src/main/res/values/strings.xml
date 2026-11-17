@@ -24,6 +24,9 @@
     <string name="product_added">تزاد المنتوج للسلة</string>
     <string name="products_count">%1$d منتوج</string>
     <string name="deals_title">عروض وتخفيضات</string>
+    <string name="sold_out">نفد</string>
+    <string name="open_now">مفتوح</string>
+    <string name="closed_now">مسدود مؤقتاً</string>
 
     <!-- السلة -->
     <string name="cart_title">السلة</string>
@@ -42,6 +45,7 @@
     <string name="checkout_empty">زيد شي منتوج للسلة أولاً</string>
     <string name="checkout_no_phone">مول الحانوت مازال ما دخّلش رقم واتساب صحيح</string>
     <string name="checkout_sent">تصيفط الطلب — كمّل فواتساب</string>
+    <string name="cart_items">%1$d عنصر فالسلة</string>
 
     <!-- الطلبات -->
     <string name="orders_title">طلباتي</string>
@@ -49,6 +53,7 @@
     <string name="order_status_new">قيد الانتظار</string>
     <string name="order_status_done">تم التأكيد</string>
     <string name="order_total">المجموع</string>
+    <string name="order_code">رقم الطلب</string>
 
     <!-- معلومات الحانوت -->
     <string name="shop_phone">الهاتف / واتساب</string>
@@ -74,6 +79,116 @@
     <string name="shop_suspended">الحانوت موقوف مؤقتاً. المرجو المحاولة لاحقاً.</string>
     <string name="no_shop_selected">هاد التطبيق ما مربوطش بحانوت معيّن.</string>
     <string name="demo_notice">هاد التطبيق كيعرض معطيات تجريبية حيت مازال ما ترابطش مع Firebase.</string>
+
+    <!-- عام -->
+    <string name="save">سجّل</string>
+    <string name="cancel">إلغاء</string>
+    <string name="delete">حذف</string>
+    <string name="edit">تعديل</string>
+    <string name="refresh">حدّث</string>
+    <string name="back">رجع</string>
+    <string name="confirm_delete">واش متأكد بغيتي تحيد هادشي؟</string>
+
+    <!-- منصة HANWEB HUB -->
+    <string name="hub_name">HANWEB HUB</string>
+    <string name="hub_tagline">منصة تسيير تطبيقات HANOUT LITE</string>
+    <string name="hub_about">HANWEB HUB كتصاوب وكتسيّر التطبيقات ديال الحوانت الصغيرة — نسخة للزبون ونسخة للتاجر من نفس الكود، بمعطيات موحّدة فـ Firestore.</string>
+    <string name="app_role_customer">نسخة الزبون</string>
+    <string name="app_role_merchant">نسخة التاجر</string>
+
+    <!-- المظهر -->
+    <string name="ui_title">المظهر والتخصيص</string>
+    <string name="ui_mode">وضع المظهر</string>
+    <string name="ui_mode_system">حسب النظام</string>
+    <string name="ui_mode_light">فاتح</string>
+    <string name="ui_mode_dark">غامق</string>
+    <string name="ui_dynamic">ألوان النظام (Material You)</string>
+    <string name="ui_dynamic_hint">ملي يكون مفعّل، كيتجاهل لون الحانوت وكياخد ألوان النظام.</string>
+    <string name="ui_palette">لوحة ألوان المنصة</string>
+    <string name="shop_color">لون الحانوت</string>
+
+    <!-- تطبيق التاجر — الدخول -->
+    <string name="merchant_login_title">دخول التاجر</string>
+    <string name="merchant_login_sub">دخّل بحساب المنصة باش تسيّر الحانوت، الطلبات والكتالوغ.</string>
+    <string name="merchant_email">البريد الإلكتروني</string>
+    <string name="merchant_password">كلمة السر</string>
+    <string name="merchant_sign_in">دخول</string>
+    <string name="merchant_sign_out">خروج</string>
+    <string name="merchant_demo">تجربة بلا حساب</string>
+    <string name="merchant_demo_badge">وضع تجريبي — التعديلات ما كيتسجلوش</string>
+    <string name="merchant_email_required">عافاك دخّل البريد الإلكتروني وكلمة السر.</string>
+    <string name="merchant_auth_hint">الدخول كيخدم بـ Firebase Authentication. إلا ما كانش مفعّل، استعمل «تجربة بلا حساب» باش تشوف التطبيق.</string>
+
+    <!-- تطبيق التاجر — التبويبات -->
+    <string name="nav_dashboard">لوحة التحكم</string>
+    <string name="nav_manage_orders">الطلبات</string>
+    <string name="nav_catalog">الكتالوغ</string>
+    <string name="nav_shop">الحانوت</string>
+
+    <!-- تطبيق التاجر — لوحة التحكم -->
+    <string name="stat_new_orders">طلبات جديدة</string>
+    <string name="stat_all_orders">مجموع الطلبات</string>
+    <string name="stat_revenue">رقم المعاملات</string>
+    <string name="stat_products">المنتوجات</string>
+    <string name="dashboard_welcome">مرحبا بيك</string>
+    <string name="dashboard_today">اليوم</string>
+    <string name="dashboard_latest">آخر الطلبات</string>
+    <string name="dashboard_quick">إجراءات سريعة</string>
+    <string name="dashboard_share_shop">شارك رابط الحانوت</string>
+    <string name="dashboard_open_web">حلّ النسخة الويب</string>
+    <string name="dashboard_no_orders">مازال ما توصل حتى طلب.</string>
+    <string name="dashboard_see_all">شوف الكل</string>
+    <string name="dashboard_no_shop">مازال ما ترابطش حانوت بهاد الحساب.</string>
+
+    <!-- تطبيق التاجر — الطلبات -->
+    <string name="orders_filter_all">الكل</string>
+    <string name="orders_search_hint">قلّب بالاسم ولا بمنتوج…</string>
+    <string name="orders_empty_filter">ما كاين حتى طلب فهاد الحالة.</string>
+    <string name="order_mark_done">تأكيد الطلب</string>
+    <string name="order_mark_new">رجّع للانتظار</string>
+    <string name="order_contact">تواصل مع الزبون</string>
+    <string name="order_deleted">تحيد الطلب</string>
+    <string name="order_updated">تبدّلت حالة الطلب</string>
+    <string name="order_buyer">الزبون</string>
+    <string name="order_no_buyer">بلا اسم</string>
+    <string name="order_fulfillment">الاستلام</string>
+    <string name="order_note">ملاحظة</string>
+
+    <!-- تطبيق التاجر — الكتالوغ -->
+    <string name="catalog_search_hint">قلّب على منتوج…</string>
+    <string name="catalog_add">زيد منتوج</string>
+    <string name="catalog_edit_title">تعديل المنتوج</string>
+    <string name="catalog_new_title">منتوج جديد</string>
+    <string name="catalog_empty">مازال ما كاين حتى منتوج فهاد الحانوت.</string>
+    <string name="catalog_empty_hint">دوس «زيد منتوج» باش تبدا تعمّر الكتالوغ.</string>
+    <string name="product_name">اسم المنتوج</string>
+    <string name="product_price">الثمن (DH)</string>
+    <string name="product_old_price">الثمن القديم (اختياري)</string>
+    <string name="product_category">الصنف</string>
+    <string name="product_category_none">بلا صنف</string>
+    <string name="product_emoji">الرمز (إيموجي)</string>
+    <string name="product_available">متوفر للبيع</string>
+    <string name="product_invalid">عمّر على الأقل اسم المنتوج والثمن.</string>
+    <string name="product_saved">تسجّل المنتوج</string>
+    <string name="product_deleted">تحيد المنتوج</string>
+    <string name="catalog_saved">تسجّل الكتالوغ فالمنصة</string>
+    <string name="catalog_unsaved">عندك تغييرات ما تسجلوش. دوس «سجّل فالسحابة» باش تصيفطهم للمنصة.</string>
+    <string name="catalog_save_cloud">سجّل فالسحابة</string>
+    <string name="catalog_unsaved_short">تغييرات محلية</string>
+    <string name="catalog_synced">متزامن</string>
+    <string name="save_failed">تعذّر الحفظ: %1$s</string>
+
+    <!-- تطبيق التاجر — الحانوت -->
+    <string name="shop_name">اسم الحانوت</string>
+    <string name="shop_phone_edit">رقم الهاتف / واتساب</string>
+    <string name="shop_active">الحانوت مفتوح (كيبان للزبناء)</string>
+    <string name="shop_active_hint">إلا طفّيتي هاد الخيار، الزبناء ما يقدروش يشوفو الحانوت ولا يطلبو.</string>
+    <string name="shop_saved">تسجلت معلومات الحانوت</string>
+    <string name="shop_plan">الخطة</string>
+    <string name="shop_plan_free">مجانية</string>
+    <string name="shop_slug_missing">هاد التطبيق ما مربوطش بحانوت. عاود بنيه بـ -Pshop=slug-الحانوت.</string>
+    <string name="shop_signed_as">داخل بصفة</string>
+    <string name="shop_account">الحساب</string>
 
     <!-- وصف عام -->
     <string name="launcher_shortcut_shop">الحانوت</string>

@@ -1,16 +1,22 @@
 name: بناء تطبيق أندرويد أصلي (Kotlin)
 
 # ============================================================
-# تطبيق أندرويد أصلي (Kotlin + Jetpack Compose) لكل حانوت.
+# تطبيقات أندرويد أصلية (Kotlin + Jetpack Compose) لمنصة HANWEB HUB.
+#
+# كيتبنى تطبيقين من نفس الكود، على حساب المدخل «role»:
+#   • customer : تطبيق الزبون — كيتصفح الحانوت، كيعمّر السلة وكيصيفط الطلب
+#   • merchant : تطبيق التاجر (مول الحانوت) — كيسيّر الطلبات والكتالوغ والحانوت
 #
 # كيفاش كتخدم:
 #   1) GitHub → Actions → «بناء تطبيق أندرويد أصلي (Kotlin)» → Run workflow
 #   2) عمّر:
-#        • app_name     : الاسم اللي كيبان تحت الأيقونة
+#        • role         : customer ولا merchant
+#        • app_name     : الاسم اللي كيبان تحت الأيقونة (خاوي = كيتولّد أوتوماتيكيا)
 #        • shop         : slug الحانوت (بحال hanout-nakhil) — كيتقرا منو
 #                         merchants/{slug} و merchants/{slug}/data/catalog
 #                         فـ Firestore
 #        • package_id   : معرّف الحزمة، خاص يبقى ثابت لكل تحديثات نفس الحانوت
+#                         (نسخة التاجر كيتزاد ليها .merchant أوتوماتيكيا)
 #        • fb_project_id / fb_api_key : إعدادات Firebase (كتّقرا من
 #                         Project settings → Your apps → Web app)
 #        • web_base     : رابط النسخة الويب (خاوي = كيتولّد أوتوماتيكيا)
@@ -27,10 +33,18 @@ name: بناء تطبيق أندرويد أصلي (Kotlin)
 on:
   workflow_dispatch:
     inputs:
-      app_name:
-        description: 'اسم التطبيق (كيظهر تحت الأيقونة)'
+      role:
+        description: 'نوع النسخة'
         required: true
-        default: 'HANOUT LITE'
+        default: 'customer'
+        type: choice
+        options:
+          - customer
+          - merchant
+      app_name:
+        description: 'اسم التطبيق (كيظهر تحت الأيقونة) — خاوي = كيتولّد أوتوماتيكيا'
+        required: false
+        default: ''
       shop:
         description: 'slug الحانوت (مثال: hanout-nakhil)'
         required: false
@@ -64,7 +78,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: kotlin-apk-${{ github.event.inputs.shop || 'platform' }}
+  group: kotlin-apk-${{ github.event.inputs.role || 'customer' }}-${{ github.event.inputs.shop || 'platform' }}
   cancel-in-progress: false
 
 jobs:
@@ -117,14 +131,45 @@ jobs:
         with:
           gradle-version: '8.10.2'
 
-      - name: تحديد رابط الويب
+      - name: تحديد الإعدادات (الدور + الاسم + الرابط)
         id: cfg
+        env:
+          IN_ROLE: ${{ github.event.inputs.role || 'customer' }}
+          IN_NAME: ${{ github.event.inputs.app_name }}
+          IN_SHOP: ${{ github.event.inputs.shop }}
+          IN_WEB: ${{ github.event.inputs.web_base }}
         run: |
-          if [ -n "${{ github.event.inputs.web_base }}" ]; then
-            echo "web_base=${{ github.event.inputs.web_base }}" >> "$GITHUB_OUTPUT"
+          ROLE="$IN_ROLE"
+          [ -z "$ROLE" ] && ROLE="customer"
+
+          if [ -n "$IN_WEB" ]; then
+            WEB="$IN_WEB"
           else
-            echo "web_base=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" >> "$GITHUB_OUTPUT"
+            WEB="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
           fi
+
+          NAME="$IN_NAME"
+          if [ -z "$NAME" ]; then
+            if [ "$ROLE" = "merchant" ]; then
+              NAME="HANOUT LITE — التاجر"
+            else
+              NAME="HANOUT LITE"
+            fi
+            if [ -n "$IN_SHOP" ]; then
+              NAME="$NAME · $IN_SHOP"
+            fi
+          fi
+
+          {
+            echo "role=$ROLE"
+            echo "name=$NAME"
+            echo "web_base=$WEB"
+            echo "slug=${IN_SHOP:-platform}"
+          } >> "$GITHUB_OUTPUT"
+
+          echo "الدور: $ROLE"
+          echo "الاسم: $NAME"
+          echo "الرابط: $WEB"
 
       - name: تحضير مفتاح التوقيع
         working-directory: android
@@ -140,7 +185,7 @@ jobs:
             keytool -genkeypair -v -keystore release.keystore -storetype PKCS12 \
               -alias "$KEY_ALIAS" -keyalg RSA -keysize 2048 -validity 10000 \
               -storepass "$KEYSTORE_PASSWORD" -keypass "$KEYSTORE_PASSWORD" \
-              -dname "CN=HANOUT LITE, OU=Apps, O=HANOUT, L=Casablanca, C=MA"
+              -dname "CN=HANWEB HUB, OU=Apps, O=HANOUT, L=Casablanca, C=MA"
             echo "⚠ تولّد مفتاح تجريبي جديد — للإنتاج زيد ANDROID_KEYSTORE_BASE64"
           fi
           echo "ANDROID_KEYSTORE_PATH=$PWD/release.keystore" >> "$GITHUB_ENV"
@@ -151,7 +196,8 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'hanout-lite-dev' }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || secrets.KEYSTORE_PASSWORD || 'hanout-lite-dev' }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS || 'android' }}
-          IN_APP_NAME: ${{ github.event.inputs.app_name }}
+          IN_APP_NAME: ${{ steps.cfg.outputs.name }}
+          IN_ROLE: ${{ steps.cfg.outputs.role }}
           IN_SHOP: ${{ github.event.inputs.shop }}
           IN_PACKAGE: ${{ github.event.inputs.package_id }}
           IN_FB_PROJECT: ${{ github.event.inputs.fb_project_id }}
@@ -162,6 +208,7 @@ jobs:
         run: |
           gradle --no-daemon --stacktrace assembleRelease bundleRelease \
             -PappLabel="$IN_APP_NAME" \
+            -Prole="$IN_ROLE" \
             -Pshop="$IN_SHOP" \
             -PappPackage="$IN_PACKAGE" \
             -PfbProjectId="$IN_FB_PROJECT" \
@@ -173,7 +220,7 @@ jobs:
       - name: رفع APK/AAB كأرتيفاكت
         uses: actions/upload-artifact@v4
         with:
-          name: kotlin-apk-${{ github.event.inputs.shop || 'platform' }}
+          name: kotlin-${{ steps.cfg.outputs.role }}-${{ steps.cfg.outputs.slug }}
           path: |
             android/app/build/outputs/apk/release/*.apk
             android/app/build/outputs/bundle/release/*.aab
@@ -182,13 +229,14 @@ jobs:
       - name: إنشاء Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: kotlin-${{ github.event.inputs.shop || 'platform' }}-${{ github.run_number }}
-          name: "${{ github.event.inputs.app_name }} (Kotlin) — إصدار ${{ github.run_number }}"
+          tag_name: kotlin-${{ steps.cfg.outputs.role }}-${{ steps.cfg.outputs.slug }}-${{ github.run_number }}
+          name: "${{ steps.cfg.outputs.name }} — إصدار ${{ github.run_number }}"
           files: |
             android/app/build/outputs/apk/release/*.apk
             android/app/build/outputs/bundle/release/*.aab
           body: |
-            **التطبيق:** ${{ github.event.inputs.app_name }} (نسخة Kotlin أصلية)
+            **التطبيق:** ${{ steps.cfg.outputs.name }} (Kotlin أصلية)
+            **النسخة:** ${{ steps.cfg.outputs.role }} — `customer` = الزبون، `merchant` = التاجر
             **الحانوت:** `${{ github.event.inputs.shop || '(غير محدّد)' }}`
             **الحزمة:** `${{ github.event.inputs.package_id || 'ma.hanout.lite' }}`
             **النسخة الويب:** ${{ steps.cfg.outputs.web_base }}
