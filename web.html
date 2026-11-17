@@ -185,7 +185,7 @@ html[data-theme=dark] .empty{border-color:#26334A}
       <a class="tlink" href="#" onclick="goDeals();return false"><i class="fa-solid fa-tags"></i>العروض</a>
       <a class="tlink" href="#" onclick="goCart();return false"><i class="fa-solid fa-cart-shopping"></i>السلة</a>
       <a id="navMyorders" class="tlink" href="#" onclick="showTab('myorders');return false"><i class="fa-solid fa-receipt"></i>طلباتي</a>
-      <a id="navMerchant" class="tlink" href="#" onclick="showTab('merchant');return false"><i class="fa-solid fa-store"></i>فضاء التاجر</a>
+      <a class="tlink" href="merchant.html"><i class="fa-solid fa-store"></i>فضاء التاجر</a>
       <a id="navAbout" class="tlink" href="#" onclick="showTab('about');return false"><i class="fa-solid fa-circle-info"></i>حول</a>
     </nav>
     <div class="topsearch"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="قلب على منتوج فالكتالوغ..." oninput="renderProducts()" aria-label="بحث في المنتوجات"></div>
@@ -237,22 +237,6 @@ html[data-theme=dark] .empty{border-color:#26334A}
     </div>
   </section>
 
-  <section id="merchant" class="hidden">
-    <div class="whead"><h2><i class="fa-solid fa-store"></i> فضاء التاجر</h2><span class="muted">إدارة المنتوجات والعروض والطلبات</span></div>
-    <div class="notice"><i class="fa-solid fa-lock"></i>هذه نسخة محلية تجريبية وليست لوحة محمية بكلمة مرور. لا تدخل معلومات شخصية حساسة أو بيانات ديون الزبائن. التعديلات تظهر على هذا الجهاز فقط.</div>
-    <div class="stats"><div class="stat"><b id="statProducts">0</b><span class="muted"><i class="fa-solid fa-box"></i>منتج</span></div><div class="stat"><b id="statAvailable">0</b><span class="muted"><i class="fa-solid fa-circle-check"></i>متوفر</span></div><div class="stat"><b id="statCart">0</b><span class="muted"><i class="fa-solid fa-cart-shopping"></i>في السلة</span></div><div class="stat"><b id="statOrders">0</b><span class="muted"><i class="fa-solid fa-receipt"></i>طلبات جديدة</span></div></div>
-    <div class="split">
-      <div class="main-col">
-        <div class="panel"><h3><i class="fa-solid fa-box"></i>المنتجات</h3><div class="toolbar2"><input id="manageSearch" placeholder="بحث فالمنتجات..." oninput="renderManage()" aria-label="بحث في المنتجات"><select id="manageSort" onchange="renderManage()" aria-label="ترتيب المنتجات"><option value="recent">الأحدث أولاً</option><option value="name">الاسم (أ - ي)</option><option value="price-asc">الثمن (من الأرخص)</option><option value="price-desc">الثمن (من الأغلى)</option></select></div><div id="manage"></div></div>
-        <div class="panel" style="margin-top:14px"><h3><i class="fa-solid fa-receipt"></i>الطلبات</h3><div id="orders"></div></div>
-      </div>
-      <div class="side-col">
-        <div class="panel"><h3 id="formTitle"><i class="fa-solid fa-plus"></i>إضافة منتج</h3><form id="productForm" onsubmit="saveProduct(event)"><input id="editId" type="hidden"><div class="field"><label>اسم المنتج</label><input id="pName" required maxlength="70" placeholder="مثلاً: حليب 1 لتر"></div><div class="field"><label>الثمن بالدرهم</label><input id="pPrice" type="number" min="0" max="100000" step="0.01" required></div><div class="field"><label>الثمن السابق (اختياري — للعرض أو الزيادة)</label><input id="pOldPrice" type="number" min="0" max="100000" step="0.01" placeholder="مثال: 20"><span class="hint">إذا كان الثمن الجديد أقل، سيظهر التخفيض؛ وإذا كان أعلى، ستظهر الزيادة. لا تضع ثمناً سابقاً غير حقيقي.</span></div><div class="field"><label>صورة المنتوج (اختياري)</label><input id="pImage" type="file" accept="image/png,image/jpeg,image/webp" onchange="previewImage(event)"><img id="imagePreview" class="preview hidden" alt="معاينة صورة المنتوج"><button type="button" class="secondary" style="padding:11px" onclick="removeImage()"><i class="fa-solid fa-trash"></i> حذف صورة المنتوج</button><span class="hint">الصور تُضغط وتُحفظ محلياً في هذا المتصفح. اختر صورة واضحة أقل من 5 ميغابايت.</span></div><div class="field"><label>الصنف</label><input id="pCategory" required maxlength="35" placeholder="مواد غذائية" list="catOptions"><datalist id="catOptions"></datalist></div><div class="field"><label>رمز تعبيري للمنتج</label><input id="pEmoji" maxlength="4" placeholder="🥛"></div><div class="field"><label><input type="checkbox" id="pAvailable" checked> متوفر حالياً</label></div><button class="primary full" type="submit" style="padding:12px"><i class="fa-solid fa-floppy-disk"></i> حفظ المنتج</button><button class="secondary full" type="button" style="margin-top:7px;padding:12px" onclick="resetForm()"><i class="fa-solid fa-xmark"></i> إلغاء التعديل</button></form></div>
-        <div class="panel" style="margin-top:14px"><h3><i class="fa-solid fa-layer-group"></i>إدارة الأصناف</h3><div id="catsManage"></div><div class="field"><label>زيد صنف جديد</label><div class="toolbar2"><input id="newCatEmoji" maxlength="4" placeholder="🛒" style="max-width:90px" aria-label="رمز الصنف"><input id="newCatName" maxlength="35" placeholder="اسم الصنف" aria-label="اسم الصنف الجديد"></div></div><button class="secondary full" style="padding:12px" onclick="addCategory()"><i class="fa-solid fa-plus"></i> زيد الصنف</button></div>
-        <div class="panel" style="margin-top:14px"><h3><i class="fa-solid fa-gear"></i>إعدادات الحانوت</h3><div class="field"><label>اسم الحانوت</label><input id="shopName" maxlength="70"></div><div class="field"><label>رقم واتساب التاجر</label><input id="shopPhone" inputmode="tel" placeholder="2126XXXXXXXX"></div><button class="primary full" style="padding:12px" onclick="saveSettings()"><i class="fa-solid fa-floppy-disk"></i> حفظ الإعدادات</button><p class="muted">استعمل الرقم بصيغة دولية: 212 ثم الرقم دون الصفر الأول.</p><hr><div class="actions"><button class="secondary" style="padding:11px" onclick="exportData()"><i class="fa-solid fa-download"></i> تصدير الكتالوغ</button><button class="secondary" style="padding:11px" onclick="document.getElementById('importFile').click()"><i class="fa-solid fa-upload"></i> استيراد</button><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></div><p class="muted">الاستيراد يستبدل بيانات الحانوت المحلية بعد التأكيد.</p></div>
-      </div>
-    </div>
-  </section>
 
   <section id="myorders" class="hidden">
     <div class="whead"><h2><i class="fa-solid fa-receipt"></i> الطلبات ديالك</h2><span class="muted">الطلبات المُرسلة من هاد المتصفح</span></div>
@@ -271,7 +255,7 @@ html[data-theme=dark] .empty{border-color:#26334A}
 <footer class="sitefoot">
   <div class="fw">
     <div><h4>HANOUT LITE</h4><p style="margin:0 0 10px;font-size:14px">كتالوج الحانوت الرقمي: تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب. نسخة ويب مخصّصة للحاسوب، وتشتغل كذلك على الهاتف من النسخة المخصّصة.</p></div>
-    <div><h4>التنقّل</h4><a href="#" onclick="showTab('customer');return false">الرئيسية</a><a href="#" onclick="goDeals();return false">عروض الأسبوع</a><a href="#" onclick="showTab('myorders');return false">الطلبات ديالك</a><a href="#" onclick="showTab('merchant');return false">فضاء التاجر</a></div>
+    <div><h4>التنقّل</h4><a href="#" onclick="showTab('customer');return false">الرئيسية</a><a href="#" onclick="goDeals();return false">عروض الأسبوع</a><a href="#" onclick="showTab('myorders');return false">الطلبات ديالك</a><a href="merchant.html">فضاء التاجر</a></div>
     <div><h4>النسخ والأدوات</h4><a href="index.html"><i class="fa-solid fa-mobile-screen-button"></i> نسخة الهاتف</a><a href="#" onclick="installApp();return false"><i class="fa-solid fa-download"></i> تثبيت التطبيق</a><a href="#" onclick="shareApp();return false"><i class="fa-solid fa-share-nodes"></i> مشاركة التطبيق</a><a href="#" onclick="showTab('about');return false"><i class="fa-solid fa-circle-info"></i> حول التطبيق</a></div>
   </div>
   <div class="fb">HANOUT LITE — نسخة الويب v0.7 • 2026</div>

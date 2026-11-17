@@ -1,6 +1,6 @@
 /* HANOUT LITE — Service Worker (offline app shell) */
-const CACHE = 'hanout-lite-v4';
-const CORE = ['./', './index.html', './web.html', './app.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './logo.png'];
+const CACHE = 'hanout-lite-v5';
+const CORE = ['./', './index.html', './web.html', './merchant.html', './app.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './logo.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

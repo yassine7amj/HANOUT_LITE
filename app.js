@@ -12,9 +12,9 @@ function validData(d){return !!(d&&typeof d.name==='string'&&typeof d.phone==='s
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch(e){toast('مساحة التخزين ممتلئة. احذف بعض الصور أو صدّر نسخة احتياطية.');return false}}
 function toast(t,icon){el('toast').innerHTML=(icon?`<i class="fa-solid ${icon}"></i>`:'')+escapeHTML(t);el('toast').style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>el('toast').style.display='none',2800)}
 
-function showTab(tab,scroll=true){['customer','merchant','myorders','about'].forEach(t=>{el(t).classList.toggle('hidden',t!==tab);const b=el('nav'+t.charAt(0).toUpperCase()+t.slice(1));if(b)b.classList.toggle('active',t===tab)});if(scroll)window.scrollTo({top:0,behavior:'smooth'});render()}
-function goDeals(){showTab('customer',false);el('deals').scrollIntoView({behavior:'smooth',block:'start'})}
-function goCart(){showTab('customer',false);el('cartPanel').scrollIntoView({behavior:'smooth',block:'start'})}
+function showTab(tab,scroll=true){['customer','merchant','myorders','about'].forEach(t=>{const s=el(t);if(!s)return;s.classList.toggle('hidden',t!==tab);const b=el('nav'+t.charAt(0).toUpperCase()+t.slice(1));if(b)b.classList.toggle('active',t===tab)});if(scroll)window.scrollTo({top:0,behavior:'smooth'});render()}
+function goDeals(){const d=el('deals');if(!d)return;showTab('customer',false);d.scrollIntoView({behavior:'smooth',block:'start'})}
+function goCart(){const c=el('cartPanel');if(!c)return;showTab('customer',false);c.scrollIntoView({behavior:'smooth',block:'start'})}
 
 function openMenu(){const d=el('drawer');if(!d)return;const s=el('drawerShop');if(s)s.textContent=data.name;d.classList.add('open');d.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
 function closeMenu(){const d=el('drawer');if(!d)return;d.classList.remove('open');d.setAttribute('aria-hidden','true');document.body.style.overflow=''}
@@ -22,12 +22,22 @@ function menuGo(tab,after){closeMenu();setTimeout(()=>{if(tab)showTab(tab,false)
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
 function handleHash(){const h=location.hash;if(h==='#deals')goDeals();else if(h==='#cart')goCart()}
 
-function render(){el('shopTitle').textContent=data.name;el('shopName').value=data.name;el('shopPhone').value=data.phone;
-  let cats=[...new Set(data.products.map(p=>p.category))].sort();let prev=el('category').value;
-  el('category').innerHTML='<option value="">جميع الأصناف</option>'+cats.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
-  el('category').value=cats.includes(prev)?prev:'';
-  el('catOptions').innerHTML=cats.map(c=>`<option value="${escapeHTML(c)}"></option>`).join('');
-  renderCats();renderDeals();renderProducts();renderCart();renderManage();renderOrders();renderMyOrders();renderCatsManage()}
+function render(){const cats=[...new Set(data.products.map(p=>p.category))].sort();
+  if(el('shopTitle'))el('shopTitle').textContent=data.name;
+  if(el('shopName'))el('shopName').value=data.name;
+  if(el('shopPhone'))el('shopPhone').value=data.phone;
+  if(el('category')){let prev=el('category').value;
+    el('category').innerHTML='<option value="">جميع الأصناف</option>'+cats.map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
+    el('category').value=cats.includes(prev)?prev:''}
+  if(el('catOptions'))el('catOptions').innerHTML=cats.map(c=>`<option value="${escapeHTML(c)}"></option>`).join('');
+  if(el('cats'))renderCats();
+  if(el('deals'))renderDeals();
+  if(el('products'))renderProducts();
+  if(el('cart'))renderCart();
+  if(el('myOrders'))renderMyOrders();
+  if(el('manage'))renderManage();
+  if(el('orders'))renderOrders();
+  if(el('catsManage'))renderCatsManage()}
 
 function renderCats(){catList=[...new Set(data.products.map(p=>p.category))].sort();const active=el('category').value;
   el('cats').innerHTML=`<button class="cat ${!active?'active':''}" onclick="pickCat(-1)"><span class="cat-ic"><i class="fa-solid fa-basket-shopping"></i></span><span>الكل</span></button>`+
@@ -66,7 +76,7 @@ function updateQty(id,n){cart[id]=Math.max(0,(cart[id]||0)+n);if(!cart[id])delet
 function renderCart(){let entries=Object.entries(cart).map(([id,qty])=>({p:data.products.find(p=>p.id===id),qty,id})).filter(x=>x.p&&x.p.available);
   let total=entries.reduce((a,x)=>a+x.p.price*x.qty,0);
   el('cart').innerHTML=entries.length?entries.map(x=>`<div class="cartrow"><div><b>${escapeHTML(x.p.name)}</b><div class="muted">${money(x.p.price*x.qty)}</div></div><div class="actions"><button class="mini" onclick="updateQty('${x.id}',-1)"><i class="fa-solid fa-minus"></i></button><b>${x.qty}</b><button class="mini" onclick="updateQty('${x.id}',1)"><i class="fa-solid fa-plus"></i></button></div></div>`).join('')+`<div class="cartrow"><b>المجموع التقديري</b><b>${money(total)}</b></div>`:'<div class="empty"><i class="fa-solid fa-basket-shopping"></i>السلة خاوية دابا</div>';
-  const count=entries.reduce((a,x)=>a+x.qty,0);el('statCart').textContent=count;el('cartBadge').textContent=count}
+  const count=entries.reduce((a,x)=>a+x.qty,0);const sc=el('statCart');if(sc)sc.textContent=count;const cb=el('cartBadge');if(cb)cb.textContent=count}
 
 function checkout(){let entries=Object.entries(cart).map(([id,qty])=>({p:data.products.find(p=>p.id===id),qty})).filter(x=>x.p&&x.p.available);
   if(!entries.length)return toast('زيد شي منتوج للسلة أولاً','fa-triangle-exclamation');
@@ -96,8 +106,9 @@ function resetForm(){el('productForm').reset();el('editId').value='';pendingImag
 function saveSettings(){let name=el('shopName').value.trim(),phone=el('shopPhone').value.replace(/\D/g,'');if(!name)return toast('دخل اسم الحانوت','fa-triangle-exclamation');if(phone&&!/^212[5-7]\d{8}$/.test(phone))return toast('رقم واتساب غير صحيح. مثال: 212612345678','fa-triangle-exclamation');data.name=name;data.phone=phone;persist();render();toast('تحفظات الإعدادات','fa-circle-check')}
 function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='hanout-catalog.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 async function importData(e){let f=e.target.files[0];if(!f)return;try{if(f.size>250000)throw Error('الملف كبير');let d=JSON.parse(await f.text());if(!validData(d))throw Error('صيغة الملف غير صحيحة');if(!confirm('غادي يتبدل الكتالوغ الحالي. واش موافق؟'))return;data=d;normalize();cart={};persist();render();toast('تم الاستيراد','fa-circle-check')}catch(err){toast(err.message,'fa-triangle-exclamation')}finally{e.target.value=''}}
-function renderOrders(){const list=data.orders;el('statOrders').textContent=list.filter(o=>o.status==='جديد').length;
-  el('orders').innerHTML=list.length?list.map(o=>{const t=new Date(o.ts).toLocaleString('ar-MA',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+function renderOrders(){const list=data.orders;const so=el('statOrders');if(so)so.textContent=list.filter(o=>o.status==='جديد').length;
+  const box=el('orders');if(!box)return;
+  box.innerHTML=list.length?list.map(o=>{const t=new Date(o.ts).toLocaleString('ar-MA',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     return `<div class="orderRow"><div class="otop"><b>${escapeHTML(o.buyer)} • ${money(o.total)}</b><span class="chip ${o.status==='جديد'?'new':'done'}">${o.status==='جديد'?'جديد':'تم'}</span></div><div class="muted" style="font-size:12px">${t}${o.fulfillment?' • '+escapeHTML(o.fulfillment):''}</div><ul>${o.items.map(i=>`<li>${escapeHTML(i.name)} × ${i.qty} = ${money(i.price*i.qty)}</li>`).join('')}</ul>${o.note?`<div class="muted" style="font-size:12px">ملاحظة: ${escapeHTML(o.note)}</div>`:''}<div class="actions" style="margin-top:8px"><button class="mini" onclick="setOrderStatus('${o.id}')"><i class="fa-solid fa-check"></i> ${o.status==='جديد'?'تم':'رجع جديد'}</button><button class="mini danger" onclick="deleteOrder('${o.id}')"><i class="fa-solid fa-trash"></i> حذف</button></div></div>`}).join(''):'<p class="empty"><i class="fa-solid fa-receipt"></i>مازال ما كاين حتى طلب.</p>'}
 function setOrderStatus(id){let o=data.orders.find(x=>x.id===id);if(!o)return;o.status=o.status==='جديد'?'تم':'جديد';persist();renderOrders()}
 function deleteOrder(id){if(!confirm('تحذف هاد الطلب؟'))return;data.orders=data.orders.filter(x=>x.id!==id);persist();renderOrders()}
