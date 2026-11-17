@@ -72,6 +72,12 @@
           if (!window.firebase.apps.length) window.firebase.initializeApp(cfg);
           auth = window.firebase.auth();
           db = window.firebase.firestore();
+          // المشروع كيستعمل قاعدة بيانات مسمّاة ماشي «(default)».
+          // SDK ديال compat ما كيقبلش نختارو القاعدة، إذن كنبدّلو المعرّف مباشرة
+          // قبل أي عملية (الاتصال كيتصاوب أول مرة غير ملي نقراو/نكتبو).
+          if (cfg.databaseId && db && db._delegate && db._delegate._databaseId) {
+            db._delegate._databaseId.database = cfg.databaseId;
+          }
           auth.onAuthStateChanged(function (u) {
             currentUser = u || null;
             if (!authArrived) { authArrived = true; authResolvers.splice(0).forEach(function (f) { f(); }); }

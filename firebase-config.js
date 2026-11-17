@@ -8,14 +8,18 @@
  * (البيانات كتبقى فالمتصفح فقط، بلا مزامنة بين الأجهزة).
  */
 window.HANOUT_FB = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
+  apiKey: "AIzaSyAYGVHK-caah07WVxdN7LdJzJ8edM6Ht9Y",
+  authDomain: "hanout-lite.firebaseapp.com",
+  projectId: "hanout-lite",
+  storageBucket: "hanout-lite.firebasestorage.app",
+  messagingSenderId: "593726572210",
+  appId: "1:593726572210:web:4bf1bdae76587ab03babab",
+
+  /* اسم قاعدة بيانات Firestore. المشروع كيستعمل قاعدة مسمّاة «default»
+     (ماشي «(default)»)، لهذا كنمرّروها هنا. */
+  databaseId: "default",
 
   /* الإيميلات ديال المدراء العامين (Super Admins).
      هاد الناس كيدخلو لمنصة التحكم admin.html وكيسيّرو جميع التجار. */
-  adminEmails: ["admin@hanout.ma"]
+  adminEmails: ["yasskimadon@gmail.com"]
 };

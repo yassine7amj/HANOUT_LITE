@@ -37,7 +37,7 @@ class FirestoreRest(
 ) {
 
     private val base =
-        "https://firestore.googleapis.com/v1/projects/$projectId/databases/(default)/documents"
+        "https://firestore.googleapis.com/v1/projects/$projectId/databases/$DATABASE/documents"
 
     /** كيقرا الحانوت + الكتالوغ. كيرجّع null إلا ما كاينش الحانوت. */
     suspend fun getShop(slug: String): Shop? = withContext(Dispatchers.IO) {
@@ -183,6 +183,9 @@ class FirestoreRest(
     private fun enc(value: String): String = URLEncoder.encode(value, "UTF-8")
 
     companion object {
+        /** اسم قاعدة البيانات فمشروع Firebase (المشروع كيستعمل قاعدة مسمّاة «default»). */
+        private const val DATABASE = "default"
+
         private val JSON_MEDIA = "application/json; charset=utf-8".toMediaType()
 
         private fun defaultClient(): OkHttpClient = OkHttpClient.Builder()

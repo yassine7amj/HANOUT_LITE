@@ -1,0 +1,74 @@
+rules_version = '2';
+
+// HANOUT LITE — قواعد أمان Firestore
+// ------------------------------------------------------------------
+// نموذج البيانات:
+//   admins/{email}                    : مدراء المنصة (وجود الوثيقة = صلاحية)
+//   users/{uid}                       : حساب التاجر (slug, email, role)
+//   merchants/{slug}                  : معلومات الحانوت (قراءة عامة للزبناء)
+//   merchants/{slug}/data/catalog     : الكتالوغ (قراءة عامة)
+//   merchants/{slug}/orders/{id}      : الطلبات (الزبون كيصيفط بلا حساب)
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function myUid() {
+      return request.auth.uid;
+    }
+
+    // مدراء المنصة: كيتعيّنو بخلق وثيقة admins/{email} من الكونسول
+    function isPlatformAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.token.email));
+    }
+
+    function myProfile() {
+      return get(/databases/$(database)/documents/users/$(myUid())).data;
+    }
+
+    // واش المستعمل الحالي مالك الحانوت {slug}؟
+    function isMerchantOwner(slug) {
+      return signedIn() && (
+        (exists(/databases/$(database)/documents/users/$(myUid()))
+          && myProfile().slug == slug)
+        || (exists(/databases/$(database)/documents/merchants/$(slug))
+          && get(/databases/$(database)/documents/merchants/$(slug)).data.ownerUid == myUid())
+      );
+    }
+
+    function canManage(slug) {
+      return isPlatformAdmin() || isMerchantOwner(slug);
+    }
+
+    match /admins/{email} {
+      allow read: if isPlatformAdmin();
+      allow write: if false; // كيتزادو يدوياً (كونسول ولا Admin SDK)
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn() && (userId == myUid() || isPlatformAdmin());
+      allow write: if signedIn() && (userId == myUid() || isPlatformAdmin());
+    }
+
+    match /merchants/{slug} {
+      allow read: if true;
+      allow create: if isPlatformAdmin()
+        || (signedIn() && request.resource.data.ownerUid == myUid());
+      allow update, delete: if canManage(slug);
+
+      match /data/{docId} {
+        allow read: if true;
+        allow write: if canManage(slug);
+      }
+
+      match /orders/{orderId} {
+        // الزبون كيصيفط الطلب بلا حساب (بحال النسخة الويب)
+        allow create: if true;
+        allow read, update, delete: if canManage(slug);
+      }
+    }
+  }
+}
