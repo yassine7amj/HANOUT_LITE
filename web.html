@@ -1,0 +1,279 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#003DA5">
+<title>HANOUT LITE — نسخة الويب | حانوت حومتك على الحاسوب</title>
+<meta name="description" content="HANOUT LITE نسخة الويب: تصميم مكتبي لعرض كتالوج الحانوت، العروض والسلة، واطلب مباشرة عبر واتساب.">
+<meta name="keywords" content="حانوت, كتالوج, طلبات, واتساب, HANOUT LITE, نسخة الويب">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="HANOUT LITE">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HANOUT LITE">
+<meta property="og:title" content="HANOUT LITE — نسخة الويب">
+<meta property="og:description" content="تصميم مكتبي لعرض المنتوجات والعروض واطلب مباشرة عبر واتساب.">
+<meta property="og:url" content="https://yassine7amj.github.io/HANOUT_LITE/web.html">
+<meta property="og:image" content="https://yassine7amj.github.io/HANOUT_LITE/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ar_MA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HANOUT LITE — نسخة الويب">
+<meta name="twitter:description" content="تصميم مكتبي لعرض المنتوجات والعروض واطلب مباشرة عبر واتساب.">
+<meta name="twitter:image" content="https://yassine7amj.github.io/HANOUT_LITE/og-cover.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><style>
+*{box-sizing:border-box}
+:root{--blue:#003DA5;--blue2:#002A73;--blue-l:#E9F1FC;--teal:#0E9F8B;--yellow:#FFC220;--red:#E01A2B;--green:#00843D;--ink:#0B1B34;--muted:#5B6B82;--line:#E4E9F2;--bg:#F2F5FA;--card:#fff;--r:12px;--shadow:0 1px 3px rgba(11,27,52,.06),0 8px 24px rgba(11,27,52,.05)}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,Tahoma,Arial,sans-serif;font-size:15px}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;color:inherit}
+input,select,textarea{font:inherit}
+img{display:block}
+a{color:var(--blue)}
+.hidden{display:none!important}
+.muted{color:var(--muted);font-size:13px}
+.empty{text-align:center;color:var(--muted);padding:28px;background:var(--card);border-radius:14px;border:1px dashed var(--line)}
+.empty i{font-size:26px;color:var(--blue);display:block;margin-bottom:8px}
+/* ===== Top navigation bar (desktop) ===== */
+.topbar{position:sticky;top:0;z-index:30;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 1px 2px rgba(11,27,52,.04)}
+.topwrap{max-width:1280px;margin:auto;display:flex;align-items:center;gap:14px;padding:0 22px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--blue);font-weight:900;font-size:19px;letter-spacing:.4px;flex:0 0 auto}
+.logo img{width:34px;height:34px;border-radius:9px;object-fit:cover;background:var(--blue-l)}
+.logo b{color:var(--ink);font-weight:700}
+.wbadge{background:var(--teal);color:#fff;font-size:11px;font-weight:800;padding:4px 9px;border-radius:20px;white-space:nowrap}
+.topnav{display:flex;gap:4px;align-items:center}
+.tlink{display:flex;align-items:center;gap:7px;padding:9px 13px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.tlink i{font-size:15px}
+.tlink:hover{background:var(--blue-l);color:var(--blue)}
+.tlink.active{background:var(--blue);color:#fff}
+.topsearch{flex:1;max-width:340px;display:flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 14px;color:var(--muted);margin-inline-start:auto}
+.topsearch input{flex:1;border:0;outline:0;background:transparent;color:var(--ink);padding:0}
+.topacts{display:flex;gap:8px;flex:0 0 auto}
+.ib{position:relative;width:40px;height:40px;border-radius:11px;background:var(--bg);color:var(--ink);display:grid;place-items:center;font-size:16px}
+.ib:hover{background:var(--blue-l);color:var(--blue)}
+.ib:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--yellow);outline-offset:1px}
+.badge{position:absolute;top:-6px;inset-inline-start:-6px;background:var(--yellow);color:#3a2a00;font-size:11px;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
+/* ===== Layout ===== */
+.wrap{max-width:1280px;margin:auto;padding:26px 22px 60px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center;background:linear-gradient(120deg,#EAF2FE,#F7FAFF);border:1px solid var(--line);border-radius:22px;padding:40px;margin-bottom:8px}
+.hero .tag{display:inline-block;background:var(--teal);color:#fff;font-weight:800;font-size:12px;padding:6px 13px;border-radius:30px;margin-bottom:14px}
+.hero h1{margin:0 0 10px;font-size:38px;line-height:1.25;color:var(--blue2)}
+.hero p{margin:0 0 22px;color:var(--muted);font-size:16px;max-width:46ch}
+.hero-cta{display:flex;gap:11px;flex-wrap:wrap}
+.hero-chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.hero-chips span{background:var(--card);border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:700;padding:7px 12px;border-radius:30px}
+.hero-art{display:grid;place-items:center;font-size:132px;color:var(--blue);opacity:.92}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:12px;font-weight:800;font-size:15px}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:var(--blue2)}
+.btn.ghost{background:var(--card);color:var(--blue);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--blue-l)}
+.whead{display:flex;align-items:baseline;gap:12px;margin:32px 0 14px}
+.whead h2{margin:0;font-size:22px;color:var(--blue2)}
+.whead i{color:var(--blue)}
+/* ===== Categories ===== */
+.cats{display:flex;gap:12px;flex-wrap:wrap}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:700;font-size:14px;box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.cat:hover{transform:translateY(-2px)}
+.cat.active{border-color:var(--blue);background:var(--blue-l);color:var(--blue)}
+.cat .cat-ic{font-size:20px}
+/* ===== Deals & products ===== */
+.deals{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.split{display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start}
+.main-col{min-width:0}
+.side-col{position:sticky;top:88px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.toolbar select{padding:11px 13px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--ink)}
+.check{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 14px;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.check input{accent-color:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.product,.deal{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column;gap:9px;transition:transform .15s,box-shadow .15s}
+.product:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(11,27,52,.12)}
+.pimg{height:150px;border-radius:10px;overflow:hidden;background:var(--blue-l);display:grid;place-items:center}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.deal .pimg{height:120px}
+.pemoji{width:80px;height:80px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:40px;box-shadow:0 2px 8px rgba(11,27,52,.08)}
+.deal .pemoji{width:62px;height:62px;font-size:32px}
+.product h3,.deal h3{margin:0;font-size:15px}
+.product .muted,.deal .muted{font-size:12px}
+.deal-badge{position:absolute;top:10px;inset-inline-start:10px;background:var(--red);color:#fff;font-weight:800;font-size:12px;padding:4px 9px;border-radius:20px;z-index:1}
+.up-badge{position:absolute;top:10px;inset-inline-start:10px;background:var(--yellow);color:#3a2a00;font-weight:800;font-size:12px;padding:4px 9px;border-radius:20px;z-index:1}
+.favbtn{position:absolute;top:10px;inset-inline-end:10px;width:34px;height:34px;border-radius:50%;background:#fff;color:#9AA7BC;display:grid;place-items:center;font-size:14px;z-index:2;box-shadow:var(--shadow)}
+.favbtn.on{color:var(--red)}
+.pricebox{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.price{font-size:21px;font-weight:800;color:var(--red)}
+.oldprice{color:#8C96A5;text-decoration:line-through;font-size:13px}
+.btn-add{margin-top:auto;background:var(--blue);color:#fff;font-weight:700;padding:12px;border-radius:11px}
+.btn-add:disabled{background:#B9C6DA;cursor:not-allowed}
+.btn-add:not(:disabled):hover{background:var(--blue2)}
+/* ===== Panels ===== */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+.panel h3{margin:0 0 14px;font-size:17px;color:var(--blue2);display:flex;align-items:center}
+.panel h3 i{margin-inline-end:8px}
+.cartrow,.manageRow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 0;border-bottom:1px solid #EEF2F8}
+.mini{padding:6px 11px;background:var(--blue-l);color:var(--blue);border-radius:9px}
+.danger{background:#FBE7E3;color:#A33120}
+.primary{background:var(--blue);color:#fff}
+.secondary{background:#E5EDF8;color:var(--blue)}
+.full{width:100%}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.field{display:flex;flex-direction:column;gap:6px;margin:11px 0}
+.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.pill{background:var(--blue-l);color:var(--blue);padding:5px 10px;border-radius:30px;font-size:12px}
+.hint{font-size:12px;color:var(--muted)}
+.notice{background:#FFF7DC;padding:13px;border-radius:12px;color:#695222;font-size:13px;margin-bottom:16px}
+.notice i{margin-inline-end:6px}
+.preview{width:100%;height:140px;object-fit:contain;border:1px dashed #B6C4DD;border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:24px;color:var(--blue2)}
+.stat i{margin-inline-end:6px}
+.toolbar2{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.toolbar2 input,.toolbar2 select{flex:1;min-width:130px;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--blue-l);color:var(--blue);border-radius:20px;padding:4px 11px;font-size:12px;font-weight:700}
+.chip.new{background:#FFF4D6;color:#8a6100}
+.chip.done{background:#E4F5EA;color:var(--green)}
+.orderRow{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;background:var(--card)}
+.orderRow .otop{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.orderRow ul{margin:7px 0 0;padding-inline-start:18px;color:var(--muted);font-size:13px}
+.catRow{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin-bottom:8px}
+.catRow .cname{display:flex;align-items:center;gap:8px;font-weight:700}
+.catRow .cname .ce{font-size:20px}
+.installCta{display:none;align-items:center;justify-content:space-between;gap:10px;background:var(--blue);color:#fff;border-radius:14px;padding:14px 18px;margin:18px 0}
+.installCta span{font-size:13px;font-weight:600}
+.installCta button{background:var(--yellow);color:#0B1B34;font-weight:800;padding:9px 16px;border-radius:10px}
+/* ===== Toast ===== */
+#toast{position:fixed;bottom:26px;inset-inline-start:26px;background:var(--blue);color:#fff;padding:13px 18px;border-radius:12px;display:none;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+#toast i{margin-inline-end:6px}
+/* ===== Footer ===== */
+.sitefoot{background:#0B1B34;color:#B9C6DA;margin-top:44px}
+.sitefoot .fw{max-width:1280px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:26px;padding:40px 22px 26px}
+.sitefoot h4{color:#fff;margin:0 0 12px;font-size:15px}
+.sitefoot a{color:#B9C6DA;text-decoration:none;display:block;padding:5px 0;font-size:14px;background:none;text-align:start;width:100%}
+.sitefoot a:hover{color:#fff}
+.sitefoot .fb{border-top:1px solid #1E2E48;text-align:center;padding:16px;font-size:13px;color:#7E8CA3}
+/* ===== Dark theme ===== */
+html[data-theme=dark]{--ink:#E9EFFA;--muted:#98A7BE;--line:#26334A;--bg:#0D1524;--card:#141F33;--blue-l:#182741;--shadow:0 1px 3px rgba(0,0,0,.5)}
+html[data-theme=dark] .logo b{color:#E9EFFA}
+html[data-theme=dark] .hero{background:linear-gradient(120deg,#0F2347,#0D1524)}
+html[data-theme=dark] .hero h1,html[data-theme=dark] .whead h2,html[data-theme=dark] .panel h3,html[data-theme=dark] .stat b{color:#BFD6FF}
+html[data-theme=dark] .cartrow,html[data-theme=dark] .manageRow{border-color:#26334A}
+html[data-theme=dark] .notice{background:#3B2F13;color:#F1DEA8}
+html[data-theme=dark] .mini,html[data-theme=dark] .secondary,html[data-theme=dark] .chip{background:#1C2B46;color:#A8C7F7}
+html[data-theme=dark] .danger{background:#3B1F1A;color:#F2A99B}
+html[data-theme=dark] .chip.new{background:#3B2F13;color:#F1DEA8}
+html[data-theme=dark] .chip.done{background:#123020;color:#7FD9A6}
+html[data-theme=dark] .installCta{background:#0B2A5B}
+html[data-theme=dark] .oldprice{color:#7E8CA3}
+html[data-theme=dark] .preview{border-color:#26334A}
+html[data-theme=dark] .btn-add:disabled{background:#33405A}
+html[data-theme=dark] .empty{border-color:#26334A}
+/* ===== Responsive (web.html is desktop-first) ===== */
+@media(max-width:1080px){.split{grid-template-columns:1fr}.side-col{position:static}.topnav{display:none}}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding:26px}.hero-art{font-size:80px;order:-1}.hero h1{font-size:28px}.stats{grid-template-columns:repeat(2,1fr)}.sitefoot .fw{grid-template-columns:1fr}}
+@media(max-width:620px){.wrap{padding:16px}.topsearch{display:none}.deals,.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
+</style></head><body>
+<header class="topbar">
+  <div class="topwrap">
+    <a class="logo" href="#" onclick="showTab('customer');return false"><img src="logo.png" alt="شعار HANOUT LITE" onerror="this.onerror=null;this.src='icon.svg'"><span>HANOUT <b>LITE</b></span></a>
+    <span class="wbadge">نسخة الويب</span>
+    <nav class="topnav">
+      <a id="navCustomer" class="tlink active" href="#" onclick="showTab('customer');return false"><i class="fa-solid fa-house"></i>الرئيسية</a>
+      <a class="tlink" href="#" onclick="goDeals();return false"><i class="fa-solid fa-tags"></i>العروض</a>
+      <a class="tlink" href="#" onclick="goCart();return false"><i class="fa-solid fa-cart-shopping"></i>السلة</a>
+      <a id="navMyorders" class="tlink" href="#" onclick="showTab('myorders');return false"><i class="fa-solid fa-receipt"></i>طلباتي</a>
+      <a id="navMerchant" class="tlink" href="#" onclick="showTab('merchant');return false"><i class="fa-solid fa-store"></i>فضاء التاجر</a>
+      <a id="navAbout" class="tlink" href="#" onclick="showTab('about');return false"><i class="fa-solid fa-circle-info"></i>حول</a>
+    </nav>
+    <div class="topsearch"><i class="fa-solid fa-magnifying-glass"></i><input id="search" placeholder="قلب على منتوج فالكتالوغ..." oninput="renderProducts()" aria-label="بحث في المنتوجات"></div>
+    <div class="topacts">
+      <button class="ib" id="themeBtn" aria-label="الوضع الليلي" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      <button class="ib" aria-label="مشاركة التطبيق" onclick="shareApp()"><i class="fa-solid fa-share-nodes"></i></button>
+      <button class="ib" aria-label="السلة" onclick="goCart()"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartBadge">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="customer">
+    <div class="hero">
+      <div>
+        <span class="tag">توصيل أو استلام من الحانوت</span>
+        <h1>حانوت حومتك… على الحاسوب</h1>
+        <p id="shopTitle"></p>
+        <div class="hero-cta">
+          <button class="btn primary" onclick="goDeals()"><i class="fa-solid fa-tags"></i> شوف عروض الأسبوع</button>
+          <button class="btn ghost" onclick="document.getElementById('search').focus()"><i class="fa-solid fa-magnifying-glass"></i> قلب على منتوج</button>
+        </div>
+        <div class="hero-chips"><span><i class="fa-solid fa-desktop"></i> تصميم مخصص للحاسوب</span><span><i class="fa-solid fa-mobile-screen-button"></i> قابل للتثبيت</span><span><i class="fa-solid fa-wifi"></i> يشتغل بلا إنترنت</span></div>
+      </div>
+      <div class="hero-art"><i class="fa-solid fa-basket-shopping"></i></div>
+    </div>
+
+    <div class="whead"><h2><i class="fa-solid fa-layer-group"></i> الأصناف</h2><span class="muted">اختر صنفاً للتسوق</span></div>
+    <div id="cats" class="cats"></div>
+
+    <div class="whead"><h2><i class="fa-solid fa-tags"></i> عروض الأسبوع</h2><span class="muted">تخفيضات مختارة</span></div>
+    <div id="deals" class="deals"></div>
+
+    <div class="whead"><h2><i class="fa-solid fa-boxes-stacked"></i> كل المنتوجات</h2></div>
+    <div class="split">
+      <div class="main-col">
+        <div class="toolbar"><select id="category" onchange="renderProducts();renderCats()"><option value="">جميع الأصناف</option></select><select id="sortBy" onchange="renderProducts()" aria-label="ترتيب المنتجات"><option value="default">ترتيب: افتراضي</option><option value="new">الأحدث أولاً</option><option value="price-asc">الثمن (من الأرخص)</option><option value="price-desc">الثمن (من الأغلى)</option><option value="name">الاسم (أ - ي)</option></select><label class="check"><input type="checkbox" id="onlyAvailable" onchange="renderProducts()"> المتوفر فقط</label><label class="check"><input type="checkbox" id="onlyFavs" onchange="renderProducts()"> <i class="fa-solid fa-heart" style="color:var(--red)"></i> المفضلة فقط</label></div>
+        <div id="products" class="grid"></div>
+      </div>
+      <aside class="side-col panel" id="cartPanel">
+        <h3><i class="fa-solid fa-cart-shopping"></i>السلة ديالك</h3>
+        <div id="cart"></div>
+        <div class="field"><label>الاسم (اختياري)</label><input id="buyer" placeholder="اسم الزبون"></div>
+        <div class="field"><label>طريقة الاستلام</label><select id="fulfillment"><option>الاستلام من الحانوت</option><option>طلب التوصيل (حسب موافقة التاجر)</option></select></div>
+        <div class="field"><label>ملاحظة للطلب</label><input id="note" placeholder="مثلاً: بغيت الخبز سخون"></div>
+        <button class="primary full" style="padding:13px" onclick="checkout()"><i class="fa-brands fa-whatsapp"></i> إرسال الطلب عبر واتساب</button>
+        <p class="muted">الأسعار والتوفر نهائيان فقط بعد تأكيد التاجر. لا يتم الدفع داخل التطبيق.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="merchant" class="hidden">
+    <div class="whead"><h2><i class="fa-solid fa-store"></i> فضاء التاجر</h2><span class="muted">إدارة المنتوجات والعروض والطلبات</span></div>
+    <div class="notice"><i class="fa-solid fa-lock"></i>هذه نسخة محلية تجريبية وليست لوحة محمية بكلمة مرور. لا تدخل معلومات شخصية حساسة أو بيانات ديون الزبائن. التعديلات تظهر على هذا الجهاز فقط.</div>
+    <div class="stats"><div class="stat"><b id="statProducts">0</b><span class="muted"><i class="fa-solid fa-box"></i>منتج</span></div><div class="stat"><b id="statAvailable">0</b><span class="muted"><i class="fa-solid fa-circle-check"></i>متوفر</span></div><div class="stat"><b id="statCart">0</b><span class="muted"><i class="fa-solid fa-cart-shopping"></i>في السلة</span></div><div class="stat"><b id="statOrders">0</b><span class="muted"><i class="fa-solid fa-receipt"></i>طلبات جديدة</span></div></div>
+    <div class="split">
+      <div class="main-col">
+        <div class="panel"><h3><i class="fa-solid fa-box"></i>المنتجات</h3><div class="toolbar2"><input id="manageSearch" placeholder="بحث فالمنتجات..." oninput="renderManage()" aria-label="بحث في المنتجات"><select id="manageSort" onchange="renderManage()" aria-label="ترتيب المنتجات"><option value="recent">الأحدث أولاً</option><option value="name">الاسم (أ - ي)</option><option value="price-asc">الثمن (من الأرخص)</option><option value="price-desc">الثمن (من الأغلى)</option></select></div><div id="manage"></div></div>
+        <div class="panel" style="margin-top:14px"><h3><i class="fa-solid fa-receipt"></i>الطلبات</h3><div id="orders"></div></div>
+      </div>
+      <div class="side-col">
+        <div class="panel"><h3 id="formTitle"><i class="fa-solid fa-plus"></i>إضافة منتج</h3><form id="productForm" onsubmit="saveProduct(event)"><input id="editId" type="hidden"><div class="field"><label>اسم المنتج</label><input id="pName" required maxlength="70" placeholder="مثلاً: حليب 1 لتر"></div><div class="field"><label>الثمن بالدرهم</label><input id="pPrice" type="number" min="0" max="100000" step="0.01" required></div><div class="field"><label>الثمن السابق (اختياري — للعرض أو الزيادة)</label><input id="pOldPrice" type="number" min="0" max="100000" step="0.01" placeholder="مثال: 20"><span class="hint">إذا كان الثمن الجديد أقل، سيظهر التخفيض؛ وإذا كان أعلى، ستظهر الزيادة. لا تضع ثمناً سابقاً غير حقيقي.</span></div><div class="field"><label>صورة المنتوج (اختياري)</label><input id="pImage" type="file" accept="image/png,image/jpeg,image/webp" onchange="previewImage(event)"><img id="imagePreview" class="preview hidden" alt="معاينة صورة المنتوج"><button type="button" class="secondary" style="padding:11px" onclick="removeImage()"><i class="fa-solid fa-trash"></i> حذف صورة المنتوج</button><span class="hint">الصور تُضغط وتُحفظ محلياً في هذا المتصفح. اختر صورة واضحة أقل من 5 ميغابايت.</span></div><div class="field"><label>الصنف</label><input id="pCategory" required maxlength="35" placeholder="مواد غذائية" list="catOptions"><datalist id="catOptions"></datalist></div><div class="field"><label>رمز تعبيري للمنتج</label><input id="pEmoji" maxlength="4" placeholder="🥛"></div><div class="field"><label><input type="checkbox" id="pAvailable" checked> متوفر حالياً</label></div><button class="primary full" type="submit" style="padding:12px"><i class="fa-solid fa-floppy-disk"></i> حفظ المنتج</button><button class="secondary full" type="button" style="margin-top:7px;padding:12px" onclick="resetForm()"><i class="fa-solid fa-xmark"></i> إلغاء التعديل</button></form></div>
+        <div class="panel" style="margin-top:14px"><h3><i class="fa-solid fa-layer-group"></i>إدارة الأصناف</h3><div id="catsManage"></div><div class="field"><label>زيد صنف جديد</label><div class="toolbar2"><input id="newCatEmoji" maxlength="4" placeholder="🛒" style="max-width:90px" aria-label="رمز الصنف"><input id="newCatName" maxlength="35" placeholder="اسم الصنف" aria-label="اسم الصنف الجديد"></div></div><button class="secondary full" style="padding:12px" onclick="addCategory()"><i class="fa-solid fa-plus"></i> زيد الصنف</button></div>
+        <div class="panel" style="margin-top:14px"><h3><i class="fa-solid fa-gear"></i>إعدادات الحانوت</h3><div class="field"><label>اسم الحانوت</label><input id="shopName" maxlength="70"></div><div class="field"><label>رقم واتساب التاجر</label><input id="shopPhone" inputmode="tel" placeholder="2126XXXXXXXX"></div><button class="primary full" style="padding:12px" onclick="saveSettings()"><i class="fa-solid fa-floppy-disk"></i> حفظ الإعدادات</button><p class="muted">استعمل الرقم بصيغة دولية: 212 ثم الرقم دون الصفر الأول.</p><hr><div class="actions"><button class="secondary" style="padding:11px" onclick="exportData()"><i class="fa-solid fa-download"></i> تصدير الكتالوغ</button><button class="secondary" style="padding:11px" onclick="document.getElementById('importFile').click()"><i class="fa-solid fa-upload"></i> استيراد</button><input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></div><p class="muted">الاستيراد يستبدل بيانات الحانوت المحلية بعد التأكيد.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="myorders" class="hidden">
+    <div class="whead"><h2><i class="fa-solid fa-receipt"></i> الطلبات ديالك</h2><span class="muted">الطلبات المُرسلة من هاد المتصفح</span></div>
+    <div class="panel" style="max-width:820px"><div id="myOrders"></div></div>
+  </section>
+
+  <section id="about" class="hidden">
+    <div class="whead"><h2><i class="fa-solid fa-circle-info"></i> حول التطبيق</h2></div>
+    <div class="panel" style="max-width:860px"><h3>HANOUT LITE v0.7 — نسخة الويب</h3><p>نسخة مكتبية من HANOUT LITE بتصميم مختلف عن نسخة الهاتف: شريط تنقّل علوي، شبكة منتوجات أعرض، وسلة جانبية ثابتة. تشترك في نفس البيانات ومنطق التطبيق مع نسخة الهاتف.</p><div class="actions" style="margin:12px 0"><a class="btn primary" href="index.html"><i class="fa-solid fa-mobile-screen-button"></i> نسخة الهاتف</a><button class="btn ghost" onclick="shareApp()"><i class="fa-solid fa-share-nodes"></i> شارك التطبيق</button><button class="btn ghost" onclick="installApp()"><i class="fa-solid fa-download"></i> تثبيت التطبيق</button></div><h3>ما الذي يعمل الآن؟</h3><p>تصفّح المنتوجات بالأصناف، عروض الأسبوع، البحث، الفرز والتصفية (المتوفر / المفضلة)، قائمة المفضلة، الوضع الليلي، سلة وسجل طلبات للزبون، إرسال الطلب عبر واتساب، إدارة الأصناف والطلبات، تثبيت التطبيق، والعمل بدون إنترنت بعد أول زيارة. الصور تحفظ في المتصفح نفسه ولا تظهر على جهاز آخر.</p><h3>ما الذي لا يعمل بعد؟</h3><p>المزامنة بين الأجهزة، حسابات المستخدمين، التتبع المباشر، والدفع الإلكتروني. الطلبات تُحفظ محلياً فقط. لا تُستخدم هذه النسخة لإدارة بيانات العملاء الحساسة.</p></div>
+  </section>
+</main>
+
+<div class="installCta" id="installCta"><span><i class="fa-solid fa-mobile-screen-button"></i> ثبّت التطبيق على جهازك</span><button onclick="installApp()">تثبيت</button></div>
+<div id="toast"></div>
+
+<footer class="sitefoot">
+  <div class="fw">
+    <div><h4>HANOUT LITE</h4><p style="margin:0 0 10px;font-size:14px">كتالوج الحانوت الرقمي: تصفّح المنتوجات والعروض واطلب مباشرة عبر واتساب. نسخة ويب مخصّصة للحاسوب، وتشتغل كذلك على الهاتف من النسخة المخصّصة.</p></div>
+    <div><h4>التنقّل</h4><a href="#" onclick="showTab('customer');return false">الرئيسية</a><a href="#" onclick="goDeals();return false">عروض الأسبوع</a><a href="#" onclick="showTab('myorders');return false">الطلبات ديالك</a><a href="#" onclick="showTab('merchant');return false">فضاء التاجر</a></div>
+    <div><h4>النسخ والأدوات</h4><a href="index.html"><i class="fa-solid fa-mobile-screen-button"></i> نسخة الهاتف</a><a href="#" onclick="installApp();return false"><i class="fa-solid fa-download"></i> تثبيت التطبيق</a><a href="#" onclick="shareApp();return false"><i class="fa-solid fa-share-nodes"></i> مشاركة التطبيق</a><a href="#" onclick="showTab('about');return false"><i class="fa-solid fa-circle-info"></i> حول التطبيق</a></div>
+  </div>
+  <div class="fb">HANOUT LITE — نسخة الويب v0.7 • 2026</div>
+</footer>
+<script src="app.js"></script></body></html>
