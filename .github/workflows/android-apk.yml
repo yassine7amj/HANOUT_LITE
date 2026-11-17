@@ -1,0 +1,154 @@
+name: بناء تطبيق أندرويد (APK)
+
+# ============================================================
+# كيفاش كتخدم:
+#   1) GitHub → Actions → «بناء تطبيق أندرويد (APK)» → Run workflow
+#   2) عمّر اسم التطبيق، و slug الحانوت إلا بغيت تطبيق خاص بحانوت واحد
+#      (خلي shop خاوي = التطبيق العام ديال المنصة)
+#   3) ملي يسالي، حمّل الـ APK من:
+#        • تبويب Artifacts فهاد التشغيل، ولا
+#        • تبويب Releases (رابط ثابت للتحميل)
+#
+# ملاحظة مهمة على مفتاح التوقيع (keystore):
+#   • بلا إعداد: كيتولّد مفتاح تجريبي جديد فكل بناء — صالح للتجريب فقط،
+#     وما غاديش تقدر تحدّث التطبيق من بعد (Android كيرفض توقيع مختلف).
+#   • للإنتاج (تحديثات + Google Play): زيد هاد الأسرار فـ
+#     Settings → Secrets and variables → Actions → New repository secret:
+#        ANDROID_KEYSTORE_BASE64   محتوى android.keystore مشفّر base64
+#        KEYSTORE_PASSWORD         كلمة سر المفتاح
+#        KEY_PASSWORD              كلمة سر المفتاح (غالباً نفسها)
+#        KEY_ALIAS                 الافتراضي: android
+#     باش تصنع المفتاح مرة واحدة محلياً:
+#        keytool -genkeypair -v -keystore android.keystore -storetype PKCS12 \
+#          -alias android -keyalg RSA -keysize 2048 -validity 10000 \
+#          -storepass "كلمة_السر" -keypass "كلمة_السر" -dname "CN=HANOUT LITE, C=MA"
+#     ومن بعد:  PowerShell → [Convert]::ToBase64String([IO.File]::ReadAllBytes("android.keystore"))
+# ============================================================
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_name:
+        description: 'اسم التطبيق (كيظهر تحت الأيقونة)'
+        required: true
+        default: 'HANOUT LITE'
+      shop:
+        description: 'slug الحانوت — خليه خاوي = التطبيق العام ديال المنصة'
+        required: false
+        default: ''
+      package_id:
+        description: 'معرّف الحزمة (ma.hanout.xxx) — خليه خاوي وكيتولّد أوتوماتيكيا'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apk-${{ github.event.inputs.shop || 'platform' }}
+  cancel-in-progress: false
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: جلب الكود
+        uses: actions/checkout@v4
+
+      - name: تهيئة Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: تهيئة Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: تهيئة Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: تحضير بيئة Bubblewrap
+        run: |
+          npm i -g @bubblewrap/cli
+
+          JDK="${JAVA_HOME:-}"
+          if [ -z "$JDK" ] && command -v javac > /dev/null; then
+            JDK="$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")")"
+          fi
+
+          SDK="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+
+          mkdir -p "$HOME/.bubblewrap"
+          printf '{"jdkPath":"%s","androidSdkPath":"%s"}' "$JDK" "$SDK" > "$HOME/.bubblewrap/config.json"
+
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0" > /dev/null 2>&1 || true
+
+          echo "JDK=$JDK"
+          echo "SDK=$SDK"
+          bubblewrap --version || true
+
+      - name: توليد twa-manifest.json
+        run: |
+          node twa/make-manifest.mjs \
+            --base "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" \
+            --name "${{ github.event.inputs.app_name }}" \
+            --shop "${{ github.event.inputs.shop }}" \
+            --package "${{ github.event.inputs.package_id }}"
+
+      - name: تحضير مفتاح التوقيع
+        working-directory: twa
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'hanout-lite-dev' }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS || 'android' }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > android.keystore
+            echo "✔ استرجعنا مفتاح التوقيع من الأسرار"
+          else
+            keytool -genkeypair -v -keystore android.keystore -storetype PKCS12 \
+              -alias "$KEY_ALIAS" -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass "$KEYSTORE_PASSWORD" -keypass "$KEYSTORE_PASSWORD" \
+              -dname "CN=HANOUT LITE, OU=Apps, O=HANOUT, L=Casablanca, C=MA"
+            echo "⚠ تولّد مفتاح تجريبي جديد — للإنتاج زيد ANDROID_KEYSTORE_BASE64"
+          fi
+
+      - name: بناء APK (Bubblewrap / TWA)
+        working-directory: twa
+        env:
+          BUBBLEWRAP_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'hanout-lite-dev' }}
+          BUBBLEWRAP_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || secrets.KEYSTORE_PASSWORD || 'hanout-lite-dev' }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS || 'android' }}
+        run: |
+          # update كيولّد مشروع Android + manifest-checksum.txt (باش build ما يسولش)
+          bubblewrap update --skipVersionUpgrade
+          bubblewrap build --skipPwaValidation --signingKeyAlias="$KEY_ALIAS"
+
+      - name: رفع APK/AAB كأرتيفاكت
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-${{ github.event.inputs.shop || 'platform' }}
+          path: |
+            twa/app-release-signed.apk
+            twa/app-release-bundle.aab
+          if-no-files-found: error
+
+      - name: إنشاء Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-${{ github.event.inputs.shop || 'platform' }}-${{ github.run_number }}
+          name: "${{ github.event.inputs.app_name }} — إصدار ${{ github.run_number }}"
+          files: |
+            twa/app-release-signed.apk
+            twa/app-release-bundle.aab
+          body: |
+            **التطبيق:** ${{ github.event.inputs.app_name }}
+            **الحانوت:** `${{ github.event.inputs.shop || '(التطبيق العام)' }}`
+            **الرابط:** https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}${{ github.event.inputs.shop && format('/index.html?shop={0}', github.event.inputs.shop) || '/' }}
+
+            حمّل `app-release-signed.apk` وثبّتو فالتيليفون (خاصك تسمح بـ«تثبيت من مصادر غير معروفة»).
+            للآيفون: حلّ نفس الرابط فـ Safari → «إضافة إلى الشاشة الرئيسية».
