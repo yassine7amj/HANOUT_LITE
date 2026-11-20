@@ -1,0 +1,83 @@
+{
+  "name": "tensants-control-center",
+  "productName": "TENSANTS GROUP CONTROL CENTER",
+  "version": "0.3.0",
+  "description": "Enterprise Windows desktop administration & system control for the TENSANTS GROUP ecosystem",
+  "main": "electron/main.js",
+  "author": "FIPCOM Network",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "dist": "electron-builder --win nsis portable",
+    "dist:dir": "electron-builder --win --dir",
+    "release:win": "electron-builder --win nsis --publish never"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "group.tensants.controlcenter",
+    "productName": "TENSANTS GROUP CONTROL CENTER",
+    "copyright": "Copyright © TENSANTS GROUP",
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://github.com/yassine7amj/HANOUT_LITE/releases/download/cc-latest",
+        "channel": "latest"
+      }
+    ],
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "assets/**/*",
+      "!assets/installer.nsh",
+      "!assets/installerSidebar.bmp",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/app.ico"
+    },
+    "portable": {
+      "artifactName": "TENSANTS-Control-Center-Portable-${version}.${ext}"
+    },
+    "nsis": {
+      "artifactName": "TENSANTS-Control-Center-Setup-${version}.${ext}",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "createDesktopShortcut": false,
+      "include": "installer.nsh",
+      "installerSidebar": "installerSidebar.bmp",
+      "runAfterFinish": false,
+      "shortcutName": "TENSANTS Control Center",
+      "installerIcon": "assets/app.ico",
+      "uninstallerIcon": "assets/app.ico",
+      "installerHeaderIcon": "assets/app.ico"
+    }
+  }
+}

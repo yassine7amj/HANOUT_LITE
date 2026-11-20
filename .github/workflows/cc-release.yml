@@ -1,0 +1,95 @@
+name: نشر برنامج التحكم (Windows)
+
+# ============================================================
+# بناء ونشر «TENSANTS GROUP CONTROL CENTER» لسطح المكتب (Windows).
+#
+# كيفاش كتخدم:
+#   1) GitHub → Actions → «نشر برنامج التحكم (Windows)» → Run workflow
+#   2) عمّر الإصدار الجديد (x.y.z) — إلا خليتيه خاوي كيتقرا من package.json.
+#   3) ملي يسالي، كيتصنع/كيتحدّث Release بالوسم «cc-latest» فيه:
+#        • latest.yml   ← ملف الوصف اللي كيقراه electron-updater
+#        • Setup .exe   ← المثبّت (NSIS)
+#        • .blockmap    ← التحديث التفاضلي
+#
+# ملاحظات مهمة:
+#   • البرنامج كيتحدّث براسو من هاد الـ Release عبر provider من نوع
+#     «generic» على رابط ثابت: releases/download/cc-latest
+#     (الوسم ثابت حيت إصدارات أندرويد فنفس المستودع كياخدو «Latest»).
+#   • النسخة portable ما كتحدّثش براسها — غير NSIS (المثبّتة).
+#   • للإنتاج: زيد شهادة توقيع الكود فـ CSC_LINK / CSC_KEY_PASSWORD باش
+#     Windows ما يطلعش تحذير SmartScreen.
+# ============================================================
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'الإصدار الجديد (x.y.z) — خاوي = من package.json'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cc-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: Tensant control center
+    steps:
+      - name: جلب الكود
+        uses: actions/checkout@v4
+
+      - name: تهيئة Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: Tensant control center/package-lock.json
+
+      - name: تثبيت الاعتماديات
+        run: npm ci
+
+      - name: ضبط الإصدار
+        if: inputs.version != ''
+        run: npm version "${{ inputs.version }}" --no-git-tag-version --allow-same-version
+
+      - name: بناء المثبّت + ملف التحديث
+        run: npx electron-builder --win nsis --publish never
+
+      - name: حذف مرفقات الإصدار السابقة
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # الوسم ثابت، فكنمسحو المرفقات القديمة قبل ما نرفعو الجديدة باش
+        # ما تتراكمش مثبّتات الإصدارات السابقة.
+        run: |
+          gh release view cc-latest --json assets --jq '.assets[].name' 2>/dev/null \
+            | while read -r asset; do
+                [ -n "$asset" ] && gh release delete-asset cc-latest "$asset" -y
+              done || true
+
+      - name: نشر الإصدار
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: cc-latest
+          name: "TENSANTS GROUP CONTROL CENTER — أحدث إصدار"
+          make_latest: false
+          files: |
+            Tensant control center/release/latest.yml
+            Tensant control center/release/*.exe
+            Tensant control center/release/*.blockmap
+          body: |
+            **البرنامج:** TENSANTS GROUP CONTROL CENTER (Windows)
+            **الإصدار:** ${{ inputs.version || 'من package.json' }}
+
+            هاد الـ Release كيمثّل قناة التحديث ديال البرنامج: كيتفحّص
+            ويحمّل براسو فالخلفية، ومن بعد كيسوّل المستعمل واش يثبّت.
+
+            **للتحميل المباشر:** `TENSANTS GROUP CONTROL CENTER Setup x.y.z.exe`

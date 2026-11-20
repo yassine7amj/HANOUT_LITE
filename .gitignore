@@ -1,3 +1,11 @@
 # مخرجات أدوات محلية
 .trae-html-share-packages/
 .gh-config/
+
+# ملفات الأسرار (تبقى محلية فقط)
+.env
+!**/.env.example
+
+# Tensant Control Center (Electron) — اعتماديات ومخرجات البناء
+Tensant control center/node_modules/
+Tensant control center/release/

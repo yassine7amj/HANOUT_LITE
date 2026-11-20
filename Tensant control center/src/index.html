@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'" />
+  <title>TENSANTS GROUP CONTROL CENTER</title>
+  <link rel="stylesheet" href="styles/app.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ============================ title bar ============================ -->
+    <header class="titlebar">
+      <div class="titlebar__id">
+        <img class="titlebar__logo" src="../assets/logo-64.png" alt="" draggable="false" />
+        <div class="titlebar__names">
+          <span class="titlebar__app" data-i18n="appName">TENSANTS GROUP</span>
+          <span class="titlebar__sep">/</span>
+          <span class="titlebar__sub" data-i18n="appSub">Control Center</span>
+        </div>
+      </div>
+
+      <div class="titlebar__drag"></div>
+
+      <div class="titlebar__tools">
+        <button class="lang" id="langBtn" title="Language">
+          <span id="langLabel">EN</span>
+          <svg viewBox="0 0 12 12" width="10" height="10"><path d="M2 4.5 6 8.5 10 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" id="themeBtn" title="Theme">
+          <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.4M12 19v2.4M2.6 12H5M19 12h2.4M5.3 5.3 7 7M17 17l1.7 1.7M18.7 5.3 17 7M7 17l-1.7 1.7"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24"><path d="M20 13.4A8.4 8.4 0 0 1 10.6 4a8.4 8.4 0 1 0 9.4 9.4Z"/></svg>
+        </button>
+        <button class="icon-btn" id="bellBtn" title="Notifications">
+          <svg viewBox="0 0 24 24"><path d="M18 15.2V11a6 6 0 1 0-12 0v4.2L4.6 17.4A.8.8 0 0 0 5.3 18.8h13.4a.8.8 0 0 0 .7-1.4L18 15.2Z"/><path d="M9.8 20.6a2.4 2.4 0 0 0 4.4 0"/></svg>
+          <i class="dot"></i>
+        </button>
+        <div class="winctl">
+          <button id="minBtn" aria-label="Minimize"><svg viewBox="0 0 12 12"><path d="M2 6h8"/></svg></button>
+          <button id="maxBtn" aria-label="Maximize"><svg viewBox="0 0 12 12"><rect x="2.4" y="2.4" width="7.2" height="7.2" rx="1"/></svg></button>
+          <button id="closeBtn" class="danger" aria-label="Close"><svg viewBox="0 0 12 12"><path d="M2.6 2.6 9.4 9.4M9.4 2.6 2.6 9.4"/></svg></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell">
+      <!-- ============================= sidebar ============================ -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand__logo">
+            <img src="../assets/logo.png" alt="TENSANTS GROUP" draggable="false" />
+          </div>
+          <div class="brand__text">
+            <strong data-i18n="appName">TENSANTS GROUP</strong>
+            <span data-i18n="appSub">Control Center</span>
+          </div>
+        </div>
+
+        <nav class="nav" id="nav"></nav>
+
+        <div class="sidebar__foot">
+          <div class="conn" id="connPill">
+            <i class="conn__dot"></i>
+            <span id="connText">Disconnected</span>
+          </div>
+          <div class="foot__meta">
+            <span id="verText">v0.1.0</span>
+            <span class="foot__credit" data-i18n="credit">Designed &amp; developed by FIPCOM Network</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ============================== content =========================== -->
+      <main class="content" id="content">
+        <div class="pagehead">
+          <div>
+            <h1 id="pageTitle">Control Center</h1>
+            <p id="pageSub">Real-time view of the entire TENSANTS GROUP ecosystem.</p>
+          </div>
+          <div class="pagehead__actions" id="pageActions">
+            <div class="searchbox">
+              <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="6.4"/><path d="m16.2 16.2 4 4"/></svg>
+              <input id="searchInput" type="search" placeholder="Search merchants, orders, apps…" />
+            </div>
+            <button class="btn btn--ghost" id="refreshBtn">
+              <svg viewBox="0 0 24 24" width="15" height="15"><path d="M20 11a8 8 0 1 0-2.3 6.4"/><path d="M20 4.6V11h-6.4"/></svg>
+              <span data-i18n="actions.refresh">Refresh</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="conn-banner" id="connBanner">
+          <i></i><span data-i18n="disconnected">Disconnected</span>
+        </div>
+
+        <div class="view" id="view"></div>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- ====================== operator sign-in gate ======================= -->
+  <!-- The overview is served to platform staff only, so the shell asks for the
+       same account the website and the mobile applications use. -->
+  <div class="gate" id="loginGate" hidden>
+    <form class="gate__card" id="loginForm">
+      <img class="gate__logo" src="../assets/logo.png" alt="" draggable="false" />
+      <h1 class="gate__title" data-i18n="auth.title">Sign in</h1>
+      <p class="gate__sub" data-i18n="auth.subtitle"></p>
+
+      <label class="gate__field">
+        <span data-i18n="auth.email">Email</span>
+        <input id="loginEmail" type="email" dir="ltr" autocomplete="username" spellcheck="false" required />
+      </label>
+      <label class="gate__field">
+        <span data-i18n="auth.password">Password</span>
+        <input id="loginPassword" type="password" dir="ltr" autocomplete="current-password" required />
+      </label>
+
+      <p class="gate__error" id="loginError" hidden></p>
+
+      <button class="btn btn--primary" id="loginSubmit" type="submit" data-i18n="auth.submit">Sign in</button>
+
+      <div class="gate__foot">
+        <span class="gate__api" id="loginApi" dir="ltr"></span>
+        <button class="gate__retry" id="loginRetry" type="button" data-i18n="auth.retry">Check connection</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ========================= new-merchant modal ======================== -->
+  <!-- Opens a tenant on the central platform. It starts `pending`, so it is
+       visible to the operator but not public until the platform activates it. -->
+  <div class="modal" id="merchantModal" hidden>
+    <form class="modal__card" id="merchantForm">
+      <h2 class="modal__title" data-i18n="merchant.title">New merchant</h2>
+      <p class="modal__sub" data-i18n="merchant.subtitle"></p>
+
+      <div class="modal__grid">
+        <label class="modal__field">
+          <span data-i18n="merchant.name">Shop name</span>
+          <input id="mchName" dir="auto" maxlength="80" required />
+        </label>
+        <label class="modal__field">
+          <span data-i18n="merchant.slug">Slug</span>
+          <input id="mchSlug" dir="ltr" spellcheck="false" maxlength="40" placeholder="auto" />
+        </label>
+        <label class="modal__field">
+          <span data-i18n="merchant.city">City</span>
+          <input id="mchCity" dir="auto" maxlength="60" />
+        </label>
+        <label class="modal__field">
+          <span data-i18n="merchant.phone">Phone</span>
+          <input id="mchPhone" dir="ltr" maxlength="32" />
+        </label>
+        <label class="modal__field">
+          <span data-i18n="merchant.product">Product</span>
+          <select id="mchProduct">
+            <option value="hanout_lite">HANOUT LITE</option>
+            <option value="hanweb_hub">HANWEB HUB</option>
+            <option value="hanclient">HANCLIENT</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="modal__error" id="mchError" hidden></p>
+
+      <div class="modal__actions">
+        <button class="btn" id="mchCancel" type="button" data-i18n="merchant.cancel">Cancel</button>
+        <button class="btn btn--primary" id="mchSubmit" type="submit" data-i18n="merchant.create">Create</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/spring.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
