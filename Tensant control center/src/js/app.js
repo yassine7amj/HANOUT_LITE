@@ -30,6 +30,7 @@
   const ICONS = {
     dashboard: '<path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 8h6V4h-6z"/>',
     merchants: '<path d="M4 9.5 5.6 4h12.8L20 9.5"/><path d="M4 9.5a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0 2.8 0"/><path d="M5.5 12v8h13v-8"/><path d="M10 20v-4h4v4"/>',
+    customers: '<circle cx="9" cy="8" r="3.4"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16.5 5.4a3 3 0 0 1 0 5.6"/><path d="M17.5 14.6A5.4 5.4 0 0 1 21 19.6"/>',
     orders: '<path d="M4 6h16l-1.4 9.2a2 2 0 0 1-2 1.8H7.4a2 2 0 0 1-2-1.8L4 6Z"/><path d="M9 6V4.8A2.8 2.8 0 0 1 11.8 2h.4A2.8 2.8 0 0 1 15 4.8V6"/>',
     subscriptions: '<rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="M3 10h18"/><path d="M7 14.5h4"/>',
     apps: '<rect x="3" y="4" width="7" height="7" rx="2"/><rect x="14" y="4" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><path d="M14.5 17.5h6M17.5 14.5v6"/>',
@@ -43,6 +44,7 @@
     { group: 'nav.overview', items: [
       { id: 'dashboard', label: 'nav.dashboard', icon: 'dashboard' },
       { id: 'merchants', label: 'nav.merchants', icon: 'merchants' },
+      { id: 'customers', label: 'nav.customers', icon: 'customers' },
     ]},
     { group: 'nav.sales', items: [
       { id: 'orders', label: 'nav.orders', icon: 'orders' },
@@ -346,6 +348,50 @@
       </section>`;
   }
 
+  function customersView() {
+    const q = state.query.trim().toLowerCase();
+    const rows = D.customers.filter((c) =>
+      !q || (c.name + c.email + c.phone).toLowerCase().includes(q));
+
+    const monthAgo = Date.now() - 30 * 864e5;
+    const recent = D.customers.filter((c) => {
+      const t = Date.parse(c.joined);
+      return !Number.isNaN(t) && t >= monthAgo;
+    }).length;
+
+    return `
+      <div class="grid grid--kpi">
+        ${kpiCard({ label: T('kpi.customers'), value: D.kpis.customers, icon: 'customers' })}
+        ${kpiCard({ label: T('customers.withPhone'), value: D.customers.filter((c) => c.phone && c.phone !== '—').length, icon: 'customers', tone: 'green' })}
+        ${kpiCard({ label: T('customers.recent'), value: recent, icon: 'customers', tone: 'gold' })}
+      </div>
+
+      <section class="card">
+        <div class="card__head">
+          <div class="card__title">${T('page.customers')[0]}</div>
+          <span class="card__hint">${T('customers.note')}</span>
+        </div>
+        <table class="tbl">
+          <thead><tr>
+            <th>${T('table.customer')}</th><th>${T('table.email')}</th>
+            <th>${T('table.phone')}</th><th>${T('table.language')}</th><th>${T('table.joined')}</th>
+          </tr></thead>
+          <tbody>
+            ${rows.length ? rows.map((c) => `<tr>
+              <td><div class="tbl__person">
+                <span class="avatar">${String(c.name).slice(0, 2).toUpperCase()}</span>
+                <span class="strong">${c.name}</span>
+              </div></td>
+              <td>${c.email}</td>
+              <td class="num">${c.phone}</td>
+              <td>${String(c.locale).toUpperCase()}</td>
+              <td class="num">${c.joined}</td>
+            </tr>`).join('') : `<tr><td colspan="5">${emptyRow(T('empty'))}</td></tr>`}
+          </tbody>
+        </table>
+      </section>`;
+  }
+
   function appsView() {
     return `
       <div class="grid grid--kpi">
@@ -369,8 +415,16 @@
 
   function subscriptionsView() {
     const total = D.subscriptions.reduce((a, b) => a + b.value, 0);
-    const subscribed = D.merchants.filter((m) => m.plan && m.plan !== '—').slice(0, 5);
+    const rows = D.merchants.filter((m) => m.plan && m.plan !== '—');
+    const free = rows.filter((m) => m.freeUntil && m.freeUntil !== '—' && Date.parse(m.freeUntil) > Date.now());
+
     return `
+      <div class="grid grid--kpi">
+        ${kpiCard({ label: T('kpi.subscriptions'), value: D.kpis.subscriptions, icon: 'subscriptions', tone: 'green' })}
+        ${kpiCard({ label: T('status.trial'), value: rows.filter((m) => m.status === 'trial').length, icon: 'subscriptions', tone: 'gold' })}
+        ${kpiCard({ label: T('subscriptions.free'), value: free.length, icon: 'subscriptions' })}
+      </div>
+
       <div class="grid grid--2">
         <section class="card">
           <div class="card__head"><div class="card__title">${T('section.split')}</div></div>
@@ -384,16 +438,25 @@
           </div>
         </section>
         <section class="card">
-          <div class="card__head"><div class="card__title">${T('kpi.subscriptions')}</div></div>
-          <div class="health">
-            ${subscribed.length ? subscribed.map((m) => `
-              <div class="health__row">
-                <i class="health__dot dot--${m.status}"></i>
-                <div class="health__name"><b>${m.name}</b><span>${m.plan} · ${m.city}</span></div>
-                <span class="health__lat">${m.plan === 'Business' ? 'Yearly' : 'Monthly'}</span>
-                <span class="chip chip--${m.status}"><i></i>${T('status.' + m.status)}</span>
-              </div>`).join('') : emptyRow(T('empty'))}
+          <div class="card__head">
+            <div class="card__title">${T('nav.subscriptions')}</div>
+            <span class="card__hint">${T('subscriptions.note')}</span>
           </div>
+          <table class="tbl">
+            <thead><tr>
+              <th>${T('table.customer')}</th><th>${T('table.plan')}</th>
+              <th>${T('table.price')}</th><th>${T('table.freeUntil')}</th><th>${T('table.status')}</th>
+            </tr></thead>
+            <tbody>
+              ${rows.length ? rows.map((m) => `<tr>
+                <td class="strong">${m.name}</td>
+                <td>${m.plan}</td>
+                <td class="num">${m.price === null || m.price === undefined ? '—' : fmt(m.price) + ' MAD'}</td>
+                <td class="num">${m.freeUntil || '—'}</td>
+                <td><span class="chip chip--${m.status}"><i></i>${T('status.' + m.status)}</span></td>
+              </tr>`).join('') : `<tr><td colspan="5">${emptyRow(T('empty'))}</td></tr>`}
+            </tbody>
+          </table>
         </section>
       </div>`;
   }
@@ -475,6 +538,7 @@
     const map = {
       dashboard: dashboardView,
       merchants: merchantsView,
+      customers: customersView,
       apps: appsView,
       subscriptions: subscriptionsView,
       settings: settingsView,
@@ -919,7 +983,7 @@
 
     $('#searchInput').addEventListener('input', (e) => {
       state.query = e.target.value;
-      if (state.view !== 'merchants') setView('merchants');
+      if (state.view !== 'merchants' && state.view !== 'customers') setView('merchants');
       else renderView(false);
     });
 

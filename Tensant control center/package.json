@@ -1,7 +1,7 @@
 {
   "name": "tensants-control-center",
   "productName": "TENSANTS GROUP CONTROL CENTER",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Enterprise Windows desktop administration & system control for the TENSANTS GROUP ecosystem",
   "main": "electron/main.js",
   "author": "FIPCOM Network",

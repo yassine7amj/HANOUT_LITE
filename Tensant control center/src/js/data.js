@@ -25,6 +25,7 @@
     },
     series: [],
     merchants: [],
+    customers: [],
     services: [],
     activity: [],
     subscriptions: [],
